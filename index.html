@@ -126,6 +126,22 @@ window.MathJax={
 <div class="part" id="strategy"><span class="partno">Part I</span>Strategy and Tricks</div>
 <section id="plan">
 <h2><span class="sn">1</span>Exam Plan</h2>
+<div class="box thm" id="format"><span class="tag">Exam format</span>
+<p>Three questions, six parts, 50 minutes, closed book: Question 1 has one part, Question 2 has three subparts, Question 3 has two subparts.</p>
+</div>
+<div class="tblwrap"><table>
+<thead><tr><th>Block</th><th>Minutes</th><th>What to do</th></tr></thead>
+<tbody>
+<tr><td>Read all three questions</td><td>3</td><td>Name the trick for every part in the margin before writing anything.</td></tr>
+<tr><td>Question 1 (one part)</td><td>9</td><td>Usually a self-contained proof; aim for the full argument.</td></tr>
+<tr><td>Question 2 (three subparts)</td><td>21</td><td>About 7 per subpart. Expect (b) and (c) to use (a).</td></tr>
+<tr><td>Question 3 (two subparts)</td><td>13</td><td>About 6–7 per subpart.</td></tr>
+<tr><td>Final check</td><td>4</td><td>Boxed conclusions present, independence and normality stated where used.</td></tr>
+</tbody></table></div>
+<div class="box warn"><span class="tag">Chained subparts</span>
+<p>When a later subpart says "hence" or "using (a)", it is built on the earlier result. If you get stuck on (a), write "Assuming the result of (a)," and do (b) and (c) anyway: those points are usually independent of whether (a) is finished. Do the subparts you can see the trick for first, and come back.</p></div>
+<p>Two full <a href="#mock">mock exams</a> in this format are in Part IV.</p>
+
 <p>The exam is closed book, you won't need theorems word for word, and there's no heavy matrix algebra. What it tests is recognizing the trick that makes a short proof go through. So study in this order:</p>
 <ol>
 <li><b>Learn the 18 tricks</b> below. For each one, know the <em>signal</em> in a problem statement that calls for it.</li>
@@ -887,11 +903,166 @@ $$\mathrm{MSE}(\hat\sigma^2)=\frac{\sigma^4}{n^2}\big(2\nu+p^2\big).$$
 <div class="rbox"><p>$\therefore$ $\mathrm{MSE}(\hat\sigma^2_{\rm MLE})\lt\mathrm{MSE}(S^2)$ if and only if $p(\nu-2)\lt4\nu$, which holds for every $\nu$ when $p\le4$: the biased MLE usually wins on MSE.</p></div>
 </div></details>
 </section>
-<div class="part" id="reference"><span class="partno">Part IV</span>Reference: Chapters 1–3</div>
+<div class="part" id="mock"><span class="partno">Part IV</span>Mock Exams</div>
+<p class="partnote">Two exams in the real format: Question 1 has one part, Question 2 has three, Question 3 has two. Set a 50-minute timer, work closed book, then open the solutions.</p>
+
+<!-- ======== MOCK EXAM A ======== -->
+<section class="prob" id="mockA1">
+<h2><span class="sn">36</span>Mock Exam A, Question 1</h2>
+<div class="pbox">
+<p>Let $\bY\sim N_n(\bzero,\sigma^2\bI_n)$ and let $\bP$ be a symmetric idempotent matrix of rank $r$, with $0\lt r\lt n$. Show that</p>
+$$F=\frac{\bY^\top\bP\bY/r}{\bY^\top(\bI_n-\bP)\bY/(n-r)}\sim F_{r,\,n-r}.$$
+</div>
+<details><summary><h3><span class="sn">36.1</span>Solution</h3></summary><div class="sol">
+<p class="tk">Tricks: T7 (standardize), T8 (idempotent ⇒ χ²), T6 + T9 (squared norms of uncorrelated normals)</p>
+<p>Let $\bZ:=\bY/\sigma\sim N_n(\bzero,\bI_n)$. The $\sigma^2$ cancels in the ratio, so</p>
+$$F=\frac{\bZ^\top\bP\bZ/r}{\bZ^\top(\bI_n-\bP)\bZ/(n-r)}.$$
+<p><b>Numerator.</b> $\bP$ is symmetric idempotent with rank $r$, so $\bZ^\top\bP\bZ\sim\chi^2_r$.</p>
+<p><b>Denominator.</b> $\bI_n-\bP$ is also symmetric idempotent, with rank $=\mathrm{tr}(\bI_n-\bP)=n-r$, so $\bZ^\top(\bI_n-\bP)\bZ\sim\chi^2_{n-r}$.</p>
+<p><b>Independence.</b> Both matrices are projections, so the forms are squared lengths:</p>
+$$\bZ^\top\bP\bZ=\|\bP\bZ\|^2,\qquad \bZ^\top(\bI_n-\bP)\bZ=\|(\bI_n-\bP)\bZ\|^2.$$
+<p>The vectors $\bP\bZ$ and $(\bI_n-\bP)\bZ$ are jointly normal with $\Cov=\bP(\bI_n-\bP)^\top=\bP-\bP^2=\bzero$, hence independent.</p>
+<div class="rbox"><p>$\therefore$ $F$ is a ratio of independent $\chi^2_r/r$ and $\chi^2_{n-r}/(n-r)$, so $F\sim F_{r,\,n-r}$.</p></div>
+</div></details>
+</section>
+
+<section class="prob" id="mockA2">
+<h2><span class="sn">37</span>Mock Exam A, Question 2</h2>
+<div class="pbox">
+<p>Consider $Y_i=\beta_0+\beta_1(x_i-\bar x)+\varepsilon_i$, $i=1,\dots,n$, with $\beps\sim N_n(\bzero,\sigma^2\bI_n)$ and $S_{xx}:=\sum_i(x_i-\bar x)^2>0$.</p>
+<ul>
+<li>(a) Show that $\hat\beta_0=\bar Y$ and $\hat\beta_1=\sum_i(x_i-\bar x)Y_i/S_{xx}$, and that $\hat\beta_0$ and $\hat\beta_1$ are independent.</li>
+<li>(b) Show that $\mathrm{RSS}=\sum_i(Y_i-\bar Y)^2-\hat\beta_1^2S_{xx}$ and that $\E[\mathrm{RSS}]=(n-2)\sigma^2$.</li>
+<li>(c) With $S^2=\mathrm{RSS}/(n-2)$, show that $T=\dfrac{\hat\beta_1-\beta_1}{S/\sqrt{S_{xx}}}\sim t_{n-2}$.</li>
+</ul>
+</div>
+<details><summary><h3><span class="sn">37.1</span>Solution</h3></summary><div class="sol">
+<p class="tk">Tricks: (a) T17 + T9; (b) T1 + T4; (c) T7, T8, T9 assembled</p>
+<p>Define $\mathbf u:=(x_1-\bar x,\dots,x_n-\bar x)^\top$, so $\bX=[\bone_n\mid\mathbf u]$, $\bone_n^\top\mathbf u=0$ and $\mathbf u^\top\mathbf u=S_{xx}$.</p>
+<h4><span class="sn">37.1.1</span>Part (a)</h4>
+<p>Since the columns are orthogonal,</p>
+$$\bX^\top\bX=\begin{bmatrix}n&0\\0&S_{xx}\end{bmatrix},\qquad \bX^\top\bY=\begin{bmatrix}n\bar Y\\\mathbf u^\top\bY\end{bmatrix}\ \Longrightarrow\ \hat\beta_0=\bar Y,\quad \hat\beta_1=\frac{\mathbf u^\top\bY}{S_{xx}}.$$
+<p>Now, $\bhat$ is a linear function of the normal vector $\bY$, so it is normal, and $\Var(\bhat)=\sigma^2(\bX^\top\bX)^{-1}=\sigma^2\,\mathrm{diag}(1/n,1/S_{xx})$ has zero off-diagonal.</p>
+<div class="rbox">$$\therefore\ \hat\beta_0=\bar Y,\qquad \hat\beta_1=\frac{\sum_i(x_i-\bar x)Y_i}{S_{xx}},\qquad \hat\beta_0\perp\!\!\!\perp\hat\beta_1$$</div>
+<h4><span class="sn">37.1.2</span>Part (b)</h4>
+<p>Using $\mathrm{RSS}=\bY^\top\bY-\bhat^\top\bX^\top\bX\bhat$,</p>
+$$\mathrm{RSS}=\bY^\top\bY-n\bar Y^2-\hat\beta_1^2S_{xx}=\sum_i(Y_i-\bar Y)^2-\hat\beta_1^2S_{xx}.$$
+<p>For the expectation, $\E[\bY]=\beta_0\bone_n+\beta_1\mathbf u$ and $\bC\mathbf u=\mathbf u$, so by the mean of a quadratic form,</p>
+$$\E\Big[\sum_i(Y_i-\bar Y)^2\Big]=\sigma^2\,\mathrm{tr}(\bC)+\beta_1^2\mathbf u^\top\bC\mathbf u=(n-1)\sigma^2+\beta_1^2S_{xx}.$$
+<p>Further, $\E[\hat\beta_1^2]=\Var(\hat\beta_1)+\beta_1^2=\sigma^2/S_{xx}+\beta_1^2$, so</p>
+$$\E[\hat\beta_1^2S_{xx}]=\sigma^2+\beta_1^2S_{xx}.$$
+<div class="rbox">$$\therefore\ \mathrm{RSS}=\sum_i(Y_i-\bar Y)^2-\hat\beta_1^2S_{xx},\qquad \E[\mathrm{RSS}]=(n-1)\sigma^2-\sigma^2=(n-2)\sigma^2$$</div>
+<h4><span class="sn">37.1.3</span>Part (c)</h4>
+<p>From part (a), $\hat\beta_1\sim N(\beta_1,\sigma^2/S_{xx})$, so</p>
+$$Z:=\frac{\hat\beta_1-\beta_1}{\sigma/\sqrt{S_{xx}}}\sim N(0,1).$$
+<p>Next, $\mathrm{RSS}=\beps^\top(\bI_n-\bP)\beps$ with $\bI_n-\bP$ a projection of rank $n-2$, so $V:=\mathrm{RSS}/\sigma^2\sim\chi^2_{n-2}$. Also $\bhat$ and $\be=(\bI_n-\bP)\bY$ are jointly normal with $\Cov(\bhat,\be)=\sigma^2(\bX^\top\bX)^{-1}\bX^\top(\bI_n-\bP)=\bzero$, so $Z\perp\!\!\!\perp V$. Then,</p>
+$$T=\frac{\hat\beta_1-\beta_1}{S/\sqrt{S_{xx}}}=\frac{Z}{\sqrt{V/(n-2)}}.$$
+<div class="rbox">$$\therefore\ T\sim t_{n-2}$$</div>
+</div></details>
+</section>
+
+<section class="prob" id="mockA3">
+<h2><span class="sn">38</span>Mock Exam A, Question 3</h2>
+<div class="pbox">
+<p>Consider $Y_i=\beta x_i+\varepsilon_i$, $i=1,\dots,n$, with $x_i>0$, uncorrelated errors, $\E[\varepsilon_i]=0$ and $\Var(\varepsilon_i)=\sigma^2x_i$.</p>
+<ul>
+<li>(a) Find the weighted least squares estimate $\beta^*$ and its variance.</li>
+<li>(b) Show that the ordinary least squares estimate $\hat\beta=\sum_ix_iY_i/\sum_ix_i^2$ satisfies $\Var(\hat\beta)\ge\Var(\beta^*)$.</li>
+</ul>
+</div>
+<details><summary><h3><span class="sn">38.1</span>Solution</h3></summary><div class="sol">
+<p class="tk">Tricks: (a) transform to the standard model (weights $1/x_i$), (b) T15 via Cauchy–Schwarz</p>
+<h4><span class="sn">38.1.1</span>Part (a)</h4>
+<p>Here $\bV=\mathrm{diag}(x_1,\dots,x_n)$, so $\beta^*$ minimizes $\sum_i(Y_i-\beta x_i)^2/x_i$. Setting the derivative to zero,</p>
+$$\sum_i\frac{x_i(Y_i-\beta x_i)}{x_i}=0\ \Longrightarrow\ \sum_iY_i=\beta\sum_ix_i.$$
+<p>Since the $Y_i$ are uncorrelated with $\Var(Y_i)=\sigma^2x_i$,</p>
+$$\Var\Big(\frac{\sum_iY_i}{\sum_ix_i}\Big)=\frac{\sigma^2\sum_ix_i}{(\sum_ix_i)^2}.$$
+<div class="rbox">$$\therefore\ \beta^*=\frac{\sum_iY_i}{\sum_ix_i},\qquad \Var(\beta^*)=\frac{\sigma^2}{\sum_ix_i}$$</div>
+<h4><span class="sn">38.1.2</span>Part (b)</h4>
+$$\Var(\hat\beta)=\frac{\sum_ix_i^2\Var(Y_i)}{(\sum_ix_i^2)^2}=\frac{\sigma^2\sum_ix_i^3}{(\sum_ix_i^2)^2}.$$
+<p>So $\Var(\hat\beta)\ge\Var(\beta^*)$ iff $(\sum_ix_i^2)^2\le\sum_ix_i\sum_ix_i^3$. Write $x_i^2=x_i^{1/2}\cdot x_i^{3/2}$ and apply Cauchy–Schwarz:</p>
+$$\Big(\sum_ix_i^{1/2}x_i^{3/2}\Big)^2\le\sum_ix_i\cdot\sum_ix_i^3.$$
+<div class="rbox">$$\therefore\ \Var(\hat\beta)=\frac{\sigma^2\sum_ix_i^3}{(\sum_ix_i^2)^2}\ \ge\ \frac{\sigma^2}{\sum_ix_i}=\Var(\beta^*),\ \text{with equality iff all }x_i\text{ are equal}$$</div>
+</div></details>
+</section>
+
+<!-- ======== MOCK EXAM B ======== -->
+<section class="prob" id="mockB1">
+<h2><span class="sn">39</span>Mock Exam B, Question 1</h2>
+<div class="pbox">
+<p class="c">Let $\bX$ be a random vector with $\Var(\bX)=\Sig$. Show that $\Sig$ is singular if and only if there exist $\ba\ne\bzero$ and a constant $b$ with $\ba^\top\bX=b$ with probability one.</p>
+</div>
+<details><summary><h3><span class="sn">39.1</span>Solution</h3></summary><div class="sol">
+<p class="tk">Trick: T5 (a linear combination has variance $\ba^\top\Sig\ba$)</p>
+<p>For any constant vector $\ba$, by the variance of a linear transformation,</p>
+$$\Var(\ba^\top\bX)=\ba^\top\Sig\ba.$$
+<p>($\Rightarrow$) If $\Sig$ is singular, there is $\ba\ne\bzero$ with $\Sig\ba=\bzero$. Then $\Var(\ba^\top\bX)=\ba^\top\Sig\ba=0$, so $\ba^\top\bX=\E[\ba^\top\bX]=:b$ with probability one.</p>
+<p>($\Leftarrow$) If $\ba^\top\bX=b$ a.s. with $\ba\ne\bzero$, then $\ba^\top\Sig\ba=\Var(b)=0$. Since $\Sig\succeq0$, write $\Sig=\Sig^{1/2}\Sig^{1/2}$: $0=\ba^\top\Sig\ba=\|\Sig^{1/2}\ba\|^2$, so $\Sig^{1/2}\ba=\bzero$ and $\Sig\ba=\bzero$.</p>
+<div class="rbox"><p>$\therefore$ $\Sig$ is singular $\iff$ $\ba^\top\bX$ is a.s. constant for some $\ba\ne\bzero$.</p></div>
+</div></details>
+</section>
+
+<section class="prob" id="mockB2">
+<h2><span class="sn">40</span>Mock Exam B, Question 2</h2>
+<div class="pbox">
+<p>Let $\bY=\bX\bbeta+\beps$ with $\mathit{rank}(\bX)=p$, $\bP=\bX(\bX^\top\bX)^{-1}\bX^\top$ and residuals $\be=(\bI_n-\bP)\bY$.</p>
+<ul>
+<li>(a) Assuming only $\E[\beps]=\bzero$ and $\Var(\beps)=\sigma^2\bI_n$, show that $\E[\be]=\bzero$, $\Var(\be)=\sigma^2(\bI_n-\bP)$, and $\sum_i\Var(e_i)=(n-p)\sigma^2$.</li>
+<li>(b) Now assume $\beps\sim N_n(\bzero,\sigma^2\bI_n)$. Show that $\be$ and $\bhat$ are independent.</li>
+<li>(c) Under normality, show that $S^2=\be^\top\be/(n-p)$ satisfies $\E[S^2]=\sigma^2$ and $\Var(S^2)=2\sigma^4/(n-p)$.</li>
+</ul>
+</div>
+<details><summary><h3><span class="sn">40.1</span>Solution</h3></summary><div class="sol">
+<p class="tk">Tricks: (a) T5 + T4; (b) T9; (c) T7 + T8 (χ² moments)</p>
+<h4><span class="sn">40.1.1</span>Part (a)</h4>
+<p>Note that $\bP\bX=\bX$, so $(\bI_n-\bP)\bX\bbeta=\bzero$ and $\be=(\bI_n-\bP)\beps$. Then,</p>
+$$\E[\be]=(\bI_n-\bP)\E[\beps]=\bzero,\qquad \Var(\be)=(\bI_n-\bP)\sigma^2\bI_n(\bI_n-\bP)^\top=\sigma^2(\bI_n-\bP),$$
+<p>using that $\bI_n-\bP$ is symmetric and idempotent. Taking the trace,</p>
+<div class="rbox">$$\therefore\ \sum_{i=1}^n\Var(e_i)=\sigma^2\,\mathrm{tr}(\bI_n-\bP)=\sigma^2\big(n-\mathrm{tr}((\bX^\top\bX)^{-1}\bX^\top\bX)\big)=(n-p)\sigma^2$$</div>
+<h4><span class="sn">40.1.2</span>Part (b)</h4>
+<p>Both $\bhat=(\bX^\top\bX)^{-1}\bX^\top\bY$ and $\be=(\bI_n-\bP)\bY$ are linear in the normal vector $\bY$, so they are jointly normal. Their cross-covariance is</p>
+$$\Cov(\bhat,\be)=(\bX^\top\bX)^{-1}\bX^\top\,\sigma^2\bI_n\,(\bI_n-\bP)^\top=\sigma^2(\bX^\top\bX)^{-1}\big(\bX^\top-\bX^\top\bP\big)=\bzero,$$
+<p>since $\bX^\top\bP=(\bP\bX)^\top=\bX^\top$.</p>
+<div class="rbox">$$\therefore\ \be\perp\!\!\!\perp\bhat$$</div>
+<h4><span class="sn">40.1.3</span>Part (c)</h4>
+<p>From part (a), $\be^\top\be=\beps^\top(\bI_n-\bP)\beps$. Standardizing, $\beps/\sigma\sim N_n(\bzero,\bI_n)$, and $\bI_n-\bP$ is a projection of rank $n-p$:</p>
+$$\frac{\be^\top\be}{\sigma^2}=\Big(\frac{\beps}\sigma\Big)^\top(\bI_n-\bP)\Big(\frac{\beps}\sigma\Big)\sim\chi^2_{n-p}.$$
+<p>Using $\E[\chi^2_\nu]=\nu$ and $\Var(\chi^2_\nu)=2\nu$ with $S^2=\frac{\sigma^2}{n-p}\cdot\frac{\be^\top\be}{\sigma^2}$,</p>
+<div class="rbox">$$\therefore\ \E[S^2]=\frac{\sigma^2}{n-p}(n-p)=\sigma^2,\qquad \Var(S^2)=\frac{\sigma^4}{(n-p)^2}\cdot2(n-p)=\frac{2\sigma^4}{n-p}$$</div>
+</div></details>
+</section>
+
+<section class="prob" id="mockB3">
+<h2><span class="sn">41</span>Mock Exam B, Question 3</h2>
+<div class="pbox">
+<p>Fit $\E[Y_i]=\beta_0+\beta_1x_i+\beta_2(x_i^2-2)$ at $x=(-2,-1,0,1,2)$, with $\bY\sim N_5(\bX\bbeta,\sigma^2\bI_5)$.</p>
+<ul>
+<li>(a) Show that the columns of $\bX$ are mutually orthogonal, and find $\bhat$ and $\Var(\bhat)$.</li>
+<li>(b) Show that dropping the quadratic term increases the RSS by $14\hat\beta_2^2$, and that under $\beta_2=0$, $\;F=\dfrac{14\hat\beta_2^2}{\mathrm{RSS}/2}\sim F_{1,2}$.</li>
+</ul>
+</div>
+<details><summary><h3><span class="sn">41.1</span>Solution</h3></summary><div class="sol">
+<p class="tk">Tricks: (a) T17 (orthogonal columns decouple); (b) T6, T8, T9 assembled</p>
+<p>Define the columns $\bone_5$, $\bx=(-2,-1,0,1,2)^\top$ and $\mathbf q=(2,-1,-2,-1,2)^\top$ (the values of $x^2-2$).</p>
+<h4><span class="sn">41.1.1</span>Part (a)</h4>
+<p>Orthogonality check:</p>
+$$\bone_5^\top\bx=0,\qquad \bone_5^\top\mathbf q=2-1-2-1+2=0,\qquad \bx^\top\mathbf q=-4+1+0-1+4=0.$$
+<p>Thus $\bX^\top\bX=\mathrm{diag}(5,\ 10,\ 14)$, and each estimate uses only its own column:</p>
+<div class="rbox">$$\therefore\ \hat\beta_0=\bar Y,\quad \hat\beta_1=\frac{\bx^\top\bY}{10},\quad \hat\beta_2=\frac{\mathbf q^\top\bY}{14},\qquad \Var(\bhat)=\sigma^2\,\mathrm{diag}\Big(\frac15,\frac1{10},\frac1{14}\Big)$$</div>
+<h4><span class="sn">41.1.2</span>Part (b)</h4>
+<p>With orthogonal columns, $\mathrm{RSS}=\bY^\top\bY-\sum_j\hat\beta_j^2\|\bx_{(j)}\|^2$, and dropping $\mathbf q$ leaves the other estimates unchanged. Hence</p>
+$$\mathrm{RSS}_{\text{reduced}}-\mathrm{RSS}=\hat\beta_2^2\|\mathbf q\|^2=14\hat\beta_2^2=\bY^\top\mathbf P_q\bY,\qquad \mathbf P_q=\frac{\mathbf q\mathbf q^\top}{14}.$$
+<p><b>Numerator.</b> Under $\beta_2=0$, orthogonality gives $\mathbf P_q\bX\bbeta=\bzero$, so $\bY^\top\mathbf P_q\bY=\beps^\top\mathbf P_q\beps$ with $\mathbf P_q$ a rank-1 projection: $14\hat\beta_2^2/\sigma^2\sim\chi^2_1$.</p>
+<p><b>Denominator.</b> $\mathrm{RSS}/\sigma^2\sim\chi^2_{5-3}=\chi^2_2$.</p>
+<p><b>Independence.</b> $\mathbf P\mathbf q=\mathbf q$ gives $\mathbf P_q(\bI_5-\mathbf P)=\mathbf P_q-\mathbf P_q=\bzero$, so $\mathbf P_q\bY\perp\!\!\!\perp(\bI_5-\mathbf P)\bY$, and their squared lengths are independent.</p>
+<div class="rbox">$$\therefore\ F=\frac{(14\hat\beta_2^2/\sigma^2)/1}{(\mathrm{RSS}/\sigma^2)/2}=\frac{14\hat\beta_2^2}{\mathrm{RSS}/2}\sim F_{1,2}$$</div>
+</div></details>
+</section>
+<div class="part" id="reference"><span class="partno">Part V</span>Reference: Chapters 1–3</div>
 <p class="partnote">Everything below backs up the tricks. Read it when a trick feels unfamiliar, not cover to cover.</p>
 <!-- ================= TOOLKIT ================= -->
 <section id="toolkit">
-<h2><span class="sn">36</span>Matrix Toolkit</h2>
+<h2><span class="sn">42</span>Matrix Toolkit</h2>
 <p class="ch-intro">Almost every proof reduces to one of these facts.</p>
 
 <div class="cols">
@@ -933,10 +1104,10 @@ $$\begin{pmatrix}\bA_{11}&\bA_{12}\\ \bA_{21}&\bA_{22}\end{pmatrix}^{-1}=\begin{
 
 <!-- ================= CHAPTER 1 ================= -->
 <section id="ch1">
-<h2><span class="sn">37</span>Vectors of Random Variables</h2>
+<h2><span class="sn">43</span>Vectors of Random Variables</h2>
 <p class="ch-intro">Lectures 1–2. Model notation: $\bY=\bX\bbeta+\beps$, $\bX$ is $n\times p$ with first column $\bone_n$.</p>
 
-<h3 id="s14"><span class="sn">37.1</span><span class="lec">L1</span>Expectation and covariance operators</h3>
+<h3 id="s14"><span class="sn">43.1</span><span class="lec">L1</span>Expectation and covariance operators</h3>
 <div class="box def"><span class="tag">Definitions 1.1–1.3</span>
 <p>$\E(\bZ)=(\E Z_{ij})$; $\Cov(\bX,\bY)=(\Cov(X_i,Y_j))$; $\Var(\bX)=\Cov(\bX,\bX)$.</p></div>
 
@@ -960,7 +1131,7 @@ $$\begin{pmatrix}\bA_{11}&\bA_{12}\\ \bA_{21}&\bA_{22}\end{pmatrix}^{-1}=\begin{
 $$\E[(\bX-\ba)(\bX-\ba)^\top]=\Var(\bX)+(\E\bX-\ba)(\E\bX-\ba)^\top,\qquad \E\|\bX-\ba\|^2=\textstyle\sum_i\sigma_{ii}+\|\E\bX-\ba\|^2.$$
 <p>Add and subtract $\E\bX$; cross terms vanish because $\E[\bX-\E\bX]=\bzero$.</p></div>
 
-<h3 id="s15"><span class="sn">37.2</span><span class="lec">L1–2</span>Mean and variance of quadratic forms</h3>
+<h3 id="s15"><span class="sn">43.2</span><span class="lec">L1–2</span>Mean and variance of quadratic forms</h3>
 <div class="box thm"><span class="tag">Theorem 1.5 <span class="nm">mean of a quadratic form</span></span>
 <p>$\E\bX=\bmu$, $\Var\bX=\Sig$, $\bA$ symmetric:</p>
 $$\E(\bX^\top\bA\bX)=\tr(\bA\Sig)+\bmu^\top\bA\bmu.$$
@@ -985,7 +1156,7 @@ $$\Var(\bX^\top\bA\bX)=(\mu_4-3\mu_2^2)\,\ba^\top\ba+2\mu_2^2\tr(\bA^2)+4\mu_2\,
 <p>$\bX\sim N(\bzero,\sigma^2\bI)$: $\ \Cov(\bX^\top\bA\bX,\bX^\top\bB\bX)=2\sigma^4\tr(\bA\bB)$.</p>
 <p>Proof: polarization, $\Cov(U,V)=\tfrac12[\Var(U+V)-\Var U-\Var V]$, then Theorem 1.6 on $\bA+\bB$, $\bA$, $\bB$.</p></div>
 
-<h3 id="s16"><span class="sn">37.3</span><span class="lec">L2</span>Independence and moment generating functions</h3>
+<h3 id="s16"><span class="sn">43.3</span><span class="lec">L2</span>Independence and moment generating functions</h3>
 <div class="box def"><span class="tag">Independence</span>
 <p>$\bX\perp\bY$ iff $f_{\bX,\bY}(\bx,\mathbf y)=f_{\bX}(\bx)f_{\bY}(\mathbf y)$ (or the CDFs factor) for all $\bx,\mathbf y$.</p></div>
 <div class="box thm"><span class="tag">Propositions</span>
@@ -1007,10 +1178,10 @@ $$\Var(\bX^\top\bA\bX)=(\mu_4-3\mu_2^2)\,\ba^\top\ba+2\mu_2^2\tr(\bA^2)+4\mu_2\,
 
 <!-- ================= CHAPTER 2 ================= -->
 <section id="ch2">
-<h2><span class="sn">38</span>Multivariate Normal Distribution</h2>
+<h2><span class="sn">44</span>Multivariate Normal Distribution</h2>
 <p class="ch-intro">Lectures 3–5.</p>
 
-<h3 id="s21"><span class="sn">38.1</span><span class="lec">L3</span>Definitions</h3>
+<h3 id="s21"><span class="sn">44.1</span><span class="lec">L3</span>Definitions</h3>
 <div class="box def"><span class="tag">Definition 2.1 <span class="nm">density</span></span>
 <p>$\bY\sim N_n(\bmu,\Sig)$, $\Sig$ positive definite, if</p>
 $$f(\mathbf y)=k^{-1}\exp\!\left\{-\tfrac12(\mathbf y-\bmu)^\top\Sig^{-1}(\mathbf y-\bmu)\right\},\qquad k=(2\pi)^{n/2}\det(\Sig)^{1/2}.$$
@@ -1022,7 +1193,7 @@ $$f(\mathbf y)=k^{-1}\exp\!\left\{-\tfrac12(\mathbf y-\bmu)^\top\Sig^{-1}(\mathb
 <div class="box def"><span class="tag">Definition 2.2 <span class="nm">allows singular Σ</span></span>
 <p>$\bY\sim N_n(\bmu,\Sig)$ if $\bY\overset d=\bA\bZ+\bmu$ with $\bZ\sim N_m(\bzero,\bI_m)$, $\bA$ $n\times m$, $\Sig=\bA\bA^\top$. If $\rank\Sig=m\lt n$, the distribution is singular. For $\Sig$ PD, Definitions 2.1 and 2.2 agree (one direction by Theorem 2.2 with $\bZ=\bA^{-1}(\bY-\bmu)$; the other by matching MGFs).</p></div>
 
-<h3 id="s22"><span class="sn">38.2</span><span class="lec">L3–4</span>MGF and linear transformations</h3>
+<h3 id="s22"><span class="sn">44.2</span><span class="lec">L3–4</span>MGF and linear transformations</h3>
 <div class="box thm"><span class="tag">Proposition <span class="nm">MGF</span></span>
 $$M_{\bY}(\bt)=\exp\!\left(\bt^\top\bmu+\tfrac12\bt^\top\Sig\bt\right).$$
 </div>
@@ -1050,7 +1221,7 @@ $$\bC\bY+\mathbf d\sim N_m(\bC\bmu+\mathbf d,\ \bC\Sig\bC^\top).$$
 <div class="box thm"><span class="tag">Marginals</span>
 <p>$\bY_1=\bC\bY$ with $\bC=(\bI_p,\bzero)$ ⇒ $\bY_1\sim N_p(\bmu_1,\Sig_{11})$ by Theorem 2.2.</p></div>
 
-<h3 id="s23"><span class="sn">38.3</span><span class="lec">L4</span>Independence</h3>
+<h3 id="s23"><span class="sn">44.3</span><span class="lec">L4</span>Independence</h3>
 <div class="box thm"><span class="tag">Theorem 2.4 <span class="nm">zero covariance ⇔ independence</span></span>
 <p>$\bY=(\bY_1^\top,\bY_2^\top)^\top\sim N_n(\bmu,\Sig)$: $\ \bY_1\perp\bY_2$ ⇔ $\Sig_{12}=\bzero$.</p></div>
 <div class="box pf"><span class="tag">Proof (lecture)</span>
@@ -1069,7 +1240,7 @@ $$\bY_1\mid\bY_2=\mathbf y_2\ \sim\ N_p\!\left(\bmu_1+\Sig_{12}\Sig_{22}^{-1}(\m
 <div class="box pf"><span class="tag">Short proof</span>
 <p>Lecture derives it from the partitioned inverse (A.9). Faster on an exam: $\bU=\bY_1-\Sig_{12}\Sig_{22}^{-1}\bY_2$ has $\Cov(\bU,\bY_2)=\Sig_{12}-\Sig_{12}=\bzero$, so $\bU\perp\bY_2$ by Theorem 2.5. Given $\bY_2=\mathbf y_2$, $\bY_1=\bU+\Sig_{12}\Sig_{22}^{-1}\mathbf y_2$; read off $\E\bU$ and $\Var\bU=\Sig_{11}-\Sig_{12}\Sig_{22}^{-1}\Sig_{21}$.</p></div>
 
-<h3 id="s24"><span class="sn">38.4</span><span class="lec">L5</span>Distribution of quadratic forms</h3>
+<h3 id="s24"><span class="sn">44.4</span><span class="lec">L5</span>Distribution of quadratic forms</h3>
 
 <div class="box thm"><span class="tag">Theorem 2.7 <span class="nm">χ² ⇔ idempotent</span></span>
 <p>$\bY\sim N_n(\bzero,\bI_n)$, $\bA$ symmetric. Then $Q=\bY^\top\bA\bY\sim\chi^2_r$ iff $\bA$ is idempotent of rank $r$.</p></div>
@@ -1118,10 +1289,10 @@ $$\bY_1\mid\bY_2=\mathbf y_2\ \sim\ N_p\!\left(\bmu_1+\Sig_{12}\Sig_{22}^{-1}(\m
 
 <!-- ================= CHAPTER 3 ================= -->
 <section id="ch3">
-<h2><span class="sn">39</span>Linear Regression: Estimation and Distribution Theory</h2>
+<h2><span class="sn">45</span>Linear Regression: Estimation and Distribution Theory</h2>
 <p class="ch-intro">Model: $\bY=\bX\bbeta+\beps$, $\rank\bX=p$, $\E\beps=\bzero$, $\Var\beps=\sigma^2\bI_n$; normality only from Theorem 3.5 on. Lecture 6 lists the error assumptions (1) $\E\varepsilon_i=0$, (2) homoscedasticity, (3) uncorrelated, (4) iid $(0,\sigma^2)$, (5) iid $N(0,\sigma^2)$. Models are linear in $\bbeta$, not necessarily in $x$.</p>
 
-<h3 id="s31"><span class="sn">39.1</span><span class="lec">L6</span>Least squares estimation</h3>
+<h3 id="s31"><span class="sn">45.1</span><span class="lec">L6</span>Least squares estimation</h3>
 <div class="box thm"><span class="tag">Normal equations </span>
 <p>Minimizing $\beps^\top\beps$ makes $\bY-\bX\bhat\perp\Omega=\mathcal C(\bX)$, i.e. $\bX^\top(\bY-\bX\bhat)=\bzero$:</p>
 $$\bX^\top\bX\bhat=\bX^\top\bY,\qquad \bhat=(\bX^\top\bX)^{-1}\bX^\top\bY.$$
@@ -1147,7 +1318,7 @@ $$\bX^\top\bX\bhat=\bX^\top\bY,\qquad \bhat=(\bX^\top\bX)^{-1}\bX^\top\bY.$$
 <li>$\bY=\bone\beta_0+\beps$ ⇒ $\hat\beta_0=(\bone^\top\bone)^{-1}\bone^\top\bY=\bar Y$.</li>
 </ul></div>
 
-<h3 id="s32"><span class="sn">39.2</span><span class="lec">L7–8</span>Properties of β̂ and Gauss–Markov</h3>
+<h3 id="s32"><span class="sn">45.2</span><span class="lec">L7–8</span>Properties of β̂ and Gauss–Markov</h3>
 <div class="box thm"><span class="tag">RSS expressions <span class="nm">Lecture 7</span></span>
 <p>(1) $\be^\top\be=\bY^\top\bY-\bhat^\top\bX^\top\bY$; (2) $\be^\top\be=\bY^\top\bY-\bhat^\top\bX^\top\bX\bhat=\|\bY\|^2-\|\bX\bhat\|^2$; (3) $\be^\top\be=\bY^\top(\bI_n-\bP)\bY$.</p>
 <p>Proof of (1)–(2): expand $(\bY-\bX\bhat)^\top(\bY-\bX\bhat)=\bY^\top\bY-\bY^\top\bX\bhat-\bhat^\top(\bX^\top\bY-\bX^\top\bX\bhat)$; the bracket is $\bzero$ by the normal equations, and $\bY^\top\bX\bhat=\bhat^\top\bX^\top\bY=\bhat^\top\bX^\top\bX\bhat$ by them again. (3) uses $(\bI-\bP)^\top(\bI-\bP)=\bI-\bP$.</p></div>
@@ -1190,7 +1361,7 @@ $$\hat\beta_1=\frac{\sum(x_i-\bar x)(Y_i-\bar Y)}{\sum(x_i-\bar x)^2},\quad \hat
 <div class="box warn"><span class="tag">Same idea in HW 3b.3</span>
 <p>Minimum-variance linear unbiased estimate of $\theta$ from a $N(\theta,\sigma^2)$ sample: write $\ba=\bone/n+\mathbf d$; unbiasedness forces $\mathbf d^\top\bone=0$, so $\ba^\top\ba=\tfrac1n+\mathbf d^\top\mathbf d\ge\tfrac1n$. Answer $\bar Y$. (The official solution just cites Gauss–Markov with $\bX=\bone$.)</p></div>
 
-<h3 id="s33"><span class="sn">39.3</span><span class="lec">L8</span>Estimating σ²</h3>
+<h3 id="s33"><span class="sn">45.3</span><span class="lec">L8</span>Estimating σ²</h3>
 <div class="box thm"><span class="tag">Theorem 3.3 <span class="nm">S² is unbiased</span></span>
 <p>$\E\beps=\bzero$, $\Var\beps=\sigma^2\bI_n$, $\rank\bX=p$ ⇒ $\E S^2=\sigma^2$, where $S^2=\dfrac{\mathrm{RSS}}{n-p}=\dfrac{(\bY-\bX\bhat)^\top(\bY-\bX\bhat)}{n-p}$.</p>
 <p>Proof (lecture): $\mathrm{RSS}=\bY^\top(\bI-\bP)\bY$ with $\E\bY=\bX\bbeta$, $\Var\bY=\sigma^2\bI$. Theorem 1.5: $\E\,\mathrm{RSS}=\tr((\bI-\bP)\sigma^2\bI)+(\bX\bbeta)^\top(\bI-\bP)\bX\bbeta=\sigma^2(n-p)$.</p></div>
@@ -1200,7 +1371,7 @@ $$\hat\beta_1=\frac{\sum(x_i-\bar x)(Y_i-\bar Y)}{\sum(x_i-\bar x)^2},\quad \hat
 <div class="box thm"><span class="tag">Variance of S²</span>
 <p>Under normality $\Var S^2=2\sigma^4/(n-p)$ (since $\mathrm{RSS}/\sigma^2\sim\chi^2_{n-p}$). In general, Theorem 1.6 with $\bA=\bI-\bP$, $\bA\bX\bbeta=\bzero$ gives $\Var\,\mathrm{RSS}=2\sigma^4(n-p)+(\mu_4-3\sigma^4)\sum_i(1-p_{ii})^2$.</p></div>
 
-<h3 id="s34"><span class="sn">39.4</span><span class="lec">L9</span>Distribution theory and maximum likelihood</h3>
+<h3 id="s34"><span class="sn">45.4</span><span class="lec">L9</span>Distribution theory and maximum likelihood</h3>
 <div class="box thm"><span class="tag">Theorem 3.5 </span>
 <p>If $\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$ and $\rank\bX=p$:</p>
 <ol>
@@ -1223,7 +1394,7 @@ $$\frac{\hat\beta_j-\beta_j}{S\sqrt{[(\bX^\top\bX)^{-1}]_{j+1,j+1}}}=\frac{(\hat
 $$\bhat_{\rm MLE}=(\bX^\top\bX)^{-1}\bX^\top\bY=\bhat_{\rm LSE},\qquad \hat\sigma^2_{\rm MLE}=\frac{\mathrm{RSS}}{n}=\frac{(n-p)S^2}{n}.$$
 <p>$\E\hat\sigma^2_{\rm MLE}=\frac{n-p}{n}\sigma^2$ (biased, asymptotically unbiased). $\Var S^2=\frac{2\sigma^4}{n-p}$, $\Var\hat\sigma^2_{\rm MLE}=\frac{2(n-p)\sigma^4}{n^2}$.</p></div>
 
-<h3 id="s36"><span class="sn">39.5</span><span class="lec">L10</span>Orthogonal columns</h3>
+<h3 id="s36"><span class="sn">45.5</span><span class="lec">L10</span>Orthogonal columns</h3>
 <div class="box thm"><span class="tag">Orthogonal design </span>
 <p>$\bX=[\bx^0,\dots,\bx^{p-1}]$ with $(\bx^i)^\top\bx^j=0$ for $i\ne j$. Then $\bX^\top\bX=\mathrm{diag}((\bx^j)^\top\bx^j)$ and</p>
 $$\hat\beta_j=\frac{(\bx^j)^\top\bY}{(\bx^j)^\top\bx^j},\qquad \mathrm{RSS}=\bY^\top\bY-\sum_j\hat\beta_j^2\,(\bx^j)^\top\bx^j.$$
@@ -1237,7 +1408,7 @@ $$\hat\beta_j=\frac{(\bx^j)^\top\bY}{(\bx^j)^\top\bx^j},\qquad \mathrm{RSS}=\bY^
 $$\sum_j\Var\hat\beta_j=\sigma^2\tr(\bX^\top\bX)^{-1}=\sigma^2\Big(\tfrac1n+\sum_{j=1}^{p-1}\tfrac1{\lambda_j}\Big),\quad\text{subject to }\sum\lambda_j=\tr\bW=c(p-1).$$
 <p>Lagrange multipliers give all $\lambda_j=c$, so $\bW=c\bI$: the columns are orthogonal.</p></div>
 
-<h3 id="s311"><span class="sn">39.6</span><span class="lec">L10</span>Centering and scaling</h3>
+<h3 id="s311"><span class="sn">45.6</span><span class="lec">L10</span>Centering and scaling</h3>
 <div class="box thm"><span class="tag">Centering</span>
 <p>Rewrite $Y_i=\alpha_0+\sum_j\beta_j(x_{ij}-\bar x_j)+\varepsilon_i$ with $\alpha_0=\beta_0+\sum_j\beta_j\bar x_j$, design $\bX_c=[\bone_n,\tilde\bX]$. Since $\bone^\top\tilde\bX=\bzero$:</p>
 $$\hat\alpha_0=\bar Y,\qquad \hat\bbeta_{1:p-1}=(\tilde\bX^\top\tilde\bX)^{-1}\tilde\bX^\top\bY\ \ (\text{unchanged slopes}).$$
@@ -1247,14 +1418,14 @@ $$\hat\alpha_0=\bar Y,\qquad \hat\bbeta_{1:p-1}=(\tilde\bX^\top\tilde\bX)^{-1}\t
 <div class="box ex"><span class="tag">HW 3b.4</span>
 <p>Two centered covariates: $\bX^\top\bX=\mathrm{diag}\!\left(n,\begin{pmatrix}S_{11}&S_{12}\\S_{12}&S_{22}\end{pmatrix}\right)$, so $\Var\hat\beta_1=\dfrac{\sigma^2S_{22}}{S_{11}S_{22}-S_{12}^2}=\dfrac{\sigma^2}{S_{11}(1-r^2)}$. Correlated covariates inflate the variance.</p></div>
 
-<h3 id="s37"><span class="sn">39.7</span><span class="lec">§3.7 · book only</span>Introducing further explanatory variables</h3>
+<h3 id="s37"><span class="sn">45.7</span><span class="lec">§3.7 · book only</span>Introducing further explanatory variables</h3>
 <p class="ch-intro">Not assigned and not in the attached lectures. Skim it last.</p>
 <div class="box thm"><span class="tag">Updating formulas <span class="src">reference</span></span>
 <p>Fit $\bY=\bX\bbeta+\bZ\bgam+\beps$; let $\bR=\bI-\bP$ (hat matrix of $\bX$ alone).</p>
 $$\hat\bgam_G=(\bZ^\top\bR\bZ)^{-1}\bZ^\top\bR\bY,\quad \bhat_G=\bhat-(\bX^\top\bX)^{-1}\bX^\top\bZ\hat\bgam_G,\quad \mathrm{RSS}_G=\mathrm{RSS}-\hat\bgam_G^\top\bZ^\top\bR\bY.$$
 <p>One extra column $\bz$: $\hat\gamma=\bz^\top\bR\bY/\bz^\top\bR\bz$ and $\mathrm{RSS}_G=\mathrm{RSS}-(\bz^\top\bR\bY)^2/\bz^\top\bR\bz$. Omitting $\bZ$ when it belongs gives $\E\bhat=\bbeta+(\bX^\top\bX)^{-1}\bX^\top\bZ\bgam$.</p></div>
 
-<h3 id="s38"><span class="sn">39.8</span><span class="lec">L11–12</span>Estimation with linear restrictions</h3>
+<h3 id="s38"><span class="sn">45.8</span><span class="lec">L11–12</span>Estimation with linear restrictions</h3>
 <p>$H:\bA\bbeta=\bc$, $\bA$ is $q\times p$ of rank $q$, $\bc$ known.</p>
 <div class="box thm"><span class="tag">Restricted LSE <span class="nm">Lagrange multipliers</span></span>
 $$\bhat_H=\bhat+(\bX^\top\bX)^{-1}\bA^\top\big[\bA(\bX^\top\bX)^{-1}\bA^\top\big]^{-1}(\bc-\bA\bhat).$$
@@ -1282,7 +1453,7 @@ $$\bP_{W^\perp\cap\Omega}=\bX(\bX^\top\bX)^{-1}\bA^\top[\bA(\bX^\top\bX)^{-1}\bA
 $$\Var(\bhat_H)=\sigma^2\Big\{(\bX^\top\bX)^{-1}-(\bX^\top\bX)^{-1}\bA^\top\big[\bA(\bX^\top\bX)^{-1}\bA^\top\big]^{-1}\bA(\bX^\top\bX)^{-1}\Big\},\qquad \Var(\hat\beta_{H,j})\le\Var(\hat\beta_j).$$
 <p>Full route in the <a href="#hw">homework drills</a>.</p></div>
 
-<h3 id="s310"><span class="sn">39.9</span><span class="lec">L12</span>Generalized least squares</h3>
+<h3 id="s310"><span class="sn">45.9</span><span class="lec">L12</span>Generalized least squares</h3>
 <div class="box thm"><span class="tag">GLS estimator</span>
 <p>$\Var\beps=\sigma^2\bV$, $\bV$ PD, $\bV=\bK\bK^\top$ with $\bK$ nonsingular. Set $\bZ=\bK^{-1}\bY$, $\bB=\bK^{-1}\bX$, $\boldsymbol\eta=\bK^{-1}\beps$, so $\bZ=\bB\bbeta+\boldsymbol\eta$ with $\Var\boldsymbol\eta=\sigma^2\bI$. OLS on the transformed model:</p>
 $$\bbeta^*=(\bB^\top\bB)^{-1}\bB^\top\bZ=(\bX^\top\bV^{-1}\bX)^{-1}\bX^\top\bV^{-1}\bY,\quad \E\bbeta^*=\bbeta,\quad \Var\bbeta^*=\sigma^2(\bX^\top\bV^{-1}\bX)^{-1}.$$
