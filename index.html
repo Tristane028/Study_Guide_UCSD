@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>282A Midterm Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky section index on the left (desktop), one reading column of theorem/proof blocks; stacks to one column on phones. */
+:root{
+  --paper:#f5f7fa; --sheet:#ffffff; --ink:#1a2233; --muted:#5b6578; --rule:#d9dfe8;
+  --accent:#2446c7; --accent-soft:#e8edfb;
+  --thm:#eef2fb; --thm-ink:#1e3a9e;
+  --def:#f1f5ef; --def-ink:#2f6b33;
+  --warn:#fbf3e6; --warn-ink:#8a5a0c;
+  --hw:#f6f0fa; --hw-ink:#6b3291;
+  --pf:#fafbfc;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Literata",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11151d; --sheet:#171c26; --ink:#e3e8f1; --muted:#9aa4b6; --rule:#2c3445;
+  --accent:#8ea8ff; --accent-soft:#1d2640;
+  --thm:#1a2238; --thm-ink:#a9bcff;
+  --def:#18261b; --def-ink:#9fd3a4;
+  --warn:#2a2213; --warn-ink:#e8c07a;
+  --hw:#241a2c; --hw-ink:#d1aef0;
+  --pf:#141922; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11151d; --sheet:#171c26; --ink:#e3e8f1; --muted:#9aa4b6; --rule:#2c3445;
+  --accent:#8ea8ff; --accent-soft:#1d2640;
+  --thm:#1a2238; --thm-ink:#a9bcff;
+  --def:#18261b; --def-ink:#9fd3a4;
+  --warn:#2a2213; --warn-ink:#e8c07a;
+  --hw:#241a2c; --hw-ink:#d1aef0;
+  --pf:#141922; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;padding-block:32px 80px}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);align-self:start;max-height:calc(100vh - 40px);overflow:auto;font-family:var(--f-display);font-size:14px}
+nav.toc .lbl{text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:var(--muted);margin-bottom:8px}
+nav.toc a{display:block;color:var(--ink);text-decoration:none;padding:3px 0}
+nav.toc a.sub{padding-left:14px;color:var(--muted);font-size:13px}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--accent)}
+main{min-width:0;max-width:760px}
+header.top{border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:28px}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:var(--accent);font-weight:600}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,5vw,44px);line-height:1.05;margin:6px 0 10px;text-wrap:balance}
+h2{font-family:var(--f-display);font-weight:700;font-size:28px;line-height:1.15;margin:56px 0 6px;text-wrap:balance;scroll-margin-top:20px}
+h2 .num{color:var(--accent);margin-right:10px}
+h3{font-family:var(--f-display);font-weight:600;font-size:20px;margin:34px 0 8px;scroll-margin-top:20px;text-wrap:balance}
+h3 .sec{font-family:var(--f-mono);font-size:14px;color:var(--muted);font-weight:400;margin-right:8px}
+p{margin:0 0 12px}
+.lede{color:var(--muted);font-size:17px;max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:13px;color:var(--muted);margin-top:12px}
+.ch-intro{color:var(--muted);margin-bottom:8px}
+.box{margin:14px 0;padding:12px 16px 10px;border:1px solid var(--rule);background:var(--sheet);min-width:0;overflow-x:auto}
+.box > .tag{font-family:var(--f-display);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.box > .tag .nm{text-transform:none;letter-spacing:0;font-weight:500;font-size:15px;color:var(--ink)}
+.thm{background:var(--thm);border-color:transparent}
+.thm > .tag{color:var(--thm-ink)}
+.def{background:var(--def);border-color:transparent}
+.def > .tag{color:var(--def-ink)}
+.warn{background:var(--warn);border-color:transparent}
+.warn > .tag{color:var(--warn-ink)}
+.ex{background:var(--sheet)}
+.ex > .tag{color:var(--accent)}
+.pf{background:var(--pf);border-style:dashed}
+.pf > .tag{color:var(--muted)}
+.pf p:last-child::after{content:" ∎";color:var(--muted)}
+.star,.src{font-family:var(--f-mono);font-size:11.5px;padding:0 6px;letter-spacing:0;text-transform:none;font-weight:400;white-space:nowrap}
+.star{color:var(--accent);border:1px solid var(--accent)}
+.src{color:var(--muted);border:1px solid var(--rule)}
+.src.hw{color:var(--hw-ink);border-color:var(--hw-ink)}
+ul,ol{padding-left:22px;margin:6px 0 12px}
+li{margin:3px 0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+.tblwrap{overflow-x:auto;margin:12px 0}
+th,td{border-bottom:1px solid var(--rule);padding:7px 10px;text-align:left;vertical-align:top}
+th{font-family:var(--f-display);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+details{border:1px solid var(--rule);background:var(--sheet);margin:10px 0;padding:0 14px}
+details.hwq{background:var(--hw);border-color:transparent}
+details summary{cursor:pointer;padding:10px 0;font-family:var(--f-display);font-weight:600;font-size:16px;list-style-position:outside}
+details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+details[open] summary{border-bottom:1px solid var(--rule);margin-bottom:8px}
+details .sol{padding-bottom:10px}
+details summary .qs{display:block;font-family:var(--f-body);font-weight:400;font-size:15px;margin-top:4px;color:var(--ink)}
+.tk{font-family:var(--f-display);font-weight:600;color:var(--accent);margin-bottom:6px}
+.trick{background:var(--accent-soft);border-color:transparent}
+.trick > .tag{color:var(--accent)}
+.trick p{margin-bottom:6px}
+
+.pill{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-weight:400;margin-left:6px}
+code{font-family:var(--f-mono);font-size:.9em}
+a{color:var(--accent)}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:2px 0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.cols .box{margin:0}
+footer{margin-top:60px;border-top:1px solid var(--rule);padding-top:14px;color:var(--muted);font-size:14px}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:0}
+  nav.toc{position:static;max-height:none;border:1px solid var(--rule);background:var(--sheet);padding:12px 14px;margin-bottom:8px}
+  nav.toc a.sub{display:none}
+}
+</style>
+
+<script>
+window.MathJax={
+  tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],
+    macros:{
+      E:'\\mathbb{E}', Var:'\\operatorname{var}', Cov:'\\operatorname{cov}', tr:'\\operatorname{tr}',
+      rank:'\\operatorname{rank}', bY:'\\mathbf{Y}', bX:'\\mathbf{X}', bZ:'\\mathbf{Z}', bx:'\\mathbf{x}',
+      bz:'\\mathbf{z}', be:'\\mathbf{e}', bmu:'\\boldsymbol{\\mu}', bbeta:'\\boldsymbol{\\beta}',
+      bhat:'\\hat{\\boldsymbol{\\beta}}', beps:'\\boldsymbol{\\varepsilon}', bgam:'\\boldsymbol{\\gamma}',
+      Sig:'\\boldsymbol{\\Sigma}', bI:'\\mathbf{I}', bP:'\\mathbf{P}', bA:'\\mathbf{A}', bB:'\\mathbf{B}',
+      bR:'\\mathbf{R}', bt:'\\mathbf{t}', ba:'\\mathbf{a}', bb:'\\mathbf{b}', bc:'\\mathbf{c}', bzero:'\\mathbf{0}',
+      bone:'\\mathbf{1}', bJ:'\\mathbf{J}', bW:'\\mathbf{W}', bC:'\\mathbf{C}', bU:'\\mathbf{U}', bL:'\\mathbf{L}',
+      bV:'\\mathbf{V}', bK:'\\mathbf{K}', bM:'\\mathbf{M}', bG:'\\mathbf{G}', blam:'\\boldsymbol{\\lambda}'
+    }},
+  svg:{fontCache:'global'}
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Sections">
+  <div class="lbl">Contents</div>
+  <a href="#plan">Exam plan</a>
+  <a href="#tricks">The 18 tricks</a>
+  <a class="sub" href="#spot">Spot-the-trick table</a>
+  <a class="sub" href="#facts">Facts to carry in</a>
+  <a href="#hw">Homework drills</a>
+  <a href="#practice">New drills</a>
+  <a href="#toolkit">0 · Matrix toolkit</a>
+  <a href="#ch1">1 · Random vectors</a>
+  <a class="sub" href="#s14">Expectation &amp; covariance</a>
+  <a class="sub" href="#s15">Quadratic forms</a>
+  <a class="sub" href="#s16">Independence &amp; MGFs</a>
+  <a href="#ch2">2 · Multivariate normal</a>
+  <a class="sub" href="#s21">Definitions</a>
+  <a class="sub" href="#s22">MGF &amp; transforms</a>
+  <a class="sub" href="#s23">Independence</a>
+  <a class="sub" href="#s24">Quadratic forms</a>
+  <a href="#ch3">3 · Least squares</a>
+  <a class="sub" href="#s31">Least squares, Thm 3.1</a>
+  <a class="sub" href="#s32">Gauss–Markov</a>
+  <a class="sub" href="#s33">Estimating σ²</a>
+  <a class="sub" href="#s34">Thm 3.5, MLE</a>
+  <a class="sub" href="#s36">Orthogonal columns</a>
+  <a class="sub" href="#s311">Centering &amp; scaling</a>
+  <a class="sub" href="#s37">Adding variables</a>
+  <a class="sub" href="#s38">Linear restrictions</a>
+  <a class="sub" href="#s310">Generalized LS</a>
+</nav>
+
+<main>
+<header class="top">
+  <div class="eyebrow">MATH 282A · Applied Statistics I · Midterm</div>
+  <h1>Seber &amp; Lee, Chapters 1–3</h1>
+  <p class="lede">A trick-first guide for a closed-book proof exam: the 18 moves that unlock every lecture proof and homework problem, drills for spotting which move a problem wants, and the chapter material behind them for reference.</p>
+  <div class="meta"><span>Sources: Lectures 1–12 · HW 1–2 + solutions</span><span>Closed book · 50 min</span><span>Tristan Endo</span></div>
+</header>
+
+<section id="plan">
+<h2>Exam plan</h2>
+<p>The exam is closed book, you won't need theorems word for word, and there's no heavy matrix algebra. What it tests is recognizing the trick that makes a short proof go through. So study in this order:</p>
+<ol>
+<li><b>Learn the 18 tricks</b> below. For each one, know the <em>signal</em> in a problem statement that calls for it.</li>
+<li><b>Drill recognition.</b> Open a <a href="#hw">homework drill</a> or a <a href="#practice">new drill</a>, read only the statement, and name the trick(s) before writing anything. The solution opens with the trick numbers, so you can check yourself.</li>
+<li><b>Carry in a handful of facts</b> (<a href="#facts">listed below</a>). These are distributional facts the tricks need, not theorems to recite.</li>
+<li>Use chapters 1–3 further down only as reference when a trick feels unfamiliar.</li>
+</ol>
+<div class="box warn"><span class="tag">Writing the proof</span>
+<p>Cite results by content, not number: "since $\bA\bY$ and $\bB\bY$ are jointly normal with zero covariance, they are independent." Then state the trick in your first line ("Add and subtract $\E\bX$…", "Since $Q$ is unchanged when every $Y_i$ is shifted, take $\mu=0$…"). Graders reward a visible plan.</p></div>
+<div class="box def"><span class="tag">Deprioritized</span>
+<p>Given "no complex matrix manipulations": partitioned inverses, the projection-subspace (B.3) derivation of restricted LS, the §3.7 updating formulas, and g-inverses are now marked <span class="src">reference</span>. Skim them last.</p></div>
+</section>
+
+<!-- ================= TRICKS ================= -->
+<section id="tricks">
+<h2>The 18 tricks</h2>
+<p class="ch-intro">Grouped by what they accomplish. Each lists the signal that calls for it, the move, and where it already appeared.</p>
+
+<h3>Rewriting the object</h3>
+
+<div class="box trick" id="t1"><span class="tag">T1 <span class="nm">Add and subtract the mean</span></span>
+<p><b>Spot it:</b> an expectation of a square or outer product centered somewhere other than the mean, such as $\E\|\bX-\ba\|^2$ or $\|\bY-\bX\bbeta\|^2$.</p>
+<p><b>Move:</b> $\bX-\ba=(\bX-\bmu)+(\bmu-\ba)$. Expand; the cross term has a factor $\E(\bX-\bmu)=\bzero$ (or is orthogonal, see T2).</p>
+<p><b>Seen in:</b> HW 1a.1, Thm 1.5 proof 1, why $\bhat$ minimizes RSS.</p></div>
+
+<div class="box trick" id="t2"><span class="tag">T2 <span class="nm">Pythagoras: kill the cross term</span></span>
+<p><b>Spot it:</b> "show X minimizes", "show RSS splits", or comparing two fits.</p>
+<p><b>Move:</b> write $\bY-\bX\bbeta=(\bY-\bX\bhat)+\bX(\bhat-\bbeta)$. The cross term vanishes because residuals are orthogonal to the column space: $\bX'\be=\bzero$ (normal equations). For restricted LS the cross term vanishes because $\bA(\bhat_H-\bbeta)=\bzero$. Conclude $\|\cdot\|^2=\text{fixed}+\text{nonnegative}$.</p>
+<p><b>Seen in:</b> L6 minimization, L11 identities, Thm 3.5(iv) method 2, Gauss–Markov.</p></div>
+
+<div class="box trick" id="t3"><span class="tag">T3 <span class="nm">Shift invariance: set μ = 0</span></span>
+<p><b>Spot it:</b> the statistic only involves differences $X_i-X_j$ or deviations $X_i-\bar X$.</p>
+<p><b>Move:</b> replace $X_i$ by $X_i-\mu$; the statistic is unchanged, so assume $\mu=0$ and every $\bmu'\bA\bmu$ or mean term disappears. In matrix form this is $\bA\bone=\bzero$.</p>
+<p><b>Seen in:</b> L2 successive differences, L2 equicorrelation, HW 1b.5, 2b.8.</p></div>
+
+<div class="box trick" id="t4"><span class="tag">T4 <span class="nm">A scalar is its own trace</span></span>
+<p><b>Spot it:</b> expectation of a quadratic form $\bX'\bA\bX$.</p>
+<p><b>Move:</b> $\E\bX'\bA\bX=\E\tr(\bA\bX\bX')=\tr(\bA\,\E\bX\bX')=\tr(\bA\Sig)+\bmu'\bA\bmu$. With $\Sig=\sigma^2\bI$ this is $\sigma^2\tr\bA$, so you only need the diagonal of $\bA$.</p>
+<p><b>Seen in:</b> Thm 1.5, Thm 3.3 ($\E S^2$), HW 1b.5(b), Misc 1.3.</p></div>
+
+<div class="box trick" id="t5"><span class="tag">T5 <span class="nm">Write it as a matrix times Y</span></span>
+<p><b>Spot it:</b> sample means, deviations, differences, estimators: anything linear in the data.</p>
+<p><b>Move:</b> $\bar Y=\tfrac1n\bone'\bY$, deviations $=\bC\bY$ with $\bC=\bI-\tfrac1n\bJ$, differences $=\bA\bY$, $\bhat=(\bX'\bX)^{-1}\bX'\bY$, $\be=(\bI-\bP)\bY$. Then $\Var(\bA\bY)=\bA\Sig\bA'$ and $\Cov(\bA\bY,\bB\bY)=\bA\Sig\bB'$ do the work, and normality passes through.</p>
+<p><b>Seen in:</b> HW 1a.3, 2c.2, every Thm 3.5 part.</p></div>
+
+<div class="box trick" id="t6"><span class="tag">T6 <span class="nm">Quadratic form as a squared norm</span></span>
+<p><b>Spot it:</b> you need independence or a distribution for $\bY'\bA\bY$ and $\bA$ is a projection ($\bA=\bA'=\bA^2$).</p>
+<p><b>Move:</b> $\bY'\bA\bY=\bY'\bA'\bA\bY=\|\bA\bY\|^2$. A quadratic form becomes a function of the linear vector $\bA\bY$, and T9 applies.</p>
+<p><b>Seen in:</b> L5 independence example, $S^2=\|\bC\bY\|^2/(n-1)$, $\mathrm{RSS}=\|(\bI-\bP)\bY\|^2$.</p></div>
+
+<h3>Getting a distribution</h3>
+
+<div class="box trick" id="t7"><span class="tag">T7 <span class="nm">Standardize first</span></span>
+<p><b>Spot it:</b> normal data with mean $\mu\bone$, $\bX\bbeta$, or covariance $\Sig\ne\bI$.</p>
+<p><b>Move:</b> $\bZ=(\bY-\bmu)/\sigma$ or $\bZ=\Sig^{-1/2}(\bY-\bmu)$, so $\bZ\sim N(\bzero,\bI)$. Check $\bA\bmu=\bzero$ so the form in $\bY$ equals $\sigma^2\bZ'\bA\bZ$.</p>
+<p><b>Seen in:</b> L5 $(n-1)S^2/\sigma^2$, Thm 2.9, Thm 3.5(iv) ($\mathrm{RSS}=\beps'(\bI-\bP)\beps$).</p></div>
+
+<div class="box trick" id="t8"><span class="tag">T8 <span class="nm">Idempotent ⇒ χ², rank = trace</span></span>
+<p><b>Spot it:</b> "show $Q\sim\chi^2$" or "find $c$ so that $cQ$ is χ²".</p>
+<p><b>Move:</b> write $Q=\bZ'\bA\bZ$ with $\bZ\sim N(\bzero,\bI)$, check $\bA^2=\bA$, read degrees of freedom off $\tr\bA$. Identities that make the check one line: $\bJ^2=n\bJ$, $\bC\bJ=\bzero$, $\bP\bX=\bX$. To <em>rule out</em> χ², find one entry where $\bA^2\ne\bA$.</p>
+<p><b>Seen in:</b> HW 2d.4, Misc 2.8, L5 examples, Thm 3.5(iv).</p></div>
+
+<div class="box trick" id="t9"><span class="tag">T9 <span class="nm">Zero covariance ⇒ independence (normal only)</span></span>
+<p><b>Spot it:</b> "show U and V are independent" with normal data.</p>
+<p><b>Move:</b> express both as functions of linear forms $\bA\bY$, $\bB\bY$ (T5, T6). Compute $\bA\Sig\bB'$; if zero, the linear forms are independent, and so are any functions of them. Say "jointly normal" explicitly: it is the condition graders look for.</p>
+<p><b>Seen in:</b> L4 $\bar Y\perp Q$, HW 2c.2, Thm 3.5(iii), Misc 2.8.</p></div>
+
+<div class="box trick" id="t10"><span class="tag">T10 <span class="nm">Factor the joint MGF</span></span>
+<p><b>Spot it:</b> independence must be shown "from first principles" or without Chapter 2 machinery; or you must identify a distribution.</p>
+<p><b>Move:</b> compute $\E e^{sU+\bt'\mathbf V}$, rearrange the exponent (often completing a square, using $\sum(t_i-\bar t)=0$), and split it into (function of $s$)·(function of $\bt$). For distributions, match a known MGF and invoke uniqueness.</p>
+<p><b>Seen in:</b> HW 2b.8, Thm 2.4 proof, Cramér–Wold.</p></div>
+
+<div class="box trick" id="t11"><span class="tag">T11 <span class="nm">χ² subtraction by MGF</span></span>
+<p><b>Spot it:</b> $Q_1=Q+Q_2$ with $Q_1,Q_2$ known χ² and $Q\perp Q_2$.</p>
+<p><b>Move:</b> $M_{Q_1}=M_QM_{Q_2}$, so $M_Q=(1-2t)^{-(r_1-r_2)/2}$ and $Q\sim\chi^2_{r_1-r_2}$.</p>
+<p><b>Seen in:</b> L2 example, Thm 3.5(iv) method 2.</p></div>
+
+<div class="box trick" id="t12"><span class="tag">T12 <span class="nm">Rotate with an orthogonal matrix</span></span>
+<p><b>Spot it:</b> iid $N(0,1)$ (or $N(0,\sigma^2\bI)$) data and a sum of squares minus something.</p>
+<p><b>Move:</b> $\bX=\bP\bZ$ with $\bP$ orthogonal is still $N(\bzero,\bI)$ and $\|\bX\|=\|\bZ\|$. Choose the first row $\bone'/\sqrt n$ (Helmert) so $X_1=\sqrt n\bar Z$, giving $\sum(Z_i-\bar Z)^2=\sum_{i\ge2}X_i^2$. Eigen-decomposition $\bA=\mathbf T\boldsymbol\Lambda\mathbf T'$ is the same idea.</p>
+<p><b>Seen in:</b> L3 $\bar Y\perp Q$, Thm 2.7 proof.</p></div>
+
+<div class="box trick" id="t13"><span class="tag">T13 <span class="nm">Show normality via every linear combination</span></span>
+<p><b>Spot it:</b> "show this stacked vector is multivariate normal".</p>
+<p><b>Move:</b> for any $\ba$, $\ba'\bW$ is a sum of independent normals, hence normal (Cramér–Wold).</p>
+<p><b>Seen in:</b> HW Misc 2.9.</p></div>
+
+<h3>Optimizing and comparing</h3>
+
+<div class="box trick" id="t14"><span class="tag">T14 <span class="nm">Unbiased for all parameters ⇒ constraints</span></span>
+<p><b>Spot it:</b> "find the minimum-variance unbiased linear/quadratic estimator".</p>
+<p><b>Move:</b> unbiasedness for every $\bbeta$ (or $\theta,\sigma^2$) turns into equations: $\bX'\ba=\bc$, or $\bone'\ba=1$, or $\tr\bA=1,\ \bone'\bA\bone=0$. Then write $\ba=\ba_0+\mathbf d$ with $\ba_0$ the candidate; the constraint kills the cross term (T2) so $\|\ba\|^2=\|\ba_0\|^2+\|\mathbf d\|^2$.</p>
+<p><b>Seen in:</b> HW 3b.3, 3c.2, Gauss–Markov.</p></div>
+
+<div class="box trick" id="t15"><span class="tag">T15 <span class="nm">Difference is a square, so ≥ 0</span></span>
+<p><b>Spot it:</b> "show $\Var\tilde\theta\ge\Var\hat\theta$", "deduce each diagonal is smaller".</p>
+<p><b>Move:</b> write the difference as $\sigma^2\mathbf M'\mathbf K\mathbf M$ with $\mathbf K\succ0$, or as $\Var(\text{orthogonal piece})$; a PSD matrix has nonnegative diagonal. For scalars, Cauchy–Schwarz: $(\sum x_i)^2\le n\sum x_i^2$.</p>
+<p><b>Seen in:</b> HW 3g.3, 3c.2, Gauss–Markov, ratio estimator drill.</p></div>
+
+<div class="box trick" id="t16"><span class="tag">T16 <span class="nm">MSE = variance + bias²</span></span>
+<p><b>Spot it:</b> comparing estimators of $\sigma^2$, or any "smaller mean-squared error".</p>
+<p><b>Move:</b> if $\mathrm{RSS}/\sigma^2\sim\chi^2_m$, then $c\,\mathrm{RSS}$ has mean $cm\sigma^2$ and variance $2c^2m\sigma^4$. Plug in.</p>
+<p><b>Seen in:</b> HW 3c.1, MLE vs $S^2$.</p></div>
+
+<h3>Using structure</h3>
+
+<div class="box trick" id="t17"><span class="tag">T17 <span class="nm">Specialize the regression model</span></span>
+<p><b>Spot it:</b> a one-sample problem that "should" follow from a regression theorem, or a small design.</p>
+<p><b>Move:</b> take $\bX=\bone_n$ ($p=1$): $\bhat=\bar Y$, $\mathrm{RSS}=\sum(Y_i-\bar Y)^2$, $\bP=\tfrac1n\bJ$. For two-parameter problems write $\bX'\bX$ explicitly. With orthogonal or centered columns, $\bX'\bX$ is (block) diagonal, so estimates decouple: $\hat\beta_j=\bx_j'\bY/\bx_j'\bx_j$.</p>
+<p><b>Seen in:</b> HW 3d.1, 3c.2, 3a.4, 3e.2, 3b.1, 3b.4.</p></div>
+
+<div class="box trick" id="t18"><span class="tag">T18 <span class="nm">Polarization and products of moments</span></span>
+<p><b>Spot it:</b> a covariance between two quadratic forms, or between a linear and a quadratic form.</p>
+<p><b>Move:</b> $\Cov(U,V)=\tfrac12[\Var(U+V)-\Var U-\Var V]$. For $\E[X_iX_jX_k]$ or $\E[X_iX_jX_kX_l]$ with independent mean-zero $X$'s, only matching indices survive: $\E X_i^3=\mu_3$, pairs give $\sigma^4$.</p>
+<p><b>Seen in:</b> HW Misc 1.5, drill 1.</p></div>
+
+<h3 id="spot">Spot-the-trick table</h3>
+<div class="tblwrap"><table>
+<thead><tr><th>The problem says…</th><th>Reach for</th></tr></thead>
+<tbody>
+<tr><td>"Find $\E$ of" a sum of squares</td><td>T3 → T5 → T4</td></tr>
+<tr><td>"Find $\Var$ of" a sum of squares, normal data</td><td>T3, then χ² variance (T8) or $2\sigma^4\tr\bA^2$</td></tr>
+<tr><td>"Show … are independent"</td><td>T5 + T6 → T9; first-principles: T10</td></tr>
+<tr><td>"Show … has a χ² distribution"</td><td>T7 → T8; or T12; or T11</td></tr>
+<tr><td>"Show … has a $t$ / $F$ distribution"</td><td>Numerator and denominator separately (T7, T8), independence (T9), divide</td></tr>
+<tr><td>"Show … is multivariate normal"</td><td>T5 (linear map of normal) or T13</td></tr>
+<tr><td>"Show … minimizes / is the least squares estimate"</td><td>T1 + T2</td></tr>
+<tr><td>"Find the best (minimum-variance) unbiased…"</td><td>T14 + T15</td></tr>
+<tr><td>"Show … has smaller variance / MSE"</td><td>T15, T16</td></tr>
+<tr><td>"Use Theorem 3.5 to prove" a one-sample fact</td><td>T17</td></tr>
+<tr><td>"Find the conditional distribution"</td><td>$\bU=\bY_1-\Sig_{12}\Sig_{22}^{-1}\bY_2$, then T9</td></tr>
+<tr><td>Covariance of two quadratic forms</td><td>T18</td></tr>
+</tbody></table></div>
+
+<h3 id="facts">Facts to carry in</h3>
+<p class="ch-intro">Not theorems to recite, but the raw material the tricks run on. Know them cold.</p>
+<div class="cols">
+<div class="box def"><span class="tag">χ²</span>
+<p>$\chi^2_r=\sum_{i=1}^rZ_i^2$; mean $r$, variance $2r$, MGF $(1-2t)^{-r/2}$. Independent χ²'s add.</p></div>
+<div class="box def"><span class="tag">Normal</span>
+<p>MGF $\exp(\bt'\bmu+\tfrac12\bt'\Sig\bt)$. $\bA\bY+\mathbf d$ is normal with mean $\bA\bmu+\mathbf d$, covariance $\bA\Sig\bA'$.</p></div>
+<div class="box def"><span class="tag">t and F</span>
+<p>$Z/\sqrt{V/k}\sim t_k$ and $(U/m)/(V/k)\sim F_{m,k}$, numerator and denominator independent.</p></div>
+<div class="box def"><span class="tag">Quadratic forms</span>
+<p>$\E\bX'\bA\bX=\tr(\bA\Sig)+\bmu'\bA\bmu$. Normal, mean zero: $\Var(\bZ'\bA\bZ)=2\sigma^4\tr\bA^2$.</p></div>
+<div class="box def"><span class="tag">Matrices that recur</span>
+<p>$\bC=\bI-\tfrac1n\bJ$, $\bJ^2=n\bJ$, $\bC\bone=\bzero$, $\tr\bC=n-1$. $\bP=\bX(\bX'\bX)^{-1}\bX'$, $\bP\bX=\bX$, $\tr\bP=p$.</p></div>
+<div class="box def"><span class="tag">Regression basics</span>
+<p>$\bhat=(\bX'\bX)^{-1}\bX'\bY$, $\Var\bhat=\sigma^2(\bX'\bX)^{-1}$, $\bX'\be=\bzero$, $S^2=\mathrm{RSS}/(n-p)$, $\mathrm{RSS}/\sigma^2\sim\chi^2_{n-p}$, $\bhat\perp S^2$.</p></div>
+</div>
+</section>
+
+<!-- ================= HOMEWORK BANK ================= -->
+<section id="hw">
+<h2>Homework drills</h2>
+<p class="ch-intro">Every assigned problem. Read the statement, name the trick, then open it: the first line of each solution is the trick, followed by the route the official solution takes.</p>
+
+<details class="hwq"><summary>1a.1 · Shift identity<span class="qs">Prove $\E[(\bX-\ba)(\bX-\ba)']=\Var\bX+(\E\bX-\ba)(\E\bX-\ba)'$ and $\E\|\bX-\ba\|^2=\sum\sigma_{ii}+\|\E\bX-\ba\|^2$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T1</p>
+
+<p>Insert $\pm\E\bX$, expand into four terms, use $\E[\bX-\E\bX]=\bzero$ for the cross terms. Second part: the same with $(\cdot)'(\cdot)$, or take the trace of the first.</p></div></details>
+
+<details class="hwq"><summary>1a.3 · Variance from increments<span class="qs">$Y_1=X_1$, $Y_i=X_i-X_{i-1}$ independent with unit variance. Find $\Var\bX$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T5</p>
+
+<p>$\bX=\bA\bY$ with $\bA$ the lower-triangular matrix of ones, $\Var\bY=\bI$, so $\Var\bX=\bA\bA'$, whose $(i,j)$ entry is $\min(i,j)$.</p></div></details>
+
+<details class="hwq"><summary>1b.2 · Unequal variances<span class="qs">$X_i$ independent, common mean $\mu$, variances $\sigma_i^2$. Show $\E\sum(X_i-\bar X)^2=n(n-1)\Var\bar X$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T1</p>
+
+<p>$\Var\bar X=\frac1{n^2}\sum\sigma_i^2$. Then $\E\sum(X_i-\bar X)^2=\E\sum X_i^2-n\E\bar X^2=n\mu^2+\sum\sigma_i^2-n(\Var\bar X+\mu^2)=n^2\Var\bar X-n\Var\bar X$.</p></div></details>
+
+<details class="hwq"><summary>1b.5 · Var S² and successive differences<span class="qs">$X_i$ iid $N(\mu,\sigma^2)$, $Q=\frac1{2(n-1)}\sum(X_{i+1}-X_i)^2$. (a) $\Var S^2=2\sigma^4/(n-1)$; (b) $Q$ is unbiased; (c) efficiency of $Q$ relative to $S^2$ tends to $2/3$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T3, T4, T5</p>
+
+<p>(a) $(n-1)S^2=\bX'\bC\bX$, $\bC\boldsymbol\theta=\bzero$, Theorem 1.6 leaves $2\sigma^4\tr\bC^2=2\sigma^4(n-1)$. (b) $2(n-1)Q=\|\bA\bX\|^2$ with $\bA$ the differencing matrix; $\E=\sigma^2\tr(\bA'\bA)=2(n-1)\sigma^2$. (c) $\Var[2(n-1)Q]=2\sigma^4\tr((\bA'\bA)^2)=2\sigma^4(6n-8)$, so $\Var Q=\frac{\sigma^4(6n-8)}{2(n-1)^2}$ and the ratio $\frac{4n-4}{6n-8}\to\frac23$.</p></div></details>
+
+<details class="hwq"><summary>Misc 1.3 · Unbiased estimate of Var X̄<span class="qs">Common mean, $\Cov(X_i,X_j)=0$ unless $|i-j|=1$. With $Q_1=\sum(X_i-\bar X)^2$ and $Q_2=\sum(X_i-X_{i+1})^2$, show $\E\big[\frac{3Q_1-Q_2}{n(n-3)}\big]=\Var\bar X$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T4</p>
+
+<p>$\E Q_1=\sum\sigma_{ii}-n\Var\bar X$, $\E Q_2=2\sum\sigma_{ii}-2\sum\sigma_{i,i+1}$, $\Var\bar X=\frac1{n^2}(\sum\sigma_{ii}+2\sum\sigma_{i,i+1})$. Eliminate $\sum\sigma_{ii}$ and $\sum\sigma_{i,i+1}$.</p></div></details>
+
+<details class="hwq"><summary>Misc 1.5 · Covariance of two quadratic forms<span class="qs">$\bX\sim N(\bzero,\sigma^2\bI)$: show $\Cov(\bX'\bA\bX,\bX'\bB\bX)=2\sigma^4\tr(\bA\bB)$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T18</p>
+
+<p>$\Cov=\frac12[\Var(\bX'(\bA+\bB)\bX)-\Var(\bX'\bA\bX)-\Var(\bX'\bB\bX)]=\sigma^4[\tr(\bA+\bB)^2-\tr\bA^2-\tr\bB^2]=2\sigma^4\tr(\bA\bB)$.</p></div></details>
+
+<details class="hwq"><summary>2b.8 · Ȳ ⊥ deviations via the joint MGF<span class="qs">$Y_i$ iid $N(\mu,\sigma^2)$. Show $\bar Y\perp\sum(Y_i-\bar Y)^2$ using the MGF of $(\bar Y,Y_1-\bar Y,\dots,Y_n-\bar Y)$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T10, T3</p>
+
+<p>$s\bar Y+\sum t_i(Y_i-\bar Y)=\sum(t_i-\bar t+s/n)Y_i$. Independence of the $Y_i$ gives a product of normal MGFs; since $\sum(t_i-\bar t)=0$ the exponent splits as $[s\mu+\frac{\sigma^2s^2}{2n}]+[\frac{\sigma^2}2\sum(t_i-\bar t)^2]$, a function of $s$ times a function of $\bt$.</p></div></details>
+
+<details class="hwq"><summary>2c.2 · Equicorrelated normal sample<span class="qs">$\bY\sim N_n(\mu\bone,\sigma^2[(1-\rho)\bI+\rho\bJ])$. Show $\bar Y\perp\sum(Y_i-\bar Y)^2$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T5, T9</p>
+
+<p>$\Cov(\tfrac1n\bone'\bY,(\bI-\tfrac1n\bJ)\bY)=\tfrac1n\bone'\Sig(\bI-\tfrac1n\bJ)$. Since $\bone'\Sig=\sigma^2\lambda\bone'$ with $\lambda=1+(n-1)\rho$, this is a multiple of $\bone'(\bI-\tfrac1n\bJ)=\bzero'$. Independence for every $\rho$.</p></div></details>
+
+<details class="hwq"><summary>2d.4 · Cyclic differences and χ²<span class="qs">$\bY\sim N_3(\bzero,\bI)$: show $\frac13[(Y_1-Y_2)^2+(Y_2-Y_3)^2+(Y_3-Y_1)^2]\sim\chi^2_2$. Does this extend to $n\gt3$?</span></summary>
+<div class="sol">
+<p class="tk">Trick: T8</p>
+
+<p>The form is $\bY'\bA\bY$ with $\bA=\bI-\frac13\bJ$: symmetric, idempotent, rank $2$. For $n\ge4$ the matrix $\bB=k(2\bI-\text{cyclic neighbours})$ has $(\bB^2)_{13}\ne0=\bB_{13}$, so no $k$ makes it idempotent.</p></div></details>
+
+<details class="hwq"><summary>Misc 2.8 · Three independent χ²<span class="qs">$\bY\sim N_n(\bzero,\bI)$, $\bA,\bB$ symmetric idempotent, $\bA\bB=\bB\bA=\bzero$. Show $\bY'\bA\bY$, $\bY'\bB\bY$, $\bY'(\bI-\bA-\bB)\bY$ are independent χ².</span></summary>
+<div class="sol">
+<p class="tk">Trick: T8, T9</p>
+
+<p>Check $(\bI-\bA-\bB)^2=\bI-\bA-\bB$ and $\bA(\bI-\bA-\bB)=\bB(\bI-\bA-\bB)=\bzero$; degrees of freedom are the traces.</p></div></details>
+
+<details class="hwq"><summary>Misc 2.9 · Bivariate normal sample<span class="qs">$(X_i,Y_i)$ iid bivariate normal, $\bW=(X_1,\dots,X_n,Y_1,\dots,Y_n)'$. (a) $\bW\sim N_{2n}$; (b) find $\bX\mid\bY$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T13; conditional via T9</p>
+
+<p>(a) Cramér–Wold: $\ba'\bW=\sum_i(a_iX_i+a_{n+i}Y_i)$, a sum of independent normals. (b) $\Sig_{12}=\rho\sigma_1\sigma_2\bI$, $\Sig_{22}=\sigma_2^2\bI$: $\ \bX\mid\bY\sim N_n\big(\mu_1\bone+\frac{\rho\sigma_1}{\sigma_2}(\bY-\mu_2\bone),\ \sigma_1^2(1-\rho^2)\bI\big)$.</p></div></details>
+
+<details class="hwq"><summary>3a.2 · Residuals sum to zero<span class="qs">With an intercept, show $\sum(Y_i-\hat Y_i)=0$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T2</p>
+
+<p>$\bX'\hat\bY=\bX'\bX\bhat=\bX'\bY$, so $\bX'(\bY-\hat\bY)=\bzero$; the first row of $\bX'$ is $\bone'$.</p></div></details>
+
+<details class="hwq"><summary>3a.4 · Orthogonal quadratic design<span class="qs">$\E Y_i=\beta_0+\beta_1x_i+\beta_2(3x_i^2-2)$, $x=(-1,0,1)$. Find the LSEs; show $\hat\beta_0,\hat\beta_1$ unchanged if $\beta_2=0$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T17</p>
+
+<p>$\bX'\bX=\mathrm{diag}(3,2,6)$: $\hat\beta_0=\bar Y$, $\hat\beta_1=\frac12(Y_3-Y_1)$, $\hat\beta_2=\frac16(Y_1-2Y_2+Y_3)$. Columns are orthogonal, so each estimate uses only its own column.</p></div></details>
+
+<details class="hwq"><summary>3b.1 · Straight line, uncorrelated estimates<span class="qs">Find $\hat\beta_0,\hat\beta_1$ and show they are uncorrelated iff $\bar x=0$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T17</p>
+
+<p>Invert the $2\times2$ $\bX'\bX$; $\Cov(\hat\beta_0,\hat\beta_1)=\sigma^2[(\bX'\bX)^{-1}]_{12}=-\sigma^2\bar x/S_{xx}$.</p></div></details>
+
+<details class="hwq"><summary>3b.3 · BLUE of a normal mean<span class="qs">Find the minimum-variance linear unbiased estimate of $\theta$ from a $N(\theta,\sigma^2)$ sample.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T14</p>
+
+<p>$\bX=\bone_n$; Gauss–Markov gives $\bar Y$. Direct proof: $\ba=\bone/n+\mathbf d$, $\mathbf d'\bone=0$, $\ba'\ba=\frac1n+\mathbf d'\mathbf d$.</p></div></details>
+
+<details class="hwq"><summary>3b.4 · Variance inflation<span class="qs">Centered two-covariate model: show $\Var\hat\beta_1=\sigma^2/[\sum(x_{i1}-\bar x_1)^2(1-r^2)]$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T17</p>
+
+<p>$\bX'\bX$ is block diagonal $(n)\oplus\begin{pmatrix}S_{11}&S_{12}\\S_{12}&S_{22}\end{pmatrix}$; take the $(1,1)$ entry of the $2\times2$ inverse and use $r^2=S_{12}^2/(S_{11}S_{22})$.</p></div></details>
+
+<details class="hwq"><summary>3c.1 · A biased estimator beats S²<span class="qs">$\bY\sim N_n(\bX\bbeta,\sigma^2\bI)$. Find $\Var S^2$; evaluate $\E(\bY'\bA_1\bY-\sigma^2)^2$ for $\bA_1=\frac{\bI-\bP}{n-p+2}$; show it beats $S^2$ in MSE.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T16</p>
+
+<p>$\mathrm{RSS}/\sigma^2\sim\chi^2_m$, $m=n-p$: $\Var S^2=2\sigma^4/m$. $\bY'\bA_1\bY=\mathrm{RSS}/(m+2)$ has bias $-2\sigma^2/(m+2)$ and variance $2m\sigma^4/(m+2)^2$, so MSE $=2\sigma^4/(m+2)\lt2\sigma^4/m$.</p></div></details>
+
+<details class="hwq"><summary>3c.2 · Best nonnegative quadratic unbiased estimator<span class="qs">$Y_i$ iid mean $\theta$, variance $\sigma^2$. Find the nonnegative quadratic unbiased estimate of $\sigma^2$ with minimum variance.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T14, T15, T17</p>
+
+<p>Official route: Theorem 3.4 with $\bX=\bone$ ($\bP=\frac1n\bJ$ has equal diagonal) gives $S^2$. Direct route: unbiased for all $\theta$ ⇔ $\tr\bA=1$, $\bone'\bA\bone=0$; nonnegative ⇒ $\bA\bone=\bzero$; minimize $(\mu_4-3\sigma^4)\sum a_{ii}^2+2\sigma^4\tr\bA^2$ by Cauchy–Schwarz, giving $\bA=\frac1{n-1}\bC$.</p></div></details>
+
+<details class="hwq"><summary>3d.1 · Ȳ ⊥ Q from Theorem 3.5<span class="qs">Use Theorem 3.5 to show $\bar Y\perp Q=\sum(Y_i-\bar Y)^2$ and $Q/\sigma^2\sim\chi^2_{n-1}$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T17</p>
+
+<p>Take $\bX=\bone_n$, $p=1$: $\bhat=\bar Y$, $\mathrm{RSS}=Q$. (iii) gives independence, (iv) the distribution.</p></div></details>
+
+<details class="hwq"><summary>3e.2 · Choosing an orthogonal polynomial<span class="qs">$\E Y_i=\beta_0+\beta_1x_i+\beta_2\phi(x_i)$, $x=(-1,0,1)$, $\phi$ quadratic. Find $\phi$ making the columns orthogonal.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T17</p>
+
+<p>$\phi(x)=a+bx+cx^2$: $\bx'\boldsymbol\phi=2b=0$ and $\bone'\boldsymbol\phi=3a+2c=0$, so $\phi(x)=d(3x^2-2)$, $d\ne0$.</p></div></details>
+
+<details class="hwq"><summary>3g.3 · Variance of the restricted estimator<span class="qs">Prove $\Var\bhat_H=\sigma^2\{\bG-\bG\bA'\bK^{-1}\bA\bG\}$ with $\bG=(\bX'\bX)^{-1}$, $\bK=\bA\bG\bA'$, and deduce $\Var\hat\beta_{Hj}\le\Var\hat\beta_j$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T5, T15</p>
+
+<p>$\bhat_H=(\bI-\bG\bA'\bK^{-1}\bA)\bhat+\text{const}$, so $\Var\bhat_H=\sigma^2(\bI-\bG\bA'\bK^{-1}\bA)\bG(\bI-\bA'\bK^{-1}\bA\bG)$. Expand: the two cross terms each give $-\bL$ and the last gives $+\bL$, where $\bL=\bG\bA'\bK^{-1}\bA\bG$, since $\bA\bG\bA'=\bK$. Result $\sigma^2(\bG-\bL)$. $\bL=(\bA\bG)'\bK^{-1}(\bA\bG)\succeq0$, so its diagonal is nonnegative: $\Var\hat\beta_j-\Var\hat\beta_{Hj}=\sigma^2l_{jj}\ge0$.</p></div></details>
+</section>
+
+<!-- ================= PRACTICE ================= -->
+<section id="practice">
+<h2>New drills</h2>
+<p class="ch-intro">Not from the homework. Same exercise: name the trick before opening.</p>
+
+<details><summary>1. Linear–quadratic covariance<span class="qs"> $X_i$ iid, mean 0, variance $\sigma^2$, third moment $\mu_3$. Show $\Cov(\bar X,\sum(X_i-\bar X)^2)=\frac{n-1}{n}\mu_3$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T18, T3</p>
+
+<p><b>Solution.</b> $\Cov=\E[\bar X\,\bX'\bC\bX]=\frac1n\sum_{i,j,k}c_{jk}\E[X_iX_jX_k]$; only $i=j=k$ survives: $\frac1n\mu_3\tr\bC=\frac{n-1}n\mu_3$. Zero under normality, as Theorem 2.5 predicts.</p></div></details>
+
+<details><summary>2. When is a variance matrix PD<span class="qs"> $\bX=\bA\bY$ with $\Var\bY=\bI_n$, $\bA$ $n\times n$. Show $\Var\bX$ is PD iff $\bA$ is nonsingular.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T5</p>
+
+<p><b>Solution.</b> $\Var\bX=\bA\bA'$ by Theorem 1.3, and $\bc'\bA\bA'\bc=\|\bA'\bc\|^2$, which is $0$ for some $\bc\ne\bzero$ iff $\bA'$ is singular.</p></div></details>
+
+<details><summary>3. Joint law of Ȳ and one deviation<span class="qs"> $\bY\sim N_n(\mu\bone,\sigma^2\bI)$. Find the distribution of $(\bar Y,Y_1-\bar Y)'$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T5, T9</p>
+
+<p><b>Solution.</b> $\bC$ has rows $\frac1n\bone'$ and $\mathbf e_1'-\frac1n\bone'$ (rank 2). Theorem 2.2: mean $(\mu,0)'$, covariance $\sigma^2\bC\bC'=\sigma^2\mathrm{diag}(\frac1n,1-\frac1n)$. Zero off-diagonal ⇒ independent (Theorem 2.4).</p></div></details>
+
+<details><summary>4. A χ² under equicorrelation<span class="qs"> $\bY\sim N_n(\bzero,\Sig)$ with $\Sig=\sigma^2[(1-\rho)\bI+\rho\bJ]$, $0\le\rho\lt1$. Find $c$ such that $c\sum(Y_i-\bar Y)^2\sim\chi^2_{n-1}$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T7, T8</p>
+
+<p><b>Solution.</b> $c\sum(Y_i-\bar Y)^2=\bY'(c\bC)\bY$. Since $\bC\bJ=\bzero$, $(c\bC)\Sig=c\sigma^2(1-\rho)\bC$. This is idempotent iff $c=1/[\sigma^2(1-\rho)]$, and then its rank is $\tr\bC=n-1$. Corollary to Theorem 2.8 ($\Sig\succ0$).</p></div></details>
+
+<details><summary>5. Fitted and residual sums of squares<span class="qs"> Normal regression: show $\hat\bY'\hat\bY\perp\mathrm{RSS}$ and give their distributions.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T6, T9, T8</p>
+
+<p><b>Solution.</b> $\hat\bY'\hat\bY=\bY'\bP\bY$, $\mathrm{RSS}=\bY'(\bI-\bP)\bY$, $\bP(\bI-\bP)=\bzero$. $\mathrm{RSS}/\sigma^2\sim\chi^2_{n-p}$ (Theorem 3.5). Under $\bbeta=\bzero$, $\bY'\bP\bY/\sigma^2\sim\chi^2_p$ by Theorem 2.7; otherwise it is noncentral (textbook only). For independence with any $\bbeta$: $\hat\bY'\hat\bY=\|\bP\bY\|^2$, $\mathrm{RSS}=\|(\bI-\bP)\bY\|^2$, and $\Cov(\bP\bY,(\bI-\bP)\bY)=\sigma^2\bP(\bI-\bP)=\bzero$, so Theorem 2.5 applies.</p></div></details>
+
+<details><summary>6. Residual variances<span class="qs"> Show $\sum_i\Var e_i=(n-p)\sigma^2$ and $\Cov(\be,\hat\bY)=\bzero$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T5, T4</p>
+
+<p><b>Solution.</b> $\Var\be=\sigma^2(\bI-\bP)$, trace $n-p$. $\Cov((\bI-\bP)\bY,\bP\bY)=\sigma^2(\bI-\bP)\bP=\bzero$.</p></div></details>
+
+<details><summary>7. Ratio estimator vs least squares<span class="qs"> $Y_i=\beta x_i+\varepsilon_i$. Show $\tilde\beta=\sum Y_i/\sum x_i$ is unbiased and compare with the LSE.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T15</p>
+
+<p><b>Solution.</b> $\Var\tilde\beta=n\sigma^2/(\sum x_i)^2$, $\Var\hat\beta=\sigma^2/\sum x_i^2$. Cauchy–Schwarz $(\sum x_i)^2\le n\sum x_i^2$ gives $\Var\tilde\beta\ge\Var\hat\beta$, equality iff all $x_i$ equal.</p></div></details>
+
+<details><summary>8. Dropping an orthogonal column<span class="qs"> Orthogonal columns. Show the RSS of the model without column $j$ exceeds the full RSS by $\hat\beta_j^2\|\bx^j\|^2$, and find its distribution under $\beta_j=0$ with normal errors.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T6, T8, T9</p>
+
+<p><b>Solution.</b> Subtract the two RSS formulas. Also $\hat\beta_j^2\|\bx^j\|^2=\bY'\bP_j\bY$ with $\bP_j=\bx^j(\bx^{j\prime}\bx^j)^{-1}\bx^{j\prime}$ rank 1; under $\beta_j=0$, $\bP_j\bX\bbeta=\bzero$, so it is $\sigma^2\chi^2_1$, independent of RSS since $\bP_j(\bI-\bP)=\bzero$.</p></div></details>
+
+<details><summary>9. Restricted estimator satisfies the restriction<span class="qs"> Show $\bA\bhat_H=\bc$, $\E\bhat_H=\bbeta$ when $H$ holds, and find the bias when it fails.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T5</p>
+
+<p><b>Solution.</b> $\bA\bhat_H=\bA\bhat+\bK\bK^{-1}(\bc-\bA\bhat)=\bc$. $\E\bhat_H=\bbeta+\bG\bA'\bK^{-1}(\bc-\bA\bbeta)$, which is $\bbeta$ iff $\bA\bbeta=\bc$.</p></div></details>
+
+<details><summary>10. Extra RSS from the restriction<span class="qs"> Show $\mathrm{RSS}_H-\mathrm{RSS}=(\bA\bhat-\bc)'\bK^{-1}(\bA\bhat-\bc)$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T2</p>
+
+<p><b>Solution.</b> Identity (i): $\mathrm{RSS}_H-\mathrm{RSS}=\|\bX(\bhat-\bhat_H)\|^2=(\bhat-\bhat_H)'\bX'\bX(\bhat-\bhat_H)$. Substitute $\bhat-\bhat_H=\bG\bA'\bK^{-1}(\bA\bhat-\bc)$; then $\bK^{-1}\bA\bG\bX'\bX\bG\bA'\bK^{-1}=\bK^{-1}$.</p></div></details>
+
+<details><summary>11. GLS beats OLS<span class="qs"> $\Var\beps=\sigma^2\bV$. Show $\E\bbeta^*=\bbeta$, $\Var\bbeta^*=\sigma^2(\bX'\bV^{-1}\bX)^{-1}$, and $\Var(\bc'\bhat)\ge\Var(\bc'\bbeta^*)$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: Transform to the standard model, then T14</p>
+
+<p><b>Solution.</b> First two by Theorems 1.1 and 1.3. For the third, $\bc'\bhat$ is linear and unbiased in the transformed model $\bZ=\bB\bbeta+\boldsymbol\eta$, where Gauss–Markov says $\bc'\bbeta^*$ is BLUE.</p></div></details>
+
+<details><summary>12. MLE of σ² vs S²<span class="qs"> Under normality compare the MSE of $\hat\sigma^2_{\rm MLE}$ and $S^2$.</span></summary>
+<div class="sol">
+<p class="tk">Trick: T16</p>
+
+<p><b>Solution.</b> $\nu=n-p$. $\mathrm{MSE}(S^2)=2\sigma^4/\nu$. $\hat\sigma^2$ has bias $-\frac pn\sigma^2$ and variance $\frac{2\nu}{n^2}\sigma^4$, so MSE $=\frac{\sigma^4}{n^2}(2\nu+p^2)$. Smaller than $S^2$ iff $p(\nu-2)\lt4\nu$, true for every $\nu$ when $p\le4$.</p></div></details>
+</section>
+
+<section id="refintro">
+<h2>Reference: chapters 1–3</h2>
+<p class="ch-intro">Everything below backs up the tricks. Read it when a trick feels unfamiliar, not cover to cover.</p>
+</section>
+
+<!-- ================= TOOLKIT ================= -->
+<section id="toolkit">
+<h2><span class="num">0</span>Matrix toolkit</h2>
+<p class="ch-intro">Almost every proof reduces to one of these facts.</p>
+
+<div class="cols">
+<div class="box def"><span class="tag">Trace</span>
+<p>$\tr(\bA\bB)=\tr(\bB\bA)$; trace is linear and commutes with $\E$; a scalar is its own trace, so $\bx'\bA\bx=\tr(\bA\bx\bx')$.</p></div>
+<div class="box def"><span class="tag">Symmetrizing</span>
+<p>$\bX'\bA\bX=\bX'\big(\tfrac{\bA+\bA'}{2}\big)\bX$, so any quadratic form can use a symmetric matrix. <span class="src">L1</span></p></div>
+<div class="box def"><span class="tag">Square root</span>
+<p>$\Sig=\bP\boldsymbol\Lambda\bP'$, $\Sig^{1/2}=\bP\boldsymbol\Lambda^{1/2}\bP'$ is symmetric with $(\Sig^{1/2})^2=\Sig$. <span class="src">L3</span></p></div>
+<div class="box def"><span class="tag">Rank of $\bX'\bX$</span>
+<p>$\rank(\bX'\bX)=\rank\bX$. Full column rank ⇒ $\bX'\bX$ is positive definite and invertible.</p></div>
+<div class="box def"><span class="tag">Centering matrix</span>
+<p>$\bC=\bI_n-\tfrac1n\bJ_n$: symmetric, idempotent, rank $n-1$, $\bC\bone=\bzero$, $\sum(Y_i-\bar Y)^2=\bY'\bC\bY$, $\bJ^2=n\bJ$.</p></div>
+<div class="box def"><span class="tag">PSD sums</span>
+<p>$\bB'\bB\succeq0$; $\bK\succ0$ ⇒ $\bM'\bK\bM\succeq0$. Diagonal entries of a PSD matrix are $\ge0$.</p></div>
+</div>
+
+<div class="box def"><span class="tag">Projections <span class="nm">Appendix A.6</span><span class="src">L4</span></span>
+<p>A square $\bP$ is idempotent if $\bP^2=\bP$; a symmetric idempotent matrix is a projection.</p>
+<ul>
+<li>(A.6.1) $\bP$ symmetric: idempotent of rank $r$ ⇔ $r$ eigenvalues equal to 1 and $n-r$ equal to 0.</li>
+<li>(A.6.2) Projection ⇒ $\tr\bP=\rank\bP$.</li>
+<li>(A.6.3) $\bP$ idempotent ⇒ $\bI_n-\bP$ idempotent.</li>
+<li>(A.6.4) Projections are PSD.</li>
+<li>(A.6.5) $\bP_1,\bP_2$ projections with $\bP_1-\bP_2\succeq0$ ⇒ $\bP_1\bP_2=\bP_2\bP_1=\bP_2$ and $\bP_1-\bP_2$ is a projection.</li>
+</ul></div>
+
+<div class="box def"><span class="tag">Subspace projections <span class="nm">Appendix B.3</span><span class="src">L12</span> <span class="src">reference</span></span>
+<ul>
+<li>(B.3.2) $W\subset\Omega$ ⇒ $\bP_\Omega-\bP_W=\bP_{W^\perp\cap\Omega}$.</li>
+<li>(B.3.3) $W=\mathrm{Null}(\bM)\cap\Omega$ ⇒ $W^\perp\cap\Omega=\mathcal C(\bP_\Omega\bM')$.</li>
+<li>If $\bB$ is $n\times q$ of rank $q$, the projection onto $\mathcal C(\bB)$ is $\bB(\bB'\bB)^{-1}\bB'$.</li>
+</ul></div>
+
+<div class="box def"><span class="tag">Partitioned inverse <span class="nm">A.9</span><span class="src">L4</span> <span class="src">reference</span></span>
+$$\begin{pmatrix}\bA_{11}&\bA_{12}\\ \bA_{21}&\bA_{22}\end{pmatrix}^{-1}=\begin{pmatrix}(\bA_{11}-\bA_{12}\bA_{22}^{-1}\bA_{21})^{-1} & -\bA_{11}^{-1}\bA_{12}(\bA_{22}-\bA_{21}\bA_{11}^{-1}\bA_{12})^{-1}\\ -\bA_{22}^{-1}\bA_{21}(\bA_{11}-\bA_{12}\bA_{22}^{-1}\bA_{21})^{-1} & (\bA_{22}-\bA_{21}\bA_{11}^{-1}\bA_{12})^{-1}\end{pmatrix}$$
+<p>$\det\bA=\det\bA_{22}\det(\bA_{11}-\bA_{12}\bA_{22}^{-1}\bA_{21})$. Also the $2\times2$ case $\begin{pmatrix}a&b\\b&d\end{pmatrix}^{-1}=\frac{1}{ad-b^2}\begin{pmatrix}d&-b\\-b&a\end{pmatrix}$, used constantly in the homework.</p></div>
+</section>
+
+<!-- ================= CHAPTER 1 ================= -->
+<section id="ch1">
+<h2><span class="num">1</span>Vectors of random variables</h2>
+<p class="ch-intro">Lectures 1–2. Model notation: $\bY=\bX\bbeta+\beps$, $\bX$ is $n\times p$ with first column $\bone_n$.</p>
+
+<h3 id="s14"><span class="sec">L1</span>Expectation and covariance operators</h3>
+<div class="box def"><span class="tag">Definitions 1.1–1.3</span>
+<p>$\E(\bZ)=(\E Z_{ij})$; $\Cov(\bX,\bY)=(\Cov(X_i,Y_j))$; $\Var(\bX)=\Cov(\bX,\bX)$.</p></div>
+
+<div class="box thm"><span class="tag">Theorem 1.1 <span class="nm">linearity</span><span class="star">core</span></span>
+<p>$\E(\bA\bZ\bB+\bC)=\bA\E(\bZ)\bB+\bC$. Corollary: $\E(\bA\bX+\bC)=\bA\E(\bX)+\bC$.</p></div>
+
+<div class="box thm"><span class="tag">Theorem 1.2</span>
+<p>If $\E\bX=\ba$, $\E\bY=\bb$: $\ \Cov(\bX,\bY)=\E[(\bX-\ba)(\bY-\bb)']=\E(\bX\bY')-\ba\bb'$. Corollary: $\Var(\bX)=\E(\bX\bX')-\ba\ba'$.</p></div>
+
+<div class="box thm"><span class="tag">Theorem 1.3 <span class="nm">bilinearity</span><span class="star">core</span></span>
+<p>$\Cov(\bA\bX,\bB\bY)=\bA\Cov(\bX,\bY)\bB'$. Corollary: $\Var(\bA\bX)=\bA\Var(\bX)\bA'$.</p></div>
+<div class="box pf"><span class="tag">Proof</span>
+<p>$\bA\bX-\E(\bA\bX)=\bA(\bX-\ba)$, so $\Cov(\bA\bX,\bB\bY)=\E[\bA(\bX-\ba)(\bY-\bb)'\bB']=\bA\Cov(\bX,\bY)\bB'$ by Theorem 1.1.</p></div>
+
+<div class="box thm"><span class="tag">Theorem 1.4 <span class="nm">variance matrices are PSD</span><span class="star">core</span></span>
+<p>$\Var(\bX)$ is non-negative definite. If no element of $\bX$ is a linear combination of the others (no $\ba\ne\bzero$, $b$ with $\ba'\bX=b$), then $\Var(\bX)$ is positive definite.</p></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>For any $\bc$: $0\le\Var(\bc'\bX)=\bc'\Var(\bX)\bc$. Equality iff $\bc=\bzero$ or $\bc'\bX=b$ for some constant $b$; the second is ruled out, so $\bc'\Var(\bX)\bc>0$ for $\bc\ne\bzero$.</p></div>
+
+<div class="box thm"><span class="tag">Shift identity <span class="nm">HW 1a.1</span><span class="star">core</span></span>
+$$\E[(\bX-\ba)(\bX-\ba)']=\Var(\bX)+(\E\bX-\ba)(\E\bX-\ba)',\qquad \E\|\bX-\ba\|^2=\textstyle\sum_i\sigma_{ii}+\|\E\bX-\ba\|^2.$$
+<p>Add and subtract $\E\bX$; cross terms vanish because $\E[\bX-\E\bX]=\bzero$.</p></div>
+
+<h3 id="s15"><span class="sec">L1–2</span>Mean and variance of quadratic forms</h3>
+<div class="box thm"><span class="tag">Theorem 1.5 <span class="nm">mean of a quadratic form</span><span class="star">core</span></span>
+<p>$\E\bX=\bmu$, $\Var\bX=\Sig$, $\bA$ symmetric:</p>
+$$\E(\bX'\bA\bX)=\tr(\bA\Sig)+\bmu'\bA\bmu.$$
+<p>Corollary: $\E[(\bX-\bb)'\bA(\bX-\bb)]=\tr(\bA\Sig)+(\bmu-\bb)'\bA(\bmu-\bb)$. If $\Sig=\sigma^2\bI_n$, then $\tr(\bA\Sig)=\sigma^2\tr\bA$.</p></div>
+<div class="box pf"><span class="tag">Proof 1 (entrywise, lecture)</span>
+<p>$\E[(\bX-\bmu)'\bA(\bX-\bmu)]=\E(\bX'\bA\bX)-\bmu'\bA\bmu$. Also $\E[(\bX-\bmu)'\bA(\bX-\bmu)]=\sum_{i,j}a_{ij}\sigma_{ij}=\sum_{i,j}a_{ij}\sigma_{ji}=\sum_i(\bA\Sig)_{ii}=\tr(\bA\Sig)$, using symmetry of $\Sig$.</p></div>
+<div class="box pf"><span class="tag">Proof 2 (trace trick, lecture)</span>
+<p>$\E(\bX'\bA\bX)=\E[\tr(\bA\bX\bX')]=\tr[\bA\E(\bX\bX')]=\tr[\bA(\Sig+\bmu\bmu')]=\tr(\bA\Sig)+\bmu'\bA\bmu$.</p></div>
+
+<div class="box ex"><span class="tag">Lecture 2 examples <span class="star">core</span></span>
+<p><b>Successive differences.</b> $X_i$ iid $(\mu,\sigma^2)$, $Q=\sum_{i=1}^{n-1}(X_i-X_{i+1})^2$. $Q$ does not depend on $\mu$, so take $\mu=0$. $Q=\bX'\bA\bX$ with $\bA$ tridiagonal: diagonal $(1,2,\dots,2,1)$, off-diagonal $-1$. Then $\E Q=\sigma^2\tr\bA=(2n-2)\sigma^2$.</p>
+<p><b>Equicorrelation.</b> $\Var\bX=\sigma^2[(1-\rho)\bI+\rho\bJ]$, $Q=\sum(X_i-\bar X)^2=\bX'\bC\bX$. Since $\bC\bJ=\bzero$, $\bC\Sig=\sigma^2(1-\rho)\bC$, so $\E Q=\sigma^2(1-\rho)(n-1)$.</p>
+<p><b>Trick used in both:</b> if $Q$ is invariant to shifting all $X_i$ by $\mu$, set $\mu=0$ so the $\bmu'\bA\bmu$ term disappears (formally, $\bA\bone=\bzero$).</p></div>
+
+<div class="box thm"><span class="tag">Theorem 1.6 <span class="nm">variance of a quadratic form</span><span class="star">core</span></span>
+<p>$X_1,\dots,X_n$ independent, means $\theta_i$, common central moments $\mu_2,\mu_3,\mu_4$; $\bA$ symmetric, $\ba=$ diagonal of $\bA$:</p>
+$$\Var(\bX'\bA\bX)=(\mu_4-3\mu_2^2)\,\ba'\ba+2\mu_2^2\tr(\bA^2)+4\mu_2\,\boldsymbol\theta'\bA^2\boldsymbol\theta+4\mu_3\,\boldsymbol\theta'\bA\ba.$$
+<p>Normal case ($\mu_3=0$, $\mu_4=3\mu_2^2$), $\bZ\sim N(\bzero,\mu_2\bI)$: $\ \Var(\bZ'\bA\bZ)=2\mu_2^2\tr(\bA^2)$.</p></div>
+<div class="box warn"><span class="tag">How HW 1b.5 uses it</span>
+<p>For $(n-1)S^2=\bX'\bC\bX$ with $\boldsymbol\theta=\mu\bone$: $\bC\boldsymbol\theta=\bzero$ kills the last two terms, normality kills the first, and $\tr\bC^2=\tr\bC=n-1$. So $\Var S^2=2\sigma^4/(n-1)$. Always check whether $\bA\boldsymbol\theta=\bzero$ first.</p></div>
+<div class="box thm"><span class="tag">Covariance of quadratic forms <span class="nm">HW Misc 1.5</span></span>
+<p>$\bX\sim N(\bzero,\sigma^2\bI)$: $\ \Cov(\bX'\bA\bX,\bX'\bB\bX)=2\sigma^4\tr(\bA\bB)$.</p>
+<p>Proof: polarization, $\Cov(U,V)=\tfrac12[\Var(U+V)-\Var U-\Var V]$, then Theorem 1.6 on $\bA+\bB$, $\bA$, $\bB$.</p></div>
+
+<h3 id="s16"><span class="sec">L2</span>Independence and moment generating functions</h3>
+<div class="box def"><span class="tag">Independence</span>
+<p>$\bX\perp\bY$ iff $f_{\bX,\bY}(\bx,\mathbf y)=f_{\bX}(\bx)f_{\bY}(\mathbf y)$ (or the CDFs factor) for all $\bx,\mathbf y$.</p></div>
+<div class="box thm"><span class="tag">Propositions</span>
+<ul>
+<li>$\bX\perp\bY$ ⇒ $\Cov(\bX,\bY)=\bzero$. Proof: the double integral of $xyf_X(x)f_Y(y)$ factors into $\E X\cdot\E Y$.</li>
+<li>$\bX\perp\bY$ ⇒ $\E[g(\bX)h(\bY)]=\E g(\bX)\,\E h(\bY)$.</li>
+<li>Uncorrelated does not imply independent: $X\sim U(-1,1)$, $Y=X^2$ has $\Cov(X,Y)=\E X^3-\E X\,\E X^2=0$.</li>
+</ul></div>
+<div class="box def"><span class="tag">MGF and characteristic function</span>
+<p>$M_{\bX}(\bt)=\E e^{\bt'\bX}$, $\varphi_{\bX}(\bt)=\E e^{i\bt'\bX}$. The CF always exists and determines the distribution; the MGF determines it when it exists near $\bzero$.</p></div>
+<div class="box thm"><span class="tag">Property 1.1</span>
+<p>$\bX\perp\bY$ (same dimension) ⇒ $M_{\bX+\bY}(\bt)=M_{\bX}(\bt)M_{\bY}(\bt)$.</p></div>
+<div class="box thm"><span class="tag">Property 1.2 <span class="nm">MGF test for independence</span><span class="star">core</span></span>
+<p>$\bX\perp\bY$ ⇔ $M_{\bX,\bY}(\bt_1,\bt_2)=M_{\bX}(\bt_1)M_{\bY}(\bt_2)$, where $M_{\bX,\bY}(\bt_1,\bt_2)=\E e^{\bt_1'\bX+\bt_2'\bY}$.</p></div>
+<div class="box ex"><span class="tag">χ² subtraction lemma <span class="nm">Lecture 2, used in Thm 3.5</span><span class="star">core</span></span>
+<p>$M_{\chi^2_r}(t)=(1-2t)^{-r/2}$ for $t\lt\tfrac12$. If $Q_1\sim\chi^2_{r_1}$, $Q_2\sim\chi^2_{r_2}$ ($r_1>r_2$), and $Q=Q_1-Q_2$ is independent of $Q_2$, then $Q\sim\chi^2_{r_1-r_2}$.</p>
+<p>Proof: $M_{Q_1}(t)=\E e^{tQ+tQ_2}=\E e^{tQ}\,\E e^{tQ_2}$, so $\E e^{tQ}=(1-2t)^{-r_1/2}/(1-2t)^{-r_2/2}=(1-2t)^{-(r_1-r_2)/2}$.</p></div>
+</section>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section id="ch2">
+<h2><span class="num">2</span>Multivariate normal distribution</h2>
+<p class="ch-intro">Lectures 3–5.</p>
+
+<h3 id="s21"><span class="sec">L3</span>Definitions</h3>
+<div class="box def"><span class="tag">Definition 2.1 <span class="nm">density</span></span>
+<p>$\bY\sim N_n(\bmu,\Sig)$, $\Sig$ positive definite, if</p>
+$$f(\mathbf y)=k^{-1}\exp\!\left\{-\tfrac12(\mathbf y-\bmu)'\Sig^{-1}(\mathbf y-\bmu)\right\},\qquad k=(2\pi)^{n/2}\det(\Sig)^{1/2}.$$
+</div>
+<div class="box thm"><span class="tag">Theorem 2.1</span>
+<p>$\bY\sim N_n(\bmu,\Sig)$ ⇒ $\E\bY=\bmu$, $\Var\bY=\Sig$.</p></div>
+<div class="box thm"><span class="tag">Property 2.1 and 2.2 <span class="nm">standardizing</span></span>
+<p>$\bY\sim N_n(\bmu,\Sig)$ ⇒ $\bZ=\Sig^{-1/2}(\bY-\bmu)\sim N_n(\bzero,\bI_n)$. Conversely $\bZ\sim N_n(\bzero,\bI_n)$ ⇒ $\Sig^{1/2}\bZ+\bmu\sim N_n(\bmu,\Sig)$. Proof: Jacobian change of variables.</p></div>
+<div class="box def"><span class="tag">Definition 2.2 <span class="nm">allows singular Σ</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\bmu,\Sig)$ if $\bY\overset d=\bA\bZ+\bmu$ with $\bZ\sim N_m(\bzero,\bI_m)$, $\bA$ $n\times m$, $\Sig=\bA\bA'$. If $\rank\Sig=m\lt n$, the distribution is singular. For $\Sig$ PD, Definitions 2.1 and 2.2 agree (one direction by Theorem 2.2 with $\bZ=\bA^{-1}(\bY-\bmu)$; the other by matching MGFs).</p></div>
+
+<h3 id="s22"><span class="sec">L3–4</span>MGF and linear transformations</h3>
+<div class="box thm"><span class="tag">Proposition <span class="nm">MGF</span><span class="star">core</span></span>
+$$M_{\bY}(\bt)=\exp\!\left(\bt'\bmu+\tfrac12\bt'\Sig\bt\right).$$
+</div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>$M_{\bZ}(\bt)=\prod_i\E e^{t_iZ_i}=\prod_ie^{t_i^2/2}=e^{\bt'\bt/2}$. Write $\bY=\Sig^{1/2}\bZ+\bmu$ and $\mathbf s=\Sig^{1/2}\bt$ (symmetric root): $\E e^{\bt'\bY}=\E e^{\mathbf s'\bZ+\bt'\bmu}=\exp(\tfrac12\mathbf s'\mathbf s+\bt'\bmu)=\exp(\tfrac12\bt'\Sig\bt+\bt'\bmu)$.</p></div>
+
+<div class="box thm"><span class="tag">Theorem 2.2 <span class="nm">linear transformations</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\bmu,\Sig)$, $\bC$ is $m\times n$ of rank $m$ ($m\le n$), $\mathbf d$ is $m\times1$:</p>
+$$\bC\bY+\mathbf d\sim N_m(\bC\bmu+\mathbf d,\ \bC\Sig\bC').$$
+<p>Proof: with $\mathbf s=\bC'\bt$, $\E e^{\bt'(\bC\bY+\mathbf d)}=e^{\bt'\mathbf d}M_{\bY}(\mathbf s)=\exp(\tfrac12\bt'\bC\Sig\bC'\bt+\bt'\bC\bmu+\bt'\mathbf d)$. Full row rank keeps $\bC\Sig\bC'$ positive definite.</p></div>
+<div class="box thm"><span class="tag">Corollaries and facts</span>
+<ul>
+<li>$\bZ\sim N_n(\bzero,\bI)$, $\bA$ nonsingular ⇒ $\bA\bZ+\bmu\sim N_n(\bmu,\bA\bA')$.</li>
+<li>$\bY\sim N_n(\bzero,\sigma^2\bI)$, $\bP$ orthogonal ⇒ $\bP\bY\sim N_n(\bzero,\sigma^2\bI)$.</li>
+<li>$\bY\sim N_n(\bmu,\sigma^2\bI)$ ⇒ the $Y_i\sim N(\mu_i,\sigma^2)$ are independent (density factors).</li>
+</ul></div>
+
+<div class="box ex"><span class="tag">Lecture 3 example <span class="nm">Ȳ ⊥ Q via an orthogonal (Helmert) matrix</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\mu\bone,\sigma^2\bI)$, $Q=\tfrac1{\sigma^2}\sum(Y_i-\bar Y)^2$. Let $Z_i=(Y_i-\mu)/\sigma$, so $Q=\sum Z_i^2-n\bar Z^2$. Take orthogonal $\bP$ with first row $\bone'/\sqrt n$ and $\bX=\bP\bZ\sim N_n(\bzero,\bI)$. Then $X_1=\sqrt n\bar Z$ and $\sum X_i^2=\bZ'\bP'\bP\bZ=\sum Z_i^2$, so $Q=\sum_{i=2}^nX_i^2\sim\chi^2_{n-1}$. $\bar Y$ depends only on $X_1$, which is independent of $X_2,\dots,X_n$.</p></div>
+
+<div class="box thm"><span class="tag">Theorem 2.3 <span class="nm">Cramér–Wold device</span><span class="star">core</span></span>
+<p>$\bY$ with mean $\bmu$, variance $\Sig$: $\ \bY\sim N_n(\bmu,\Sig)$ ⇔ $\ba'\bY$ is univariate normal for every $\ba\in\mathbb R^n$.</p></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>"If": $\ba'\bY\sim N(\ba'\bmu,\ba'\Sig\ba)$, so $\E e^{t\ba'\bY}=\exp(t\ba'\bmu+\tfrac12t^2\ba'\Sig\ba)$. Set $t=1$: this is $M_{\bY}(\ba)$ for $N_n(\bmu,\Sig)$. "Only if": by Definition 2.2, $\ba'\bY=(\ba'\bA)\bZ+\ba'\bmu$, a normal.</p></div>
+<div class="box thm"><span class="tag">Marginals</span>
+<p>$\bY_1=\bC\bY$ with $\bC=(\bI_p,\bzero)$ ⇒ $\bY_1\sim N_p(\bmu_1,\Sig_{11})$ by Theorem 2.2.</p></div>
+
+<h3 id="s23"><span class="sec">L4</span>Independence</h3>
+<div class="box thm"><span class="tag">Theorem 2.4 <span class="nm">zero covariance ⇔ independence</span><span class="star">core</span></span>
+<p>$\bY=(\bY_1',\bY_2')'\sim N_n(\bmu,\Sig)$: $\ \bY_1\perp\bY_2$ ⇔ $\Sig_{12}=\bzero$.</p></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>$\bt'\Sig\bt=\bt_1'\Sig_{11}\bt_1+\bt_1'\Sig_{12}\bt_2+\bt_2'\Sig_{21}\bt_1+\bt_2'\Sig_{22}\bt_2$. If $\Sig_{12}=\bzero$ the MGF factors as $M_{\bY_1}(\bt_1)M_{\bY_2}(\bt_2)$; apply Property 1.2. Conversely, factoring for all $\bt_1,\bt_2$ forces $\bt_1'\Sig_{12}\bt_2=0$, so $\Sig_{12}=\bzero$.</p></div>
+
+<div class="box thm"><span class="tag">Theorem 2.5 <span class="nm">independence of linear forms</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\bmu,\Sig)$: $\ \bA\bY\perp\bB\bY$ ⇔ $\Cov(\bA\bY,\bB\bY)=\bA\Sig\bB'=\bzero$.</p>
+<p>Proof: $\bZ=\binom{\bA}{\bB}\bY$ is MVN (Theorem 2.2); apply Theorem 2.4.</p></div>
+<div class="box ex"><span class="tag">Lecture 4 example</span>
+<p>$\bar Y=\tfrac1n\bone'\bY$ and $\bU=(\bI-\tfrac1n\bJ)\bY$: $\ \Cov(\bar Y,\bU)=\tfrac1n\bone'\sigma^2\bI(\bI-\tfrac1n\bJ)=\tfrac{\sigma^2}{n}(\bone'-\bone')=\bzero$. So $\bar Y\perp\bU$, and $Q=\bU'\bU/\sigma^2$ is a function of $\bU$.</p></div>
+
+<div class="box thm"><span class="tag">Conditional distribution <span class="nm">Example 2.9</span><span class="star">core</span></span>
+<p>$\Sig$ positive definite:</p>
+$$\bY_1\mid\bY_2=\mathbf y_2\ \sim\ N_p\!\left(\bmu_1+\Sig_{12}\Sig_{22}^{-1}(\mathbf y_2-\bmu_2),\ \ \Sig_{11}-\Sig_{12}\Sig_{22}^{-1}\Sig_{21}\right).$$
+</div>
+<div class="box pf"><span class="tag">Short proof</span>
+<p>Lecture derives it from the partitioned inverse (A.9). Faster on an exam: $\bU=\bY_1-\Sig_{12}\Sig_{22}^{-1}\bY_2$ has $\Cov(\bU,\bY_2)=\Sig_{12}-\Sig_{12}=\bzero$, so $\bU\perp\bY_2$ by Theorem 2.5. Given $\bY_2=\mathbf y_2$, $\bY_1=\bU+\Sig_{12}\Sig_{22}^{-1}\mathbf y_2$; read off $\E\bU$ and $\Var\bU=\Sig_{11}-\Sig_{12}\Sig_{22}^{-1}\Sig_{21}$.</p></div>
+
+<h3 id="s24"><span class="sec">L5</span>Distribution of quadratic forms</h3>
+
+<div class="box thm"><span class="tag">Theorem 2.7 <span class="nm">χ² ⇔ idempotent</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\bzero,\bI_n)$, $\bA$ symmetric. Then $Q=\bY'\bA\bY\sim\chi^2_r$ iff $\bA$ is idempotent of rank $r$.</p></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>"If": $\bA=\mathbf T\boldsymbol\Lambda\mathbf T'$, $\mathbf T$ orthogonal, $\boldsymbol\Lambda=\mathrm{diag}(1,\dots,1,0,\dots,0)$ with $r$ ones (A.6.1). $\bZ=\mathbf T'\bY\sim N_n(\bzero,\bI_n)$, so $Q=\bZ'\boldsymbol\Lambda\bZ=\sum_{i=1}^rZ_i^2\sim\chi^2_r$.</p>
+<p>"Only if": write $\bA=\mathbf T\boldsymbol\Lambda\mathbf T'$ with general eigenvalues $\lambda_i$, so $Q=\sum\lambda_iZ_i^2$ and $\E e^{tQ}=\prod_i(1-2t\lambda_i)^{-1/2}$. Matching $(1-2t)^{-r/2}$ forces $r$ of the $\lambda_i$ to be 1 and the rest 0. Then $\boldsymbol\Lambda^2=\boldsymbol\Lambda$, so $\bA^2=\mathbf T\boldsymbol\Lambda^2\mathbf T'=\bA$.</p></div>
+<div class="box thm"><span class="tag">Corollary</span>
+<p>$\bY\sim N_n(\bzero,\bI_n)$, $\bA$ symmetric, $\bY'\bA\bY\sim\chi^2_r$ ⇒ $\bY'(\bI_n-\bA)\bY\sim\chi^2_{n-r}$ (A.6.3).</p></div>
+<div class="box warn"><span class="tag">Scaling to σ²</span>
+<p>Theorem 2.7 is stated for $N(\bzero,\bI)$. For $\bY\sim N(\mu\bone,\sigma^2\bI)$ or $N(\bX\bbeta,\sigma^2\bI)$, first standardize: $\bZ=(\bY-\bmu)/\sigma$, and check that $\bA\bmu=\bzero$ so the quadratic form in $\bY$ equals $\sigma^2\bZ'\bA\bZ$. The lecture examples always do this step.</p></div>
+
+<div class="box ex"><span class="tag">Lecture 5 example <span class="nm">(n−1)S²/σ² ∼ χ²ₙ₋₁</span><span class="star">core</span></span>
+<p>$\bZ=(\bY-\mu\bone)/\sigma\sim N_n(\bzero,\bI)$ and $(\bY-\bar\bY)/\sigma=(\bI-\tfrac1n\bJ)\bZ$. So $(n-1)S^2/\sigma^2=\bZ'(\bI-\tfrac1n\bJ)'(\bI-\tfrac1n\bJ)\bZ=\bZ'(\bI-\tfrac1n\bJ)\bZ$. The matrix is symmetric idempotent with trace $n-1$; Theorem 2.7.</p></div>
+
+<div class="box thm"><span class="tag">Lecture 5 example <span class="nm">independence of two χ² forms</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\bzero,\bI_n)$, $\bA,\bB$ symmetric, $\bY'\bA\bY$ and $\bY'\bB\bY$ both χ². Then they are independent iff $\bA\bB=\bzero$.</p></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>"If": $\bA\bB=\bzero$ ⇒ $\bA\bY\perp\bB\bY$ (Theorem 2.5). Theorem 2.7 makes $\bA,\bB$ idempotent, so $\bY'\bA\bY=\bY'\bA'\bA\bY=\|\bA\bY\|^2$ and $\bY'\bB\bY=\|\bB\bY\|^2$, functions of independent vectors.</p>
+<p>"Only if": the sum of independent χ²'s is χ², so $\bY'(\bA+\bB)\bY$ is χ² and $\bA+\bB$ is idempotent. Expanding gives $\bA\bB+\bB\bA=\bzero$. Multiply by $\bA$ on the left: $\bA\bB+\bA\bB\bA=\bzero$; on the right: $\bA\bB\bA+\bB\bA=\bzero$. Hence $\bA\bB=\bB\bA$, and then $\bA\bB=\bB\bA=\bzero$.</p></div>
+
+<div class="box ex"><span class="tag">Lecture 5 example <span class="nm">difference of χ² forms</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\bzero,\bI)$, $Q_i=\bY'\bP_i\bY\sim\chi^2_{r_i}$ with $\bP_i$ symmetric, and $Q_1-Q_2\ge0$. Then $Q_1-Q_2\sim\chi^2_{r_1-r_2}$, independent of $Q_2$.</p>
+<p>Proof: Theorem 2.7 makes $\bP_1,\bP_2$ projections; $Q_1-Q_2=\bY'(\bP_1-\bP_2)\bY\ge0$ means $\bP_1-\bP_2\succeq0$. By A.6.5 it is a projection of rank $r_1-r_2$, so Theorem 2.7 gives the χ². Also $\bP_1\bP_2=\bP_2$, so $(\bP_1-\bP_2)\bP_2=\bzero$, and the previous example gives independence. (This is the structure behind $\mathrm{RSS}_H-\mathrm{RSS}$.)</p></div>
+
+<div class="box thm"><span class="tag">Theorem 2.8 <span class="nm">general Σ</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\bzero,\Sig)$, $\bA$ symmetric. Then $\bY'\bA\bY\sim\chi^2_r$ iff $r$ eigenvalues of $\bA\Sig$ are 1 and the other $n-r$ are 0.</p></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>$\Sig=\bR\bR'$ with $\bR$ $n\times m$, so $\bY=\bR\bZ$, $\bZ\sim N_m(\bzero,\bI_m)$ (Definition 2.2) and $Q=\bZ'(\bR'\bA\bR)\bZ$. By Theorem 2.7, $Q\sim\chi^2_r$ iff $\bR'\bA\bR$ is idempotent of rank $r$. $\bR'\bA\bR$ and $\bA\bR\bR'=\bA\Sig$ share nonzero eigenvalues, and $\tr(\bA\Sig)=\tr(\bR'\bA\bR)=r$, so $\bA\Sig$ has $r$ unit eigenvalues and the rest zero.</p></div>
+<div class="box thm"><span class="tag">Corollary <span class="nm">Σ positive definite</span></span>
+<p>$\bY\sim N_n(\bzero,\Sig)$, $\Sig\succ0$, $\bA$ symmetric: $\bY'\bA\bY\sim\chi^2_r$ iff $\bA\Sig$ is idempotent of rank $r$.</p>
+<p>Proof: $\bR$ is invertible; conjugate $(\bR'\bA\bR)^2=\bR'\bA\bR$ by $(\bR')^{-1}(\cdot)\bR'$ to get $(\bA\Sig)^2=\bA\Sig$.</p></div>
+<div class="box warn"><span class="tag">How HW 2d.4 is graded</span>
+<p>Write the statistic as $\bY'\bA\bY$, display $\bA$, verify $\bA^2=\bA$ and $\rank\bA=\tr\bA$. For $n=3$: $\tfrac13\sum_{\text{cyc}}(Y_i-Y_{i+1})^2=\bY'(\bI-\tfrac13\bJ)\bY\sim\chi^2_2$. For $n\ge4$ no multiple of the cyclic sum is idempotent.</p></div>
+
+<div class="box thm"><span class="tag">Theorem 2.9 <span class="nm">Mahalanobis form</span><span class="star">core</span></span>
+<p>$\bY\sim N_n(\bmu,\Sig)$, $\Sig$ PD ⇒ $Q=(\bY-\bmu)'\Sig^{-1}(\bY-\bmu)\sim\chi^2_n$.</p>
+<p>Proof (lecture): $\bY=\Sig^{1/2}\bZ+\bmu$, so $Q=\bZ'\Sig^{1/2}\Sig^{-1}\Sig^{1/2}\bZ=\bZ'\bZ=\sum Z_i^2$.</p></div>
+
+<div class="box thm"><span class="tag">Linear vs quadratic <span class="nm">textbook, follows from Thm 2.5</span></span>
+<p>$\bY\sim N_n(\bmu,\sigma^2\bI)$, $\bA$ a projection: $\bY'\bA\bY\perp\bB\bY$ if $\bB\bA=\bzero$. Proof: $\bY'\bA\bY=\|\bA\bY\|^2$ and $\Cov(\bB\bY,\bA\bY)=\sigma^2\bB\bA=\bzero$; Theorem 2.5. With a nonzero mean the form is noncentral χ², which the lectures do not cover.</p></div>
+
+<div class="box thm"><span class="tag">Three-way split <span class="nm">HW Misc 2.8</span></span>
+<p>$\bY\sim N_n(\bzero,\bI)$, $\bA,\bB$ symmetric idempotent with $\bA\bB=\bB\bA=\bzero$. Then $\bY'\bA\bY$, $\bY'\bB\bY$, $\bY'(\bI-\bA-\bB)\bY$ are independent χ².</p>
+<p>Proof: $(\bI-\bA-\bB)^2=\bI+\bA+\bB-2\bA-2\bB+2\bA\bB=\bI-\bA-\bB$; and $\bA(\bI-\bA-\bB)=\bzero$, $\bB(\bI-\bA-\bB)=\bzero$. Each form is χ² by Theorem 2.7 and pairwise products are zero.</p></div>
+</section>
+
+<!-- ================= CHAPTER 3 ================= -->
+<section id="ch3">
+<h2><span class="num">3</span>Linear regression: estimation and distribution theory</h2>
+<p class="ch-intro">Model: $\bY=\bX\bbeta+\beps$, $\rank\bX=p$, $\E\beps=\bzero$, $\Var\beps=\sigma^2\bI_n$; normality only from Theorem 3.5 on. Lecture 6 lists the error assumptions (1) $\E\varepsilon_i=0$, (2) homoscedasticity, (3) uncorrelated, (4) iid $(0,\sigma^2)$, (5) iid $N(0,\sigma^2)$. Models are linear in $\bbeta$, not necessarily in $x$.</p>
+
+<h3 id="s31"><span class="sec">L6</span>Least squares estimation</h3>
+<div class="box thm"><span class="tag">Normal equations <span class="star">core</span></span>
+<p>Minimizing $\beps'\beps$ makes $\bY-\bX\bhat\perp\Omega=\mathcal C(\bX)$, i.e. $\bX'(\bY-\bX\bhat)=\bzero$:</p>
+$$\bX'\bX\bhat=\bX'\bY,\qquad \bhat=(\bX'\bX)^{-1}\bX'\bY.$$
+<p>Calculus route: $\tfrac{d}{d\bbeta}(\bbeta'\ba)=\ba$, $\tfrac{d}{d\bbeta}(\bbeta'\bA\bbeta)=(\bA+\bA')\bbeta$, so $\tfrac{d}{d\bbeta}\beps'\beps=-2\bX'\bY+2\bX'\bX\bbeta$.</p></div>
+<div class="box pf"><span class="tag">Why β̂ minimizes (lecture)</span>
+<p>Write $\bY-\bX\bbeta=(\bY-\bX\bhat)+(\bX\bhat-\bX\bbeta)$. With $\bP=\bX(\bX'\bX)^{-1}\bX'$ the cross term is $\bY'(\bI-\bP)\bP(\bY-\bX\bbeta)=0$ since $\bP^2=\bP$. So $\beps'\beps=\|\bY-\bX\bhat\|^2+\|\bX\bhat-\bX\bbeta\|^2\ge\|\bY-\bX\bhat\|^2$, with equality iff $\bbeta=\bhat$ (full rank).</p></div>
+
+<div class="box thm"><span class="tag">Theorem 3.1 <span class="nm">hat matrix</span><span class="star">core</span></span>
+<p>$\rank\bX=p$, $\bP=\bX(\bX'\bX)^{-1}\bX'$:</p>
+<ol>
+<li>$\bP$ and $\bI_n-\bP$ are symmetric and idempotent.</li>
+<li>$\rank(\bI_n-\bP)=\tr(\bI_n-\bP)=n-p$.</li>
+<li>$\bP\bX=\bX$, $\bP$ projects onto $\Omega=\mathcal C(\bX)$; $(\bI_n-\bP)\bX=\bzero$, so $\bI_n-\bP$ projects onto $\Omega^\perp$.</li>
+</ol></div>
+<div class="box pf"><span class="tag">Proof</span>
+<p>(i) $\bP^2=\bX(\bX'\bX)^{-1}\bX'\bX(\bX'\bX)^{-1}\bX'=\bP$; A.6.3 for $\bI-\bP$. (ii) $\tr\bP=\tr((\bX'\bX)^{-1}\bX'\bX)=\tr\bI_p=p$; A.6.2. (iii) direct multiplication.</p></div>
+
+<div class="box thm"><span class="tag">Consequences</span>
+<ul>
+<li>$\hat\bY=\bP\bY$, $\be=(\bI-\bP)\bY$, $\bX'\be=\bzero$, $\hat\bY'\be=0$.</li>
+<li>With an intercept column $\bone_n$: $\sum_i(Y_i-\hat Y_i)=\bone'\be=0$ (HW 3a.2).</li>
+<li>$\mathrm{RSS}=\be'\be=\bY'(\bI-\bP)\bY=\bY'\bY-\bhat'\bX'\bX\bhat$.</li>
+<li>$\bY=\bone\beta_0+\beps$ ⇒ $\hat\beta_0=(\bone'\bone)^{-1}\bone'\bY=\bar Y$.</li>
+</ul></div>
+
+<h3 id="s32"><span class="sec">L7–8</span>Properties of β̂ and Gauss–Markov</h3>
+<div class="box thm"><span class="tag">RSS expressions <span class="nm">Lecture 7</span></span>
+<p>(1) $\be'\be=\bY'\bY-\bhat'\bX'\bY$; (2) $\be'\be=\bY'\bY-\bhat'\bX'\bX\bhat=\|\bY\|^2-\|\bX\bhat\|^2$; (3) $\be'\be=\bY'(\bI_n-\bP)\bY$.</p>
+<p>Proof of (1)–(2): expand $(\bY-\bX\bhat)'(\bY-\bX\bhat)=\bY'\bY-\bY'\bX\bhat-\bhat'(\bX'\bY-\bX'\bX\bhat)$; the bracket is $\bzero$ by the normal equations, and $\bY'\bX\bhat=\bhat'\bX'\bY=\bhat'\bX'\bX\bhat$ by them again. (3) uses $(\bI-\bP)'(\bI-\bP)=\bI-\bP$.</p></div>
+
+<div class="box thm"><span class="tag">Moments of β̂ <span class="nm">Lecture 7</span><span class="star">core</span></span>
+<p>$\E\beps=\bzero$, $\rank\bX=p$ ⇒ $\E\bhat=(\bX'\bX)^{-1}\bX'\bX\bbeta=\bbeta$.</p>
+<p>Uncorrelated errors with common variance ⇒ $\Var\bhat=(\bX'\bX)^{-1}\bX'\sigma^2\bI_n\bX(\bX'\bX)^{-1}=\sigma^2(\bX'\bX)^{-1}$. Also $\Var\be=\sigma^2(\bI-\bP)$ and $\Cov(\bhat,\be)=\bzero$.</p></div>
+
+<div class="box thm"><span class="tag">X not of full rank <span class="nm">Lecture 7</span> <span class="src">reference</span></span>
+<p>If $\rank\bX\lt p$, the normal equations have many solutions; one is $\bhat=(\bX'\bX)^-\bX'\bY$ with $\bB\bB^-\bB=\bB$. Theorem 3.1 holds with $p$ replaced by $\rank\bX$, and $\bP=\bX(\bX'\bX)^-\bX'$ does not depend on the choice of g-inverse, so $\bX\bhat=\bP\bY$ is unique.</p>
+<p><b>No linear unbiased estimator of β.</b> If $\bA\bY$ were unbiased, $\bA\bX\bbeta=\bbeta$ for all $\bbeta$ forces $\bA\bX=\bI_p$, but $p=\rank(\bA\bX)\le\rank\bX\lt p$, a contradiction.</p></div>
+
+<div class="box def"><span class="tag">Estimable function <span class="nm">Lecture 7, §3.9.2</span><span class="star">core</span></span>
+<p>$\bc'\bbeta$ is estimable if some $\ba'\bY$ is unbiased for $\bc'\bbeta$ for all $\bbeta$.</p>
+<ul>
+<li>$\bc'\bbeta$ estimable ⇔ $\bc\in\mathcal C(\bX')$. Proof: $\ba'\bX\bbeta=\bc'\bbeta$ for all $\bbeta$ ⇔ $\bc=\bX'\ba$.</li>
+<li>If estimable, $\bc'\bhat=\ba'\bX\bhat=\ba'\bP\bY$ is the same for every solution of the normal equations.</li>
+<li>$\bc'\bbeta$ estimable for all $\bc$ ⇔ $\mathcal C(\bX')=\mathbb R^p$ ⇔ $\rank\bX=p$ (Lecture 8).</li>
+</ul></div>
+<div class="box ex"><span class="tag">Straight line <span class="nm">Lecture 9, HW 3b.1</span><span class="star">core</span></span>
+<p>$\bX'\bX=\begin{pmatrix}n&n\bar x\\ n\bar x&\sum x_i^2\end{pmatrix}$, $\det=nS_{xx}$, $\ (\bX'\bX)^{-1}=\dfrac1{nS_{xx}}\begin{pmatrix}\sum x_i^2&-n\bar x\\-n\bar x&n\end{pmatrix}$.</p>
+$$\hat\beta_1=\frac{\sum(x_i-\bar x)(Y_i-\bar Y)}{\sum(x_i-\bar x)^2},\quad \hat\beta_0=\bar Y-\hat\beta_1\bar x,\quad \Var\hat\beta_1=\frac{\sigma^2}{S_{xx}},\quad \Cov(\hat\beta_0,\hat\beta_1)=-\frac{\sigma^2\bar x}{S_{xx}}.$$
+</div>
+
+<div class="box thm"><span class="tag">Theorem 3.2 <span class="nm">Gauss–Markov</span><span class="star">core</span></span>
+<p>Assume $\E\beps=\bzero$, $\Var\varepsilon_i=\sigma^2$, $\Cov(\varepsilon_i,\varepsilon_j)=0$ ($i\ne j$). If $\bc'\bbeta$ is estimable, then the (unique) $\bc'\bhat$ has minimum variance among all linear unbiased estimators: it is the BLUE.</p></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>Let $\ba'\bY$ be unbiased for $\bc'\bbeta$, so $\bc=\bX'\ba$. Let $\bP$ be the projection onto $\mathcal C(\bX)$ and split $\ba'\bY=\ba'\bP\bY+\ba'(\bI-\bP)\bY$. Since $\Cov(\ba'\bP\bY,\ba'(\bI-\bP)\bY)=\sigma^2\ba'\bP(\bI-\bP)\ba=0$,</p>
+<p>$\Var(\ba'\bY)=\Var(\ba'\bP\bY)+\Var(\ba'(\bI-\bP)\bY)\ge\Var(\ba'\bP\bY)=\Var(\ba'\bX\bhat)=\Var(\bc'\bhat)$.</p></div>
+<div class="box thm"><span class="tag">Notes on Gauss–Markov <span class="nm">Lecture 8</span></span>
+<ul>
+<li>No distributional assumption on the $\varepsilon_i$ is needed. Under normality, $\bc'\bhat$ has minimum variance among all unbiased estimators, not just linear ones.</li>
+<li>$\E(\bc'\bhat)=\bc'\bbeta$ for estimable $\bc'\bbeta$ does not give $\E\bhat=\bbeta$ when $\rank\bX\lt p$: then $\E\bhat=(\bX'\bX)^-\bX'\bX\bbeta$ depends on the g-inverse.</li>
+<li><b>Corollary:</b> if $\rank\bX=p$, $\bc'\bhat$ is the BLUE for every $\bc\in\mathbb R^p$.</li>
+</ul></div>
+<div class="box thm"><span class="tag">Consistency <span class="nm">Lecture 8 proposition</span></span>
+<p>$\varepsilon_i$ iid $(0,\sigma^2)$. If the smallest eigenvalue $\lambda_p(n)$ of $\bX'\bX$ tends to $\infty$, then $\bhat\xrightarrow{P}\bbeta$.</p></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>Eventually $\lambda_p(n)\gt0$, so $\bhat$ is unique. The largest eigenvalue of $(\bX'\bX)^{-1}$ is $1/\lambda_p(n)$, so for any $\ba$: $\Var(\ba'\bhat)=\sigma^2\ba'(\bX'\bX)^{-1}\ba\le\sigma^2\ba'\ba/\lambda_p(n)\to0$. Chebyshev (Markov on the square): $P(|\ba'\bhat-\ba'\bbeta|\ge\varepsilon)\le\Var(\ba'\bhat)/\varepsilon^2\to0$. Take $\ba=\mathbf e_i$.</p></div>
+<div class="box warn"><span class="tag">Same idea in HW 3b.3</span>
+<p>Minimum-variance linear unbiased estimate of $\theta$ from a $N(\theta,\sigma^2)$ sample: write $\ba=\bone/n+\mathbf d$; unbiasedness forces $\mathbf d'\bone=0$, so $\ba'\ba=\tfrac1n+\mathbf d'\mathbf d\ge\tfrac1n$. Answer $\bar Y$. (The official solution just cites Gauss–Markov with $\bX=\bone$.)</p></div>
+
+<h3 id="s33"><span class="sec">L8</span>Estimating σ²</h3>
+<div class="box thm"><span class="tag">Theorem 3.3 <span class="nm">S² is unbiased</span><span class="star">core</span></span>
+<p>$\E\beps=\bzero$, $\Var\beps=\sigma^2\bI_n$, $\rank\bX=p$ ⇒ $\E S^2=\sigma^2$, where $S^2=\dfrac{\mathrm{RSS}}{n-p}=\dfrac{(\bY-\bX\bhat)'(\bY-\bX\bhat)}{n-p}$.</p>
+<p>Proof (lecture): $\mathrm{RSS}=\bY'(\bI-\bP)\bY$ with $\E\bY=\bX\bbeta$, $\Var\bY=\sigma^2\bI$. Theorem 1.5: $\E\,\mathrm{RSS}=\tr((\bI-\bP)\sigma^2\bI)+(\bX\bbeta)'(\bI-\bP)\bX\bbeta=\sigma^2(n-p)$.</p></div>
+<div class="box thm"><span class="tag">Theorem 3.4 <span class="nm">optimality of S²</span></span>
+<p>$Y_1,\dots,Y_n$ independent with common variance $\sigma^2$ and common third and fourth central moments $\mu_3,\mu_4$; $\E\bY=\bX\bbeta$, $\rank\bX=p$. Then $S^2$ is the unique nonnegative quadratic unbiased estimator of $\sigma^2$ with minimum variance when $\mu_4=3\sigma^4$ or when the diagonal elements of $\bP$ are all equal.</p>
+<p>Proof idea (lecture): use the formulas for $\E(\bY'\bA\bY)$ and $\Var(\bY'\bA\bY)$ (Theorems 1.5, 1.6); HW 3c.2 carries this out for $\bX=\bone_n$. Under normality $S^2$ is minimum-variance among all unbiased estimators, not only quadratic ones.</p></div>
+<div class="box thm"><span class="tag">Variance of S²</span>
+<p>Under normality $\Var S^2=2\sigma^4/(n-p)$ (since $\mathrm{RSS}/\sigma^2\sim\chi^2_{n-p}$). In general, Theorem 1.6 with $\bA=\bI-\bP$, $\bA\bX\bbeta=\bzero$ gives $\Var\,\mathrm{RSS}=2\sigma^4(n-p)+(\mu_4-3\sigma^4)\sum_i(1-p_{ii})^2$.</p></div>
+
+<h3 id="s34"><span class="sec">L9</span>Distribution theory and maximum likelihood</h3>
+<div class="box thm"><span class="tag">Theorem 3.5 <span class="star">core</span></span>
+<p>If $\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$ and $\rank\bX=p$:</p>
+<ol>
+<li>$\bhat\sim N_p(\bbeta,\sigma^2(\bX'\bX)^{-1})$;</li>
+<li>$(\bhat-\bbeta)'\bX'\bX(\bhat-\bbeta)/\sigma^2\sim\chi^2_p$;</li>
+<li>$\bhat$ is independent of $S^2=\be'\be/(n-p)$;</li>
+<li>$\mathrm{RSS}/\sigma^2=(n-p)S^2/\sigma^2\sim\chi^2_{n-p}$.</li>
+</ol></div>
+<div class="box pf"><span class="tag">Proof (lecture)</span>
+<p>(i) $\bhat=\bC\bY$; Theorem 2.2. (ii) $\Var(\bhat)^{-1}=\bX'\bX/\sigma^2$; Theorem 2.9. (iii) $\bhat$ and $\be=(\bI-\bP)\bY$ are jointly normal with $\Cov(\bhat,\be)=(\bX'\bX)^{-1}\bX'\sigma^2\bI(\bI-\bP)=\bzero$ because $\bX'=\bX'\bP$; Theorem 2.5.</p>
+<p>(iv) Method 1: $(\bI-\bP)\bX\bbeta=\bzero$, so $\mathrm{RSS}=\beps'(\bI-\bP)\beps$ with $\bI-\bP$ a projection of rank $n-p$; Theorem 2.7. Method 2: $Q_1=\beps'\beps=\underbrace{\|\bY-\bX\bhat\|^2}_{Q}+\underbrace{\|\bX\bhat-\bX\bbeta\|^2}_{Q_2}$ with $Q_1/\sigma^2\sim\chi^2_n$, $Q_2/\sigma^2\sim\chi^2_p$ by (ii), $Q\perp Q_2$ by (iii); the χ² subtraction lemma (Lecture 2) gives $Q/\sigma^2\sim\chi^2_{n-p}$.</p></div>
+
+<div class="box thm"><span class="tag">Remarks <span class="nm">t statistics</span></span>
+<p>$\hat\beta_j\sim N(\beta_j,\sigma^2[(\bX'\bX)^{-1}]_{j+1,j+1})$ and</p>
+$$\frac{\hat\beta_j-\beta_j}{S\sqrt{[(\bX'\bX)^{-1}]_{j+1,j+1}}}=\frac{(\hat\beta_j-\beta_j)/\big(\sigma\sqrt{[\cdot]_{j+1,j+1}}\big)}{\sqrt{\frac{(n-p)S^2/\sigma^2}{n-p}}}\sim t_{n-p}.$$
+<p>Construction: $Z\sim N(0,1)\perp U\sim\chi^2_n$ ⇒ $Z/\sqrt{U/n}\sim t_n$. Independence of numerator and denominator is Theorem 3.5(iii).</p></div>
+
+<div class="box thm"><span class="tag">Maximum likelihood</span>
+<p>$\log L=-\tfrac n2\log2\pi-\tfrac n2\log\sigma^2-\tfrac1{2\sigma^2}(\mathbf y-\bX\bbeta)'(\mathbf y-\bX\bbeta)$. Setting both derivatives to zero:</p>
+$$\bhat_{\rm MLE}=(\bX'\bX)^{-1}\bX'\bY=\bhat_{\rm LSE},\qquad \hat\sigma^2_{\rm MLE}=\frac{\mathrm{RSS}}{n}=\frac{(n-p)S^2}{n}.$$
+<p>$\E\hat\sigma^2_{\rm MLE}=\frac{n-p}{n}\sigma^2$ (biased, asymptotically unbiased). $\Var S^2=\frac{2\sigma^4}{n-p}$, $\Var\hat\sigma^2_{\rm MLE}=\frac{2(n-p)\sigma^4}{n^2}$.</p></div>
+
+<h3 id="s36"><span class="sec">L10</span>Orthogonal columns</h3>
+<div class="box thm"><span class="tag">Orthogonal design <span class="star">core</span></span>
+<p>$\bX=[\bx^0,\dots,\bx^{p-1}]$ with $(\bx^i)'\bx^j=0$ for $i\ne j$. Then $\bX'\bX=\mathrm{diag}((\bx^j)'\bx^j)$ and</p>
+$$\hat\beta_j=\frac{(\bx^j)'\bY}{(\bx^j)'\bx^j},\qquad \mathrm{RSS}=\bY'\bY-\sum_j\hat\beta_j^2\,(\bx^j)'\bx^j.$$
+<ul>
+<li>Dropping covariate $j$ leaves every other $\hat\beta_l$ unchanged (HW 3a.4).</li>
+<li>Dropping it raises RSS by $\hat\beta_j^2(\bx^j)'\bx^j\ge0$.</li>
+<li>The $\hat\beta_j$ are uncorrelated since $\Var\bhat$ is diagonal.</li>
+</ul></div>
+<div class="box ex"><span class="tag">Lecture 10 example <span class="nm">orthogonal designs are optimal</span></span>
+<p>Centered covariates with $\sum_ix_{ij}=0$, $\sum_ix_{ij}^2=c$. Then $\bX'\bX=\mathrm{diag}(n,\bW)$ with $\bW$ having diagonal $c$. Write $\bW=\mathbf T\boldsymbol\Lambda\mathbf T'$:</p>
+$$\sum_j\Var\hat\beta_j=\sigma^2\tr(\bX'\bX)^{-1}=\sigma^2\Big(\tfrac1n+\sum_{j=1}^{p-1}\tfrac1{\lambda_j}\Big),\quad\text{subject to }\sum\lambda_j=\tr\bW=c(p-1).$$
+<p>Lagrange multipliers give all $\lambda_j=c$, so $\bW=c\bI$: the columns are orthogonal.</p></div>
+
+<h3 id="s311"><span class="sec">L10</span>Centering and scaling</h3>
+<div class="box thm"><span class="tag">Centering</span>
+<p>Rewrite $Y_i=\alpha_0+\sum_j\beta_j(x_{ij}-\bar x_j)+\varepsilon_i$ with $\alpha_0=\beta_0+\sum_j\beta_j\bar x_j$, design $\bX_c=[\bone_n,\tilde\bX]$. Since $\bone'\tilde\bX=\bzero$:</p>
+$$\hat\alpha_0=\bar Y,\qquad \hat\bbeta_{1:p-1}=(\tilde\bX'\tilde\bX)^{-1}\tilde\bX'\bY\ \ (\text{unchanged slopes}).$$
+<p>$\mathcal C(\bX_c)=\mathcal C(\bX)$, so $\bP$, fitted values and residuals are the same: $\bP=\tfrac1n\bJ+\tilde\bX(\tilde\bX'\tilde\bX)^{-1}\tilde\bX'$ and $\mathrm{RSS}=\sum(Y_i-\bar Y)^2-\bY'\tilde\bP\bY$.</p></div>
+<div class="box thm"><span class="tag">Scaling</span>
+<p>$s_j^2=\frac1{n-1}\sum_i(x_{ij}-\bar x_j)^2$, $x^*_{ij}=(x_{ij}-\bar x_j)/s_j$, $\gamma_j=\beta_js_j$. Then $\hat\gamma_j=\hat\beta_js_j$ and $\hat\bgam=(\bX^{*\prime}\bX^*)^{-1}\bX^{*\prime}\bY$, where $\bX^{*\prime}\bX^*$ is the correlation-type matrix $\bR=(r_{jk})$.</p></div>
+<div class="box ex"><span class="tag">HW 3b.4</span>
+<p>Two centered covariates: $\bX'\bX=\mathrm{diag}\!\left(n,\begin{pmatrix}S_{11}&S_{12}\\S_{12}&S_{22}\end{pmatrix}\right)$, so $\Var\hat\beta_1=\dfrac{\sigma^2S_{22}}{S_{11}S_{22}-S_{12}^2}=\dfrac{\sigma^2}{S_{11}(1-r^2)}$. Correlated covariates inflate the variance.</p></div>
+
+<h3 id="s37"><span class="sec">§3.7 · book only</span>Introducing further explanatory variables</h3>
+<p class="ch-intro">Not assigned and not in the attached lectures. Skim it last.</p>
+<div class="box thm"><span class="tag">Updating formulas <span class="src">reference</span></span>
+<p>Fit $\bY=\bX\bbeta+\bZ\bgam+\beps$; let $\bR=\bI-\bP$ (hat matrix of $\bX$ alone).</p>
+$$\hat\bgam_G=(\bZ'\bR\bZ)^{-1}\bZ'\bR\bY,\quad \bhat_G=\bhat-(\bX'\bX)^{-1}\bX'\bZ\hat\bgam_G,\quad \mathrm{RSS}_G=\mathrm{RSS}-\hat\bgam_G'\bZ'\bR\bY.$$
+<p>One extra column $\bz$: $\hat\gamma=\bz'\bR\bY/\bz'\bR\bz$ and $\mathrm{RSS}_G=\mathrm{RSS}-(\bz'\bR\bY)^2/\bz'\bR\bz$. Omitting $\bZ$ when it belongs gives $\E\bhat=\bbeta+(\bX'\bX)^{-1}\bX'\bZ\bgam$.</p></div>
+
+<h3 id="s38"><span class="sec">L11–12</span>Estimation with linear restrictions</h3>
+<p>$H:\bA\bbeta=\bc$, $\bA$ is $q\times p$ of rank $q$, $\bc$ known.</p>
+<div class="box thm"><span class="tag">Restricted LSE <span class="nm">Lagrange multipliers</span><span class="star">core</span></span>
+$$\bhat_H=\bhat+(\bX'\bX)^{-1}\bA'\big[\bA(\bX'\bX)^{-1}\bA'\big]^{-1}(\bc-\bA\bhat).$$
+</div>
+<div class="box pf"><span class="tag">Derivation (lecture)</span>
+<p>Minimize $\gamma=(\bY-\bX\bbeta)'(\bY-\bX\bbeta)+\blam'(\bA\bbeta-\bc)$: $\ \partial\gamma/\partial\bbeta=-2\bX'\bY+2\bX'\bX\bbeta+\bA'\blam=\bzero$ gives $\bhat_H=\bhat-\tfrac12(\bX'\bX)^{-1}\bA'\hat\blam_H$ $(*)$. Apply $\bA$ and impose $\bA\bhat_H=\bc$: $-\tfrac12\hat\blam_H=[\bA(\bX'\bX)^{-1}\bA']^{-1}(\bc-\bA\bhat)$. Substitute.</p></div>
+<div class="box pf"><span class="tag">Why it is the minimum (lecture)</span>
+<p>From $(*)$, $2\bX'\bX(\bhat-\bhat_H)=\bA'\hat\blam_H$. For $\bbeta$ with $\bA\bbeta=\bc$:</p>
+<p>$\|\bX\bhat-\bX\bbeta\|^2=\|\bX(\bhat-\bhat_H)\|^2+\|\bX(\bhat_H-\bbeta)\|^2+\hat\blam_H'\bA(\bhat_H-\bbeta)$, and the last term is $0$ since $\bA\bhat_H=\bA\bbeta=\bc$. Hence $\beps'\beps=\|\bY-\bX\bhat\|^2+\|\bX(\bhat-\bhat_H)\|^2+\|\bX(\bhat_H-\bbeta)\|^2$, minimized iff $\bbeta=\bhat_H$ (full rank).</p></div>
+
+<div class="box thm"><span class="tag">Useful identities <span class="nm">Lecture 11</span><span class="star">core</span></span>
+<ol>
+<li>$\|\bY-\hat\bY_H\|^2=\|\bY-\hat\bY\|^2+\|\hat\bY-\hat\bY_H\|^2$, i.e. $\mathrm{RSS}_H=\mathrm{RSS}+\|\hat\bY-\hat\bY_H\|^2$.</li>
+<li>$\|\bX\bhat-\bX\bbeta\|^2=\|\bX\bhat-\bX\bhat_H\|^2+\|\bX\bhat_H-\bX\bbeta\|^2$ for $\bA\bbeta=\bc$.</li>
+<li>$\|\bY-\bX\bbeta\|^2=\|\bX\bbeta-\hat\bY_H\|^2+\|\bY-\hat\bY_H\|^2$ for $\bA\bbeta=\bc$.</li>
+</ol>
+<p>(i): cross term $(\bY-\hat\bY)'(\hat\bY-\hat\bY_H)=\bY'(\bI-\bP)\bX(\bhat-\bhat_H)=0$. (iii): cross term $2(\bX'\bY-\bX'\bX\bhat_H)'(\bhat_H-\bbeta)=\hat\blam_H'\bA(\bhat_H-\bbeta)=0$.</p></div>
+
+<div class="box thm"><span class="tag">Method of orthogonal projections <span class="nm">Lecture 12</span> <span class="src">reference</span></span>
+<p>Pick $\bbeta_0$ with $\bA\bbeta_0=\bc$, set $\bgam=\bbeta-\bbeta_0$ and $\tilde\bY=\bY-\bX\bbeta_0=\bX\bgam+\beps$. With $\bM=\bA(\bX'\bX)^{-1}\bX'$, $\bM\bX\bgam=\bA(\bbeta-\bbeta_0)=\bzero$, so $\bX\bgam\in W=\mathrm{Null}(\bM)\cap\Omega$. By B.3.3, $W^\perp\cap\Omega=\mathcal C(\bP_\Omega\bM')=\mathcal C(\bX(\bX'\bX)^{-1}\bA')$, rank $q$, so</p>
+$$\bP_{W^\perp\cap\Omega}=\bX(\bX'\bX)^{-1}\bA'[\bA(\bX'\bX)^{-1}\bA']^{-1}\bA(\bX'\bX)^{-1}\bX'.$$
+<p>By B.3.2, $\bX\hat\bgam_H=\bP_W\tilde\bY=\bP_\Omega\tilde\bY-\bP_{W^\perp\cap\Omega}\tilde\bY$. Using $\bX'\bY=\bX'\bX\bhat$, $\bP_{W^\perp\cap\Omega}\tilde\bY=\bX(\bX'\bX)^{-1}\bA'[\cdot]^{-1}(\bA\bhat-\bc)$. Multiply by $(\bX'\bX)^{-1}\bX'$ to recover the same $\bhat_H$.</p></div>
+
+<div class="box thm"><span class="tag">Variance of β̂_H <span class="nm">HW 3g.3</span><span class="star">core</span></span>
+$$\Var(\bhat_H)=\sigma^2\Big\{(\bX'\bX)^{-1}-(\bX'\bX)^{-1}\bA'\big[\bA(\bX'\bX)^{-1}\bA'\big]^{-1}\bA(\bX'\bX)^{-1}\Big\},\qquad \Var(\hat\beta_{H,j})\le\Var(\hat\beta_j).$$
+<p>Full route in the <a href="#hw">homework drills</a>.</p></div>
+
+<h3 id="s310"><span class="sec">L12</span>Generalized least squares</h3>
+<div class="box thm"><span class="tag">GLS estimator</span>
+<p>$\Var\beps=\sigma^2\bV$, $\bV$ PD, $\bV=\bK\bK'$ with $\bK$ nonsingular. Set $\bZ=\bK^{-1}\bY$, $\bB=\bK^{-1}\bX$, $\boldsymbol\eta=\bK^{-1}\beps$, so $\bZ=\bB\bbeta+\boldsymbol\eta$ with $\Var\boldsymbol\eta=\sigma^2\bI$. OLS on the transformed model:</p>
+$$\bbeta^*=(\bB'\bB)^{-1}\bB'\bZ=(\bX'\bV^{-1}\bX)^{-1}\bX'\bV^{-1}\bY,\quad \E\bbeta^*=\bbeta,\quad \Var\bbeta^*=\sigma^2(\bX'\bV^{-1}\bX)^{-1}.$$
+<p>$\bbeta^*$ minimizes $(\bY-\bX\bbeta)'\bV^{-1}(\bY-\bX\bbeta)$; $\ \mathrm{RSS}^*=(\bY-\bX\bbeta^*)'\bV^{-1}(\bY-\bX\bbeta^*)$.</p></div>
+<div class="box thm"><span class="tag">Properties</span>
+<ul>
+<li>If $\bc'\bbeta$ is estimable, $\bc'\bbeta^*$ is its unique BLUE (Gauss–Markov on the transformed model).</li>
+<li>OLS $\bc'\bhat$ is still unbiased but $\Var(\bc'\bhat)\ge\Var(\bc'\bbeta^*)$.</li>
+<li>Normal errors: $\bbeta^*_{\rm MLE}=\bbeta^*$, $\hat\sigma^{2*}_{\rm MLE}=\mathrm{RSS}^*/n$.</li>
+<li>Weighted LS: $\bV=\mathrm{diag}(v_i)$ minimizes $\sum\varepsilon_i^2/v_i$. For a straight line with $w_i=1/\sigma_i^2$: $\beta_1^*=\dfrac{\sum w_i(x_i-\bar x_w)(Y_i-\bar Y_w)}{\sum w_i(x_i-\bar x_w)^2}$, $\beta_0^*=\bar Y_w-\beta_1^*\bar x_w$, with weighted means $\bar x_w,\bar Y_w$.</li>
+</ul></div>
+</section>
+
+<footer>Built from MATH 282A Lectures 1–12, Problem Sets 1–2 and the official HW 1–2 solutions, following Seber &amp; Lee, <em>Linear Regression Analysis</em> (2nd ed.). Results marked "textbook" were not on the slides.</footer>
+</main>
+</div>
+
+</body>
+</html>
