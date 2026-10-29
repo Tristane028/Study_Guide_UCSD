@@ -98,6 +98,16 @@ thead th{border-bottom:1px solid var(--rule);font-weight:700}
 tbody tr + tr td{border-top:1px solid var(--hair)}
 .ch-intro{color:var(--muted);font-style:italic}
 footer{margin-top:90px;border-top:1px solid var(--hair);padding-top:16px;color:var(--muted);font-size:15px;text-align:center}
+
+/* reading-the-question block */
+.qread{border-left:3px solid var(--tk);padding:4px 0 2px 20px;margin:6px 0 26px}
+.qlabel{display:block;font-weight:700;font-variant:small-caps;letter-spacing:.03em;margin-bottom:8px}
+.qread p{margin-bottom:10px}
+.cue{border-bottom:2px solid var(--tk);padding-bottom:1px}
+.ct{font-size:11.5px;font-weight:700;color:var(--tk);margin-left:2px;font-style:normal}
+.why{list-style:none;padding-left:0;margin:10px 0 4px;font-size:16px;color:var(--muted)}
+.why li{margin:6px 0;padding-left:3.4em;text-indent:-3.4em}
+.ctag{display:inline-block;min-width:3em;text-indent:0;font-weight:700;color:var(--tk)}
 @media (max-width:600px){body{font-size:16.5px}.pbox{padding:16px 16px 4px}.rbox{padding:6px 14px}.thm,.def,.trick{padding:14px 16px 4px}h2{font-size:21px}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 
@@ -303,6 +313,10 @@ window.MathJax={
 $$\E\big[(\bX-\ba)(\bX-\ba)^\top\big]=\Var(\bX)+(\E[\bX]-\ba)(\E[\bX]-\ba)^\top.$$
 </div>
 <details><summary><h3><span class="sn">3.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Prove that if $\ba$ is a vector of constants with the same dimension as the random vector $\bX$, then <span class="cue">$\E[(\bX-\ba)(\bX-\ba)^\top]$</span><sup class="ct">T1</sup>$\;=\Var(\bX)+$<span class="cue">$(\E[\bX]-\ba)$</span><sup class="ct">T1</sup>$(\E[\bX]-\ba)^\top$.</p>
+<ul class="why"><li><span class="ctag">T1</span> An outer product centered at $\ba$, while the answer is written in terms of $\E[\bX]$: add and subtract the mean.</li></ul></div>
+
 <p class="tk">Trick: T1 (add and subtract the mean)</p>
 <p>Denote $\mathbf m:=\E[\bX]$, so that $\Var(\bX)=\E[(\bX-\mathbf m)(\bX-\mathbf m)^\top]$. We can start by adding and subtracting $\mathbf m$ inside $\bX-\ba$:</p>
 $$\bX-\ba=(\bX-\mathbf m)+(\mathbf m-\ba).$$
@@ -320,6 +334,10 @@ $$\E[(\bX-\mathbf m)(\mathbf m-\ba)^\top]=\E[\bX-\mathbf m]\,(\mathbf m-\ba)^\to
 <p>Let $\bX=(X_1,\dots,X_n)^\top$, and let $Y_1=X_1$, $Y_i=X_i-X_{i-1}$ for $i=2,\dots,n$. If the $Y_i$ are mutually independent, each with unit variance, find $\Var(\bX)$.</p>
 </div>
 <details><summary><h3><span class="sn">4.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $\bX=(X_1,\dots,X_n)^\top$, and let <span class="cue">$Y_1=X_1$, $Y_i=X_i-X_{i-1}$</span><sup class="ct">T5</sup>. If the $Y_i$ are <span class="cue">mutually independent, each with unit variance</span><sup class="ct">T5</sup>, find $\Var(\bX)$.</p>
+<ul class="why"><li><span class="ctag">T5</span> The $X$s are defined through linear relations with the $Y$s, so solve for $\bX=\bL\bY$.</li><li><span class="ctag">T5</span> This says $\Var(\bY)=\bI_n$, so $\Var(\bX)=\bL\bI_n\bL^\top$ is all that is left.</li></ul></div>
+
 <p class="tk">Trick: T5 (write it as a matrix times the data)</p>
 <p>The $X_i$ are not independent, so we write them in terms of the independent $Y_i$. Applying $X_i=X_{i-1}+Y_i$ repeatedly,</p>
 $$X_i=Y_1+Y_2+\cdots+Y_i\quad\Longrightarrow\quad \bX=\bL\bY,\qquad L_{ik}=\begin{cases}1&k\le i\\0&k>i.\end{cases}$$
@@ -335,6 +353,10 @@ $$\Var(\bX)=\bL\,\Var(\bY)\,\bL^\top=\bL\bL^\top,\qquad (\bL\bL^\top)_{ij}=\sum_
 <p>If $X_1,\dots,X_n$ are independent random variables with common mean $\mu$ and variances $\sigma_1^2,\dots,\sigma_n^2$, prove that $\sum_i(X_i-\bar X)^2/[n(n-1)]$ is an unbiased estimate of $\Var(\bar X)$.</p>
 </div>
 <details><summary><h3><span class="sn">5.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>If $X_1,\dots,X_n$ are independent random variables with <span class="cue">common mean</span><sup class="ct">T1</sup> $\mu$ and variances $\sigma_1^2,\dots,\sigma_n^2$, prove that <span class="cue">$\sum_i(X_i-\bar X)^2$</span><sup class="ct">T1</sup>$/[n(n-1)]$ is an <span class="cue">unbiased estimate</span><sup class="ct">T4</sup> of $\Var(\bar X)$.</p>
+<ul class="why"><li><span class="ctag">T4</span> Unbiasedness means compute an expectation of a sum of squares.</li><li><span class="ctag">T1</span> Write $\sum(X_i-\bar X)^2=\sum X_i^2-n\bar X^2$ and use $\E[Z^2]=\Var(Z)+(\E Z)^2$.</li><li><span class="ctag">T1</span> With a common mean the $\mu^2$ terms cancel, so only the variances survive.</li></ul></div>
+
 <p class="tk">Trick: T1 (sum of squares = raw second moments minus $n\bar X^2$)</p>
 <p>By independence,</p>
 $$\Var(\bar X)=\frac1{n^2}\sum_{i=1}^n\sigma_i^2.$$
@@ -354,6 +376,10 @@ $$S^2=\frac1{n-1}\sum_{i=1}^n(X_i-\bar X)^2,\qquad Q=\frac1{2(n-1)}\sum_{i=1}^{n
 <ul><li>Prove that $\Var(S^2)=2\sigma^4/(n-1)$.</li><li>Show that $Q$ is an unbiased estimate of $\sigma^2$.</li><li>Find $\Var(Q)$ and show that, as $n\to\infty$, the efficiency of $Q$ relative to $S^2$ is $2/3$.</li></ul>
 </div>
 <details><summary><h3><span class="sn">6.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $X_1,\dots,X_n$ be <span class="cue">independently distributed as $N(\mu,\sigma^2)$</span><sup class="ct">T8</sup>. Define $S^2=\frac1{n-1}\sum$<span class="cue">$(X_i-\bar X)^2$</span><sup class="ct">T3</sup> and $Q=\frac1{2(n-1)}\sum$<span class="cue">$(X_{i+1}-X_i)^2$</span><sup class="ct">T3</sup>.</p><ul><li>Prove that the <span class="cue">variance of $S^2$</span><sup class="ct">T8</sup> is $2\sigma^4/(n-1)$.</li><li>Show that $Q$ is an <span class="cue">unbiased</span><sup class="ct">T4</sup> estimate of $\sigma^2$.</li><li>Find the variance of $Q$ and show that the <span class="cue">efficiency</span><sup class="ct">T8</sup> of $Q$ relative to $S^2$ tends to $2/3$.</li></ul>
+<ul class="why"><li><span class="ctag">T3</span> Both statistics use only deviations and differences, so set $\mu=0$.</li><li><span class="ctag">T8</span> Normal data plus a sum of squared deviations: $(n-1)S^2/\sigma^2\sim\chi^2_{n-1}$, whose variance you know.</li><li><span class="ctag">T4</span> Expectation of a quadratic form with $\Var(\bX)=\sigma^2\bI$: just the trace of the matrix.</li><li><span class="ctag">T8</span> Efficiency is a ratio of variances; under normality $\Var(\bX^\top\bA\bX)=2\sigma^4\mathrm{tr}(\bA^2)$.</li></ul></div>
+
 <p class="tk">Tricks: T3 (shift invariance), T5 (matrix form), T4 (trace), T8 (χ² facts)</p>
 <p>Both $S^2$ and $Q$ only involve differences, so they are unchanged when each $X_i$ is replaced by $X_i-\mu$. As such, we may assume $\mu=0$, i.e. $\bX\sim N_n(\bzero,\sigma^2\bI_n)$.</p>
 <h4><span class="sn">6.1.1</span>$\Var(S^2)=2\sigma^4/(n-1)$</h4>
@@ -384,6 +410,10 @@ $$Q_1=\sum_{i=1}^n(X_i-\bar X)^2,\qquad Q_2=(X_1-X_2)^2+(X_2-X_3)^2+\cdots+(X_{n
 <p>prove that $\E\left[\dfrac{3Q_1-Q_2}{n(n-3)}\right]=\Var(\bar X)$.</p>
 </div>
 <details><summary><h3><span class="sn">7.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $X_1,\dots,X_n$ have a <span class="cue">common mean $\mu$</span><sup class="ct">T3</sup>, with <span class="cue">$\Cov(X_i,X_j)=0$ whenever $j>i+1$</span><sup class="ct">T4</sup>. If $Q_1=\sum$<span class="cue">$(X_i-\bar X)^2$</span><sup class="ct">T3</sup> and $Q_2=$<span class="cue">$\sum(X_i-X_{i+1})^2+(X_n-X_1)^2$</span><sup class="ct">T3</sup>, prove that <span class="cue">$\E\big[\frac{3Q_1-Q_2}{n(n-3)}\big]$</span><sup class="ct">T4</sup>$=\Var(\bar X)$.</p>
+<ul class="why"><li><span class="ctag">T3</span> Common mean and statistics built from deviations and differences: set $\mu=0$, so $\E[X_iX_j]=\Cov(X_i,X_j)$.</li><li><span class="ctag">T4</span> Only diagonal and adjacent covariances survive, so name them ($S$ and $C$) and expand each expectation.</li><li><span class="ctag">T4</span> An expectation of a linear combination: compute $\E Q_1$ and $\E Q_2$ separately and combine.</li></ul></div>
+
 <p class="tk">Tricks: T3 (shift invariance), T4 (expectation through second moments)</p>
 <p>Both $Q_1$ and $Q_2$ are unchanged if each $X_i$ is replaced by $X_i-\mu$, so we may assume $\mu=0$, and then $\E[X_iX_j]=\Cov(X_i,X_j)$. Define the following quantities:</p>
 $$\sigma_i^2=\Var(X_i),\qquad c_i=\Cov(X_i,X_{i+1}),\qquad S=\sum_{i=1}^n\sigma_i^2,\qquad C=\sum_{i=1}^{n-1}c_i.$$
@@ -406,6 +436,10 @@ $$3\E[Q_1]-\E[Q_2]=\frac{3(n-1)S-6C-2nS+2nC}{n}=\frac{(n-3)(S+2C)}{n}.$$
 $$\Cov(\bX^\top\bA\bX,\ \bX^\top\bB\bX)=2\sigma^4\,\mathrm{tr}(\bA\bB).$$
 </div>
 <details><summary><h3><span class="sn">8.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>If <span class="cue">$\bX\sim N_n(\bzero,\sigma^2\bI_n)$</span><sup class="ct">T18</sup> and $\bA,\bB$ are symmetric, show that <span class="cue">$\Cov(\bX^\top\bA\bX,\ \bX^\top\bB\bX)$</span><sup class="ct">T18</sup>$\;=2\sigma^4\,\mathrm{tr}(\bA\bB)$.</p>
+<ul class="why"><li><span class="ctag">T18</span> A covariance of two quadratic forms: polarize into three variances.</li><li><span class="ctag">T18</span> Normal, mean zero: each variance is $2\sigma^4\,\mathrm{tr}(\mathbf M^2)$.</li></ul></div>
+
 <p class="tk">Trick: T18 (polarization)</p>
 <p>We know that for any random variables $U,V$, $\Var(U+V)=\Var(U)+\Var(V)+2\Cov(U,V)$. Rearranging,</p>
 $$\Cov(U,V)=\tfrac12\big[\Var(U+V)-\Var(U)-\Var(V)\big].$$
@@ -423,6 +457,10 @@ $$(\bar Y,\ Y_1-\bar Y,\ Y_2-\bar Y,\ \dots,\ Y_n-\bar Y)$$
 <p>and hence show that $\bar Y$ is independent of $\sum_i(Y_i-\bar Y)^2$.</p>
 </div>
 <details><summary><h3><span class="sn">9.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Suppose $Y_1,\dots,Y_n$ are independently distributed as $N(0,1)$. <span class="cue">Calculate the moment generating function</span><sup class="ct">T10</sup> of the random vector $(\bar Y,$<span class="cue">$\ Y_1-\bar Y,\dots,Y_n-\bar Y$</span><sup class="ct">T10</sup>$)$ and <span class="cue">hence show</span><sup class="ct">T10</sup> that $\bar Y$ is <span class="cue">independent</span><sup class="ct">T10</sup> of $\sum_i(Y_i-\bar Y)^2$.</p>
+<ul class="why"><li><span class="ctag">T10</span> The question names the tool: compute the joint MGF.</li><li><span class="ctag">T10</span> Deviations make $\sum_i(t_i-\bar t)=0$ appear, which kills the cross term in the exponent.</li><li><span class="ctag">T10</span> "Hence ... independent" means show the MGF factors into a function of $t$ times a function of $(t_1,\dots,t_n)$.</li></ul></div>
+
 <p class="tk">Trick: T10 (factor the joint MGF)</p>
 <h4><span class="sn">9.1.1</span>Moment generating function</h4>
 <p>Let $t$ be paired with $\bar Y$, $t_1,\dots,t_n$ with the deviations, and $\bar t=\sum_it_i/n$. We rewrite the exponent as a linear combination of the $Y_i$:</p>
@@ -442,6 +480,10 @@ $$\mathcal M(t,t_1,\dots,t_n)=\exp\Big(\frac{t^2}{2n}\Big)\cdot\exp\Big(\frac12\
 <p>Let $\bY\sim N_n(\mu\bone_n,\Sig)$, where $\Sig=(1-\rho)\bI_n+\rho\bJ_n$ and $\rho>-1/(n-1)$. When $\rho=0$, $\bar Y$ and $\sum_i(Y_i-\bar Y)^2$ are independent. Are they independent when $\rho\ne0$?</p>
 </div>
 <details><summary><h3><span class="sn">10.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let <span class="cue">$\bY\sim N_n(\mu\bone_n,\Sig)$</span><sup class="ct">T9</sup>, where $\Sig=(1-\rho)\bI_n+\rho\bJ_n$ and $\rho>-1/(n-1)$. When $\rho=0$, <span class="cue">$\bar Y$</span><sup class="ct">T5</sup> and <span class="cue">$\sum_i(Y_i-\bar Y)^2$</span><sup class="ct">T5</sup> are independent. <span class="cue">Are they independent</span><sup class="ct">T9</sup> when $\rho\ne0$?</p>
+<ul class="why"><li><span class="ctag">T9</span> Normal data and an independence question: compute a cross-covariance.</li><li><span class="ctag">T5</span> Write $\bar Y=\frac1n\bone^\top\bY$ and the deviations as $\bC\bY$; the sum of squares is $\|\bC\bY\|^2$.</li></ul></div>
+
 <p class="tk">Tricks: T5 (matrix form), T9 (zero covariance ⇒ independence)</p>
 <p>Define $\bar Y=\tfrac1n\bone_n^\top\bY$ and $\mathbf D=(\bI_n-\tfrac1n\bJ_n)\bY$. Both are linear in $\bY$, so $(\bar Y,\mathbf D)$ is jointly normal, and it suffices to show $\Cov(\bar Y,\mathbf D)=\bzero^\top$.</p>
 <p>Since $\bJ_n\bone_n=n\bone_n$,</p>
@@ -460,6 +502,10 @@ $$\tfrac13\big[(Y_1-Y_2)^2+(Y_2-Y_3)^2+(Y_3-Y_1)^2\big]\sim\chi^2_2.$$
 <p>Does some multiple of $(Y_1-Y_2)^2+\cdots+(Y_{n-1}-Y_n)^2+(Y_n-Y_1)^2$ have a $\chi^2$ distribution for some $n$?</p>
 </div>
 <details><summary><h3><span class="sn">11.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Suppose <span class="cue">$\bY\sim N_3(\bzero,\bI_3)$</span><sup class="ct">T8</sup>. Show that $\frac13[(Y_1-Y_2)^2+(Y_2-Y_3)^2+(Y_3-Y_1)^2]$<span class="cue">$\;\sim\chi^2_2$</span><sup class="ct">T8</sup>. Does <span class="cue">some multiple</span><sup class="ct">T8</sup> of $(Y_1-Y_2)^2+\cdots+(Y_n-Y_1)^2$ have a $\chi^2$ distribution for some $n$?</p>
+<ul class="why"><li><span class="ctag">T8</span> Already standard normal, so no standardizing: write $\bY^\top\bA\bY$ and check $\bA^2=\bA$.</li><li><span class="ctag">T8</span> Degrees of freedom $2$ should match $\mathrm{tr}(\bA)$.</li><li><span class="ctag">T8</span> "Some multiple": ask when $(c\bA)^2=c\bA$; to rule it out, one bad entry of $\bA^2$ suffices.</li></ul></div>
+
 <p class="tk">Trick: T8 (idempotent ⇒ χ²; to rule out, find one bad entry)</p>
 <h4><span class="sn">11.1.1</span>$\chi^2$ with 2 degrees of freedom</h4>
 <p>When $n=3$ the three cyclic pairs are all $\binom32$ pairs, and $\sum_{i\lt j}(Y_i-Y_j)^2=n\sum_i(Y_i-\bar Y)^2$. Thus,</p>
@@ -483,6 +529,10 @@ $$\tfrac13\big[(Y_1-Y_2)^2+(Y_2-Y_3)^2+(Y_3-Y_1)^2\big]=\bY^\top\Big(\bI_3-\tfra
 <p>Let $\bY\sim N_n(\bzero,\bI_n)$ and let $\bA,\bB$ be symmetric idempotent with $\bA\bB=\bB\bA=\bzero$. Show that $\bY^\top\bA\bY$, $\bY^\top\bB\bY$, and $\bY^\top(\bI_n-\bA-\bB)\bY$ have independent chi-square distributions.</p>
 </div>
 <details><summary><h3><span class="sn">12.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let <span class="cue">$\bY\sim N_n(\bzero,\bI_n)$</span><sup class="ct">T8</sup> and let $\bA,\bB$ be <span class="cue">symmetric idempotent</span><sup class="ct">T8</sup> with <span class="cue">$\bA\bB=\bB\bA=\bzero$</span><sup class="ct">T9</sup>. Show that $\bY^\top\bA\bY$, $\bY^\top\bB\bY$, $\bY^\top(\bI_n-\bA-\bB)\bY$ have <span class="cue">independent</span><sup class="ct">T6</sup> chi-square distributions.</p>
+<ul class="why"><li><span class="ctag">T8</span> Standard normal plus idempotent matrices: each form is χ² with df equal to the trace.</li><li><span class="ctag">T9</span> Products equal to zero are exactly the zero cross-covariances.</li><li><span class="ctag">T6</span> Turn each form into $\|\bA\bY\|^2$ so independence of vectors transfers to the forms.</li></ul></div>
+
 <p class="tk">Tricks: T8 (idempotent ⇒ χ²), T6 + T9 (squared norms of uncorrelated normal vectors)</p>
 <p>Let $\bC=\bI_n-\bA-\bB$. It is symmetric, and using $\bA^2=\bA$, $\bB^2=\bB$, $\bA\bB=\bB\bA=\bzero$:</p>
 $$\bC^2=\bI-2\bA-2\bB+\bA^2+\bA\bB+\bB\bA+\bB^2=\bI-\bA-\bB=\bC,$$
@@ -501,6 +551,10 @@ $$\bY^\top\bA\bY=\|\bA\bY\|^2,\qquad \bY^\top\bB\bY=\|\bB\bY\|^2,\qquad \bY^\top
 <ul><li>Show that $\bW\sim N_{2n}(\bmu,\Sig)$ with $\bmu=(\mu_1\bone_n^\top,\mu_2\bone_n^\top)^\top$ and $\Sig=\begin{bmatrix}\sigma_1^2\bI_n&\rho\sigma_1\sigma_2\bI_n\\\rho\sigma_1\sigma_2\bI_n&\sigma_2^2\bI_n\end{bmatrix}$.</li><li>Find the conditional distribution of $\bX$ given $\bY$.</li></ul>
 </div>
 <details><summary><h3><span class="sn">13.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $(X_i,Y_i)$ be a <span class="cue">random sample</span><sup class="ct">T13</sup> from a bivariate normal, and $\bW=(\bX^\top,\bY^\top)^\top$.</p><ul><li><span class="cue">Show that $\bW$ has a $N_{2n}(\bmu,\Sig)$ distribution</span><sup class="ct">T13</sup>.</li><li>Find the <span class="cue">conditional distribution</span><sup class="ct">T9</sup> of $\bX$ given $\bY$.</li></ul>
+<ul class="why"><li><span class="ctag">T13</span> Showing a stacked vector is multivariate normal: check every linear combination $\ba^\top\bW$.</li><li><span class="ctag">T13</span> Random sample means the pairs are independent across $i$, so the combination is a sum of independent normals.</li><li><span class="ctag">T9</span> Conditional distribution: build $\bU=\bX-\Sig_{12}\Sig_{22}^{-1}\bY$, uncorrelated with $\bY$, hence independent.</li></ul></div>
+
 <p class="tk">Tricks: T13 (normality via linear combinations), then T9 for the conditional</p>
 <h4><span class="sn">13.1.1</span>Distribution of $\bW$</h4>
 <p>For any $\ba\in\mathbb R^{2n}$,</p>
@@ -522,6 +576,10 @@ $$\sum_{i=1}^n\big(Y_i-\hat Y_i\big)=0.$$
 <p class="c"><b><i>Hint: Consider the first column of $\bX$.</i></b></p>
 </div>
 <details><summary><h3><span class="sn">14.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>If $\bX$ has <span class="cue">full rank</span><sup class="ct">T2</sup>, prove that <span class="cue">$\sum_{i=1}^n(Y_i-\hat Y_i)$</span><sup class="ct">T2</sup>$\;=0$. Hint: consider the <span class="cue">first column of $\bX$</span><sup class="ct">T2</sup>.</p>
+<ul class="why"><li><span class="ctag">T2</span> Full rank means $(\bX^\top\bX)^{-1}$ exists, so $\bhat$ and the normal equations are available.</li><li><span class="ctag">T2</span> A sum of residuals is $\bone^\top\be$, and residuals are orthogonal to every column: $\bX^\top\be=\bzero$.</li><li><span class="ctag">T2</span> The first column is $\bone_n$, so its row of $\bX^\top\be=\bzero$ is the claim.</li></ul></div>
+
 <p class="tk">Trick: T2 (residuals are orthogonal to the columns of $\bX$)</p>
 <p>Let $\bX=[\bone_n\mid\bx_2\mid\cdots\mid\bx_p]$ with $\mathit{rank}(\bX)=p$. Then,</p>
 $$\mathit{rank}(\bX)=p\ \Longrightarrow\ \exists(\bX^\top\bX)^{-1}\ \Longrightarrow\ \bhat=(\bX^\top\bX)^{-1}\bX^\top\bY,\qquad \hat\bY=\bX\bhat.$$
@@ -537,6 +595,10 @@ $$\bX^\top\be=\bX^\top\bY-\bX^\top\bX(\bX^\top\bX)^{-1}\bX^\top\bY=\bzero_p\ \Lo
 <p>Consider the regression model $\E[Y_i]=\beta_0+\beta_1x_i+\beta_2(3x_i^2-2)$, $i=1,2,3$, where $x_1=-1$, $x_2=0$, $x_3=1$. Find the least squares estimates of $\beta_0,\beta_1,\beta_2$. Show that the estimates of $\beta_0$ and $\beta_1$ are unchanged if $\beta_2=0$.</p>
 </div>
 <details><summary><h3><span class="sn">15.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Consider $\E[Y_i]=\beta_0+\beta_1x_i+\beta_2$<span class="cue">$(3x_i^2-2)$</span><sup class="ct">T17</sup>, $i=1,2,3$, where <span class="cue">$x_1=-1,\ x_2=0,\ x_3=1$</span><sup class="ct">T17</sup>. Find the least squares estimates. Show that the estimates of $\beta_0,\beta_1$ are <span class="cue">unchanged if $\beta_2=0$</span><sup class="ct">T17</sup>.</p>
+<ul class="why"><li><span class="ctag">T17</span> Points symmetric about 0 and an odd-looking quadratic $3x^2-2$: check whether the columns are orthogonal.</li><li><span class="ctag">T17</span> "Unchanged when a term is dropped" is the signature of orthogonal columns: $\bX^\top\bX$ is diagonal.</li></ul></div>
+
 <p class="tk">Trick: T17 (orthogonal columns ⇒ estimates decouple)</p>
 <h4><span class="sn">15.1.1</span>L.S.E. of $\beta_0,\beta_1,\beta_2$</h4>
 <p>Row $i$ of $\bX$ is $(1,x_i,3x_i^2-2)$:</p>
@@ -556,6 +618,10 @@ $$\hat\beta_j=\frac{\bx_{(j)}^\top\bY}{\bx_{(j)}^\top\bx_{(j)}}.$$
 <p>Let $Y_i=\beta_0+\beta_1x_i+\varepsilon_i$ $(i=1,\dots,n)$, where $\E[\beps]=\bzero$ and $\Var(\beps)=\sigma^2\bI_n$. Find the least squares estimates of $\beta_0$ and $\beta_1$. Prove that they are uncorrelated if and only if $\bar x=0$.</p>
 </div>
 <details><summary><h3><span class="sn">16.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let <span class="cue">$Y_i=\beta_0+\beta_1x_i+\varepsilon_i$</span><sup class="ct">T17</sup> with $\E[\beps]=\bzero$, $\Var(\beps)=\sigma^2\bI_n$. Find the least squares estimates. Prove that they are <span class="cue">uncorrelated if and only if</span><sup class="ct">T17</sup> $\bar x=0$.</p>
+<ul class="why"><li><span class="ctag">T17</span> Two parameters: write out the $2\times2$ matrix $\bX^\top\bX$ and invert it.</li><li><span class="ctag">T17</span> Correlation of $\hat\beta_0,\hat\beta_1$ is the off-diagonal of $\sigma^2(\bX^\top\bX)^{-1}$, which is proportional to $\bar x$.</li></ul></div>
+
 <p class="tk">Trick: T17 (write $\bX^\top\bX$ explicitly and invert the $2\times2$)</p>
 <p>Define the following quantities:</p>
 $$S_{xx}:=\sum_{i=1}^n(x_i-\bar x)^2,\qquad S_{xY}:=\sum_{i=1}^n(x_i-\bar x)(Y_i-\bar Y).$$
@@ -575,6 +641,10 @@ $$\Cov(\hat\beta_0,\hat\beta_1)=\sigma^2\cdot\frac{-n\bar x}{nS_{xx}}=-\frac{\si
 <p class="c">Let $Y_1,\dots,Y_n$ be a random sample from $N(\theta,\sigma^2)$. Find the linear unbiased estimate of $\theta$ with minimum variance.</p>
 </div>
 <details><summary><h3><span class="sn">17.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $Y_1,\dots,Y_n$ be a random sample from $N(\theta,\sigma^2)$. Find the <span class="cue">linear unbiased estimate</span><sup class="ct">T14</sup> of $\theta$ with <span class="cue">minimum variance</span><sup class="ct">T14</sup>.</p>
+<ul class="why"><li><span class="ctag">T14</span> Linear and unbiased for every $\theta$: turns into the constraint $\ba^\top\bone=1$.</li><li><span class="ctag">T14</span> Minimize $\ba^\top\ba$ by writing $\ba=\bone/n+\mathbf d$; the constraint kills the cross term.</li></ul></div>
+
 <p class="tk">Trick: T14 (unbiased for all θ ⇒ constraint, then split off the candidate)</p>
 <p>Write $\bY=\theta\bone_n+\beps$, so $\E[\bY]=\theta\bone_n$, $\Var(\bY)=\sigma^2\bI_n$, and consider $\hat\theta=\ba^\top\bY$.</p>
 <p><b>Unbiased:</b></p>
@@ -595,6 +665,10 @@ $$\Var(\hat\beta_1)=\frac{\sigma^2}{\sum_i(x_{i1}-\bar x_1)^2(1-r^2)},$$
 <p>where $r$ is the correlation coefficient of the pairs $(x_{i1},x_{i2})$.</p>
 </div>
 <details><summary><h3><span class="sn">18.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $Y_i=\beta_0+\beta_1$<span class="cue">$(x_{i1}-\bar x_1)$</span><sup class="ct">T17</sup>$+\beta_2$<span class="cue">$(x_{i2}-\bar x_2)$</span><sup class="ct">T17</sup>$+\varepsilon_i$. Show that <span class="cue">$\Var(\hat\beta_1)$</span><sup class="ct">T17</sup>$=\sigma^2/[\sum_i(x_{i1}-\bar x_1)^2(1-r^2)]$, where $r$ is the <span class="cue">correlation coefficient</span><sup class="ct">T17</sup> of the pairs $(x_{i1},x_{i2})$.</p>
+<ul class="why"><li><span class="ctag">T17</span> Centered covariates are orthogonal to $\bone$, so $\bX^\top\bX$ is block diagonal and only a $2\times2$ block matters.</li><li><span class="ctag">T17</span> A single variance is one diagonal entry of $\sigma^2(\bX^\top\bX)^{-1}$.</li><li><span class="ctag">T17</span> $r^2=S_{12}^2/(S_{11}S_{22})$ is what the determinant of the $2\times2$ block simplifies to.</li></ul></div>
+
 <p class="tk">Trick: T17 (centered columns ⇒ block-diagonal $\bX^\top\bX$)</p>
 <p>Define $\mathbf u_j=(x_{1j}-\bar x_j,\dots,x_{nj}-\bar x_j)^\top$, $S_{jk}:=\mathbf u_j^\top\mathbf u_k$, and $r=S_{12}/\sqrt{S_{11}S_{22}}$. Since $\bone_n^\top\mathbf u_j=0$,</p>
 $$\bX=[\bone_n\mid\mathbf u_1\mid\mathbf u_2],\qquad \bX^\top\bX=\begin{bmatrix}n&0&0\\0&S_{11}&S_{12}\\0&S_{12}&S_{22}\end{bmatrix}.$$
@@ -613,6 +687,10 @@ $$\Var(\hat\beta_1)=\sigma^2\big[(\bX^\top\bX)^{-1}\big]_{22}=\frac{\sigma^2S_{2
 <ul><li>Find $\Var(S^2)$.</li><li>Evaluate $\E[(\bY^\top\bA_1\bY-\sigma^2)^2]$ for $\bA_1=\dfrac1{n-p+2}\big[\bI_n-\bX(\bX^\top\bX)^{-1}\bX^\top\big]$.</li><li>Prove that $\bY^\top\bA_1\bY$ estimates $\sigma^2$ with smaller mean-squared error than $S^2$.</li></ul>
 </div>
 <details><summary><h3><span class="sn">19.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Suppose <span class="cue">$\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$</span><sup class="ct">T8</sup>. Find $\Var(S^2)$. Evaluate <span class="cue">$\E[(\bY^\top\bA_1\bY-\sigma^2)^2]$</span><sup class="ct">T16</sup> for $\bA_1=\frac{1}{n-p+2}(\bI_n-\bP)$. Prove that $\bY^\top\bA_1\bY$ has <span class="cue">smaller mean-squared error</span><sup class="ct">T16</sup> than $S^2$.</p>
+<ul class="why"><li><span class="ctag">T8</span> Normal regression: $\mathrm{RSS}/\sigma^2\sim\chi^2_{n-p}$, so mean and variance are free.</li><li><span class="ctag">T16</span> $\E[(\hat\theta-\theta)^2]$ is an MSE: split into variance plus bias squared.</li><li><span class="ctag">T16</span> Both estimators are multiples of RSS, so compare $2\sigma^4/(n-p+2)$ with $2\sigma^4/(n-p)$.</li></ul></div>
+
 <p class="tk">Trick: T16 (MSE = variance + bias², with χ² moments)</p>
 <p>Define $\mathbf H:=\bX(\bX^\top\bX)^{-1}\bX^\top$, $m:=n-p$, $Q:=\bY^\top(\bI_n-\mathbf H)\bY$, so that $S^2=Q/m$ and $\bY^\top\bA_1\bY=Q/(m+2)$. Since $(\bI_n-\mathbf H)\bX=\bzero$, $Q=\beps^\top(\bI_n-\mathbf H)\beps$ with $\bI_n-\mathbf H$ a projection of rank $m$:</p>
 $$\frac Q{\sigma^2}\sim\chi^2_m\ \Longrightarrow\ \E[Q]=m\sigma^2,\qquad \Var(Q)=2m\sigma^4.$$
@@ -634,6 +712,10 @@ $$\E[\bY^\top\bA_1\bY]=\frac{m\sigma^2}{m+2},\qquad B=\frac{m\sigma^2}{m+2}-\sig
 <p class="c">Let $Y_1,\dots,Y_n$ be i.i.d. with mean $\theta$ and variance $\sigma^2$. Find the nonnegative quadratic unbiased estimate of $\sigma^2$ with minimum variance.</p>
 </div>
 <details><summary><h3><span class="sn">20.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $Y_1,\dots,Y_n$ be <span class="cue">i.i.d. with mean $\theta$ and variance $\sigma^2$</span><sup class="ct">T17</sup>. Find the <span class="cue">nonnegative quadratic unbiased</span><sup class="ct">T14</sup> estimate of $\sigma^2$ with <span class="cue">minimum variance</span><sup class="ct">T15</sup>.</p>
+<ul class="why"><li><span class="ctag">T17</span> One sample with a common mean is the regression model with $\bX=\bone_n$.</li><li><span class="ctag">T14</span> Unbiased for all $\theta,\sigma^2$ gives constraints: $\mathrm{tr}(\bA)=1$, $\bone^\top\bA\bone=0$; nonnegative forces $\bA\bone=\bzero$.</li><li><span class="ctag">T15</span> Minimum variance: bound the sums of squared entries below with Cauchy–Schwarz.</li></ul></div>
+
 <p class="tk">Tricks: T17 (take $\bX=\bone_n$), or T14 + T15 directly</p>
 <h4><span class="sn">20.1.1</span>Quick route</h4>
 <p>This is the regression model with $\bX=\bone_n$, $p=1$. Then $\mathbf P=\tfrac1n\bJ_n$ has all diagonal entries equal to $1/n$, so Theorem 3.4 applies and $S^2$ is optimal.</p>
@@ -658,6 +740,10 @@ $$\sum_ia_{ii}^2\ge\frac1n,\qquad \sum_{i\ne j}a_{ij}^2\ge\sum_i\frac{a_{ii}^2}{
 <ul><li>$\bar Y$ is statistically independent of $Q=\sum_i(Y_i-\bar Y)^2$;</li><li>$Q/\sigma^2\sim\chi^2_{n-1}$.</li></ul>
 </div>
 <details><summary><h3><span class="sn">21.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Given $Y_1,\dots,Y_n$ <span class="cue">independently distributed as $N(\theta,\sigma^2)$</span><sup class="ct">T17</sup>, <span class="cue">use Theorem 3.5</span><sup class="ct">T17</sup> to prove that $\bar Y$ is independent of $Q=\sum_i(Y_i-\bar Y)^2$ and $Q/\sigma^2\sim\chi^2_{n-1}$.</p>
+<ul class="why"><li><span class="ctag">T17</span> A one-sample problem to be solved with a regression theorem: take $\bX=\bone_n$, $p=1$.</li><li><span class="ctag">T17</span> Then $\hat\beta=\bar Y$ and $\mathrm{RSS}=Q$, so parts (iii) and (iv) of the theorem are the two claims.</li></ul></div>
+
 <p class="tk">Trick: T17 (specialize the regression model)</p>
 <p>We have</p>
 $$\bY\sim N_n(\theta\bone_n,\sigma^2\bI_n)\ \Longrightarrow\ \bX=\bone_n,\qquad \bbeta=\theta,\qquad p=\mathit{rank}(\bone_n)=1.$$
@@ -677,6 +763,10 @@ $$\hat\beta=(\bone_n^\top\bone_n)^{-1}\bone_n^\top\bY=\bar Y,\qquad \mathrm{RSS}
 <p>It is required to fit $\E[Y_i]=\beta_0+\beta_1x_i+\beta_2\phi(x_i)$, $i=1,2,3$, where $\phi$ is a second-degree polynomial. If $x_1=-1$, $x_2=0$, $x_3=1$, find $\phi$ such that the design matrix has mutually orthogonal columns.</p>
 </div>
 <details><summary><h3><span class="sn">22.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Fit $\E[Y_i]=\beta_0+\beta_1x_i+\beta_2\phi(x_i)$, where $\phi$ is a <span class="cue">second-degree polynomial</span><sup class="ct">T17</sup>. If $x=(-1,0,1)$, find $\phi$ such that the design matrix has <span class="cue">mutually orthogonal columns</span><sup class="ct">T17</sup>.</p>
+<ul class="why"><li><span class="ctag">T17</span> Write $\phi(x)=a+bx+cx^2$ with unknown coefficients.</li><li><span class="ctag">T17</span> Orthogonal columns means each pair of columns has dot product zero: two equations in $a,b,c$.</li></ul></div>
+
 <p class="tk">Trick: T17 (orthogonality is a set of dot-product equations)</p>
 <p>Define $\phi(x)=a+bx+cx^2$ with $c\ne0$. Then,</p>
 $$\bX=\begin{bmatrix}1&-1&a-b+c\\1&0&a\\1&1&a+b+c\end{bmatrix}=[\bone_3\mid\bx\mid\boldsymbol\phi].$$
@@ -694,6 +784,10 @@ $$\Var(\bhat_H)=\sigma^2\Big\{(\bX^\top\bX)^{-1}-(\bX^\top\bX)^{-1}\bA^\top\big[
 <p class="c">Hence deduce that $\Var(\hat\beta_{Hj})\le\Var(\hat\beta_j)$, where $\hat\beta_{Hj}$ and $\hat\beta_j$ are the $j$-th elements of $\bhat_H$ and $\bhat$.</p>
 </div>
 <details><summary><h3><span class="sn">23.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Prove that <span class="cue">$\Var(\bhat_H)$</span><sup class="ct">T5</sup>$\;=\sigma^2\{(\bX^\top\bX)^{-1}-(\bX^\top\bX)^{-1}\bA^\top[\bA(\bX^\top\bX)^{-1}\bA^\top]^{-1}\bA(\bX^\top\bX)^{-1}\}$. <span class="cue">Hence deduce</span><sup class="ct">T15</sup> that <span class="cue">$\Var(\hat\beta_{Hj})\le\Var(\hat\beta_j)$</span><sup class="ct">T15</sup>.</p>
+<ul class="why"><li><span class="ctag">T5</span> $\bhat_H$ is a fixed matrix times $\bhat$ plus a constant, so $\Var(\bhat_H)=\mathbf M\,\Var(\bhat)\,\mathbf M^\top$.</li><li><span class="ctag">T15</span> "Hence" says the inequality comes from the formula: the subtracted matrix is $\bL\succeq0$.</li><li><span class="ctag">T15</span> Comparing individual variances means comparing diagonal entries, and a PSD matrix has a nonnegative diagonal.</li></ul></div>
+
 <p class="tk">Tricks: T5 (write $\bhat_H$ as a matrix times $\bhat$), T15 (the difference is PSD)</p>
 <p>Consider $H:\bA\bbeta=\bc$ with $\bA$ a known $q\times p$ matrix of rank $q$, and define the following quantities:</p>
 $$\bG:=(\bX^\top\bX)^{-1},\qquad \bK:=\bA\bG\bA^\top,\qquad \bL:=\bG\bA^\top\bK^{-1}\bA\bG.$$
@@ -724,6 +818,10 @@ $$\Var(\hat\beta_j)-\Var(\hat\beta_{Hj})=\sigma^2\mathbf e_j^\top\bG\mathbf e_j-
 $$\Cov\Big(\bar X,\ \sum_{i=1}^n(X_i-\bar X)^2\Big)=\frac{n-1}n\,\mu_3.$$
 </div>
 <details><summary><h3><span class="sn">24.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $X_1,\dots,X_n$ be i.i.d. with <span class="cue">mean $0$</span><sup class="ct">T18</sup>, variance $\sigma^2$ and <span class="cue">third moment $\mu_3$</span><sup class="ct">T18</sup>. Show that <span class="cue">$\Cov\big(\bar X,\ \sum_i(X_i-\bar X)^2\big)$</span><sup class="ct">T5</sup>$\;=\frac{n-1}{n}\mu_3$.</p>
+<ul class="why"><li><span class="ctag">T5</span> A covariance of a linear form with a quadratic form: write them as $\frac1n\bone^\top\bX$ and $\bX^\top\bC\bX$.</li><li><span class="ctag">T18</span> Mean zero and independence: in $\E[X_iX_jX_k]$ only $i=j=k$ survives, giving $\mu_3$.</li></ul></div>
+
 <p class="tk">Tricks: T5 (matrix form), T18 (only matching indices survive)</p>
 <p>Write $\sum_i(X_i-\bar X)^2=\bX^\top\bC\bX$ with $\bC=\bI_n-\tfrac1n\bJ_n=(c_{jk})$. Since $\E[\bar X]=0$,</p>
 $$\Cov(\bar X,\bX^\top\bC\bX)=\E[\bar X\,\bX^\top\bC\bX]=\frac1n\sum_{i,j,k}c_{jk}\,\E[X_iX_jX_k].$$
@@ -740,6 +838,10 @@ $$\Cov(\bar X,\bX^\top\bC\bX)=\frac{\mu_3}n\sum_ic_{ii}=\frac{\mu_3}n\,\mathrm{t
 <p class="c">Let $\bX=\bA\bY$, where $\Var(\bY)=\bI_n$ and $\bA$ is $n\times n$. Show that $\Var(\bX)$ is positive definite if and only if $\bA$ is nonsingular.</p>
 </div>
 <details><summary><h3><span class="sn">25.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let <span class="cue">$\bX=\bA\bY$</span><sup class="ct">T5</sup>, where <span class="cue">$\Var(\bY)=\bI_n$</span><sup class="ct">T5</sup>. Show that $\Var(\bX)$ is <span class="cue">positive definite</span><sup class="ct">T6</sup> if and only if $\bA$ is nonsingular.</p>
+<ul class="why"><li><span class="ctag">T5</span> A linear map of a vector with identity variance: $\Var(\bX)=\bA\bA^\top$.</li><li><span class="ctag">T6</span> Positive definite is about $\bc^\top(\cdot)\bc$, and $\bc^\top\bA\bA^\top\bc=\|\bA^\top\bc\|^2$.</li></ul></div>
+
 <p class="tk">Tricks: T5 (variance of a linear map), T6 (quadratic form as a squared norm)</p>
 <p>By the variance of a linear transformation,</p>
 $$\Var(\bX)=\bA\,\Var(\bY)\,\bA^\top=\bA\bA^\top.$$
@@ -756,6 +858,10 @@ $$\bc^\top\Var(\bX)\bc=\bc^\top\bA\bA^\top\bc=\|\bA^\top\bc\|^2\ge0,$$
 <p class="c">Let $\bY\sim N_n(\mu\bone_n,\sigma^2\bI_n)$. Find the joint distribution of $(\bar Y,\ Y_1-\bar Y)^\top$ and show that the two components are independent.</p>
 </div>
 <details><summary><h3><span class="sn">26.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let <span class="cue">$\bY\sim N_n(\mu\bone_n,\sigma^2\bI_n)$</span><sup class="ct">T9</sup>. Find the <span class="cue">joint distribution of $(\bar Y,\ Y_1-\bar Y)^\top$</span><sup class="ct">T5</sup> and show that the two components are <span class="cue">independent</span><sup class="ct">T9</sup>.</p>
+<ul class="why"><li><span class="ctag">T5</span> Both components are linear in $\bY$: stack them as $\bC\bY$ and use $\bC\bmu$, $\sigma^2\bC\bC^\top$.</li><li><span class="ctag">T9</span> Normal plus independence: show the off-diagonal of the covariance is zero.</li></ul></div>
+
 <p class="tk">Tricks: T5 (matrix times the data), T9 (zero covariance ⇒ independence)</p>
 <p>Write the pair as $\bC\bY$, where</p>
 $$\bC=\begin{bmatrix}\tfrac1n\bone_n^\top\\[2pt]\mathbf e_1^\top-\tfrac1n\bone_n^\top\end{bmatrix}\quad(\text{rank }2).$$
@@ -771,6 +877,10 @@ $$\E[\bC\bY]=\begin{bmatrix}\mu\\0\end{bmatrix},\qquad \Var(\bC\bY)=\sigma^2\bC\
 <p class="c">Let $\bY\sim N_n(\bzero,\Sig)$ with $\Sig=\sigma^2[(1-\rho)\bI_n+\rho\bJ_n]$, $0\le\rho\lt1$. Find $c$ such that $c\sum_i(Y_i-\bar Y)^2\sim\chi^2_{n-1}$.</p>
 </div>
 <details><summary><h3><span class="sn">27.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let <span class="cue">$\bY\sim N_n(\bzero,\Sig)$ with $\Sig=\sigma^2[(1-\rho)\bI_n+\rho\bJ_n]$</span><sup class="ct">T7</sup>. <span class="cue">Find $c$</span><sup class="ct">T8</sup> such that $c\sum_i(Y_i-\bar Y)^2$<span class="cue">$\;\sim\chi^2_{n-1}$</span><sup class="ct">T8</sup>.</p>
+<ul class="why"><li><span class="ctag">T7</span> A non-identity $\Sig$: the χ² test is on $\bA\Sig$, not on $\bA$ alone.</li><li><span class="ctag">T8</span> "Find $c$" so that it is χ²: choose $c$ to make $(c\bC)\Sig$ idempotent; df is the trace.</li></ul></div>
+
 <p class="tk">Tricks: T7 (general Σ: check $\bA\Sig$), T8 (idempotent, rank = trace)</p>
 <p>Write $c\sum_i(Y_i-\bar Y)^2=\bY^\top(c\bC)\bY$ with $\bC=\bI_n-\tfrac1n\bJ_n$. For $\Sig\succ0$ the form is $\chi^2_r$ if and only if $(c\bC)\Sig$ is idempotent of rank $r$. Since $\bC\bJ_n=\bzero$,</p>
 $$(c\bC)\Sig=c\sigma^2\big[(1-\rho)\bC+\rho\,\bC\bJ_n\big]=c\sigma^2(1-\rho)\,\bC.$$
@@ -785,6 +895,10 @@ $$(c\bC)\Sig=c\sigma^2\big[(1-\rho)\bC+\rho\,\bC\bJ_n\big]=c\sigma^2(1-\rho)\,\b
 <p class="c">In the regression model $\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$ with $\mathit{rank}(\bX)=p$, show that $\hat\bY^\top\hat\bY$ and $\mathrm{RSS}$ are independent, and give the distribution of $\mathrm{RSS}$.</p>
 </div>
 <details><summary><h3><span class="sn">28.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>In the regression model <span class="cue">$\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$</span><sup class="ct">T9</sup>, show that <span class="cue">$\hat\bY^\top\hat\bY$</span><sup class="ct">T6</sup> and <span class="cue">$\mathrm{RSS}$</span><sup class="ct">T6</sup> are <span class="cue">independent</span><sup class="ct">T9</sup>, and give the <span class="cue">distribution of $\mathrm{RSS}$</span><sup class="ct">T8</sup>.</p>
+<ul class="why"><li><span class="ctag">T6</span> Both are squared lengths: $\|\bP\bY\|^2$ and $\|(\bI-\bP)\bY\|^2$.</li><li><span class="ctag">T9</span> Normal vectors $\bP\bY$, $(\bI-\bP)\bY$ with covariance $\sigma^2\bP(\bI-\bP)=\bzero$.</li><li><span class="ctag">T8</span> $\bI-\bP$ is a projection of rank $n-p$.</li></ul></div>
+
 <p class="tk">Tricks: T6 (squared norms), T9 (zero covariance), T8 (χ²)</p>
 <p>Let $\mathbf P=\bX(\bX^\top\bX)^{-1}\bX^\top$. Since $\mathbf P$ and $\bI_n-\mathbf P$ are symmetric idempotent,</p>
 $$\hat\bY^\top\hat\bY=\|\mathbf P\bY\|^2,\qquad \mathrm{RSS}=\|(\bI_n-\mathbf P)\bY\|^2.$$
@@ -801,6 +915,10 @@ $$\Cov\big(\mathbf P\bY,(\bI_n-\mathbf P)\bY\big)=\sigma^2\mathbf P(\bI_n-\mathb
 <p class="c">In the model $\bY=\bX\bbeta+\beps$, $\Var(\beps)=\sigma^2\bI_n$, show that $\sum_i\Var(e_i)=(n-p)\sigma^2$ and $\Cov(\be,\hat\bY)=\bzero$.</p>
 </div>
 <details><summary><h3><span class="sn">29.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>In the model $\bY=\bX\bbeta+\beps$, $\Var(\beps)=\sigma^2\bI_n$, show that <span class="cue">$\sum_i\Var(e_i)$</span><sup class="ct">T4</sup>$\;=(n-p)\sigma^2$ and <span class="cue">$\Cov(\be,\hat\bY)$</span><sup class="ct">T5</sup>$\;=\bzero$.</p>
+<ul class="why"><li><span class="ctag">T4</span> A sum of diagonal variances is a trace.</li><li><span class="ctag">T5</span> Residuals and fitted values are $(\bI-\bP)\bY$ and $\bP\bY$, so the covariance is $\sigma^2(\bI-\bP)\bP$.</li></ul></div>
+
 <p class="tk">Tricks: T5 (residuals as a matrix times Y), T4 (trace)</p>
 <p>We have $\be=(\bI_n-\mathbf P)\bY$ and $\hat\bY=\mathbf P\bY$. Thus,</p>
 $$\Var(\be)=(\bI_n-\mathbf P)\sigma^2\bI_n(\bI_n-\mathbf P)^\top=\sigma^2(\bI_n-\mathbf P),\qquad \sum_i\Var(e_i)=\sigma^2\,\mathrm{tr}(\bI_n-\mathbf P)=\sigma^2(n-p).$$
@@ -816,6 +934,10 @@ $$\Cov(\be,\hat\bY)=(\bI_n-\mathbf P)\,\sigma^2\bI_n\,\mathbf P^\top=\sigma^2(\m
 <p class="c">In the model $Y_i=\beta x_i+\varepsilon_i$ with uncorrelated errors of variance $\sigma^2$, show that $\tilde\beta=\sum_iY_i/\sum_ix_i$ is unbiased, and compare its variance with that of the least squares estimate.</p>
 </div>
 <details><summary><h3><span class="sn">30.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>In $Y_i=\beta x_i+\varepsilon_i$, show that <span class="cue">$\tilde\beta=\sum_iY_i/\sum_ix_i$</span><sup class="ct">T15</sup> is unbiased, and <span class="cue">compare its variance</span><sup class="ct">T15</sup> with that of the least squares estimate.</p>
+<ul class="why"><li><span class="ctag">T15</span> Comparing variances gives $(\sum x_i)^2$ against $n\sum x_i^2$.</li><li><span class="ctag">T15</span> That is exactly Cauchy–Schwarz against the vector of ones.</li></ul></div>
+
 <p class="tk">Trick: T15 (Cauchy–Schwarz shows the difference is ≥ 0)</p>
 <p>Unbiasedness and variance:</p>
 $$\E[\tilde\beta]=\frac{\beta\sum_ix_i}{\sum_ix_i}=\beta,\qquad \Var(\tilde\beta)=\frac{n\sigma^2}{(\sum_ix_i)^2}.$$
@@ -832,6 +954,10 @@ $$\hat\beta=\frac{\bx^\top\bY}{\bx^\top\bx},\qquad \Var(\hat\beta)=\frac{\sigma^
 <p class="c">Suppose the columns $\bx_0,\dots,\bx_{p-1}$ of $\bX$ are mutually orthogonal, and $\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$. Show that dropping column $j$ increases the RSS by $\hat\beta_j^2\|\bx_j\|^2$, and that under $\beta_j=0$ this increase is $\sigma^2\chi^2_1$, independent of the full-model RSS.</p>
 </div>
 <details><summary><h3><span class="sn">31.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Suppose the columns of $\bX$ are <span class="cue">mutually orthogonal</span><sup class="ct">T17</sup> and $\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$. Show that <span class="cue">dropping column $j$ increases the RSS</span><sup class="ct">T17</sup> by $\hat\beta_j^2\|\bx_j\|^2$, and that under $\beta_j=0$ this is <span class="cue">$\sigma^2\chi^2_1$</span><sup class="ct">T8</sup>, <span class="cue">independent of the full-model RSS</span><sup class="ct">T9</sup>.</p>
+<ul class="why"><li><span class="ctag">T17</span> Orthogonal columns: estimates decouple and RSS loses one term per column.</li><li><span class="ctag">T8</span> The increase is $\bY^\top\mathbf P_j\bY$ with a rank-1 projection.</li><li><span class="ctag">T9</span> $\mathbf P_j(\bI-\bP)=\bzero$, so the two squared lengths are independent.</li></ul></div>
+
 <p class="tk">Tricks: T17 (orthogonal columns), T6 + T8 + T9 (projection, χ², independence)</p>
 <p>With orthogonal columns, $\hat\beta_l=\bx_l^\top\bY/\bx_l^\top\bx_l$ for every $l$ in either model, and</p>
 $$\mathrm{RSS}=\bY^\top\bY-\sum_l\hat\beta_l^2\|\bx_l\|^2\ \Longrightarrow\ \mathrm{RSS}_{-j}-\mathrm{RSS}=\hat\beta_j^2\|\bx_j\|^2.$$
@@ -846,6 +972,10 @@ $$\mathrm{RSS}=\bY^\top\bY-\sum_l\hat\beta_l^2\|\bx_l\|^2\ \Longrightarrow\ \mat
 <p class="c">For the restricted estimator $\bhat_H=\bhat+(\bX^\top\bX)^{-1}\bA^\top[\bA(\bX^\top\bX)^{-1}\bA^\top]^{-1}(\bc-\bA\bhat)$, show that $\bA\bhat_H=\bc$, that $\bhat_H$ is unbiased when $\bA\bbeta=\bc$, and find its bias otherwise.</p>
 </div>
 <details><summary><h3><span class="sn">32.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>For the restricted estimator $\bhat_H=\bhat+(\bX^\top\bX)^{-1}\bA^\top[\cdots]^{-1}(\bc-\bA\bhat)$, show that <span class="cue">$\bA\bhat_H=\bc$</span><sup class="ct">T5</sup>, that $\bhat_H$ is <span class="cue">unbiased</span><sup class="ct">T5</sup> when $\bA\bbeta=\bc$, and find its <span class="cue">bias</span><sup class="ct">T5</sup> otherwise.</p>
+<ul class="why"><li><span class="ctag">T5</span> Multiply the formula by $\bA$; the bracket cancels.</li><li><span class="ctag">T5</span> $\bhat_H$ is linear in $\bhat$, so take the expectation through using $\E\bhat=\bbeta$.</li></ul></div>
+
 <p class="tk">Trick: T5 (it is linear in $\bhat$; take expectations through)</p>
 <p>With $\bG=(\bX^\top\bX)^{-1}$ and $\bK=\bA\bG\bA^\top$, multiply by $\bA$:</p>
 $$\bA\bhat_H=\bA\bhat+\bK\bK^{-1}(\bc-\bA\bhat)=\bc.$$
@@ -862,6 +992,10 @@ $$\E[\bhat_H]=\bbeta+\bG\bA^\top\bK^{-1}(\bc-\bA\bbeta).$$
 $$\mathrm{RSS}_H-\mathrm{RSS}=\|\hat\bY-\hat\bY_H\|^2.$$
 </div>
 <details><summary><h3><span class="sn">33.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Show that <span class="cue">$\mathrm{RSS}_H-\mathrm{RSS}$</span><sup class="ct">T2</sup>$\;=$<span class="cue">$\|\hat\bY-\hat\bY_H\|^2$</span><sup class="ct">T2</sup>.</p>
+<ul class="why"><li><span class="ctag">T2</span> A difference of squared lengths equal to another squared length: Pythagoras.</li><li><span class="ctag">T2</span> Add and subtract $\hat\bY$; the cross term is residuals against the column space, which is zero.</li></ul></div>
+
 <p class="tk">Trick: T2 (Pythagoras: kill the cross term)</p>
 <p>We can start by adding and subtracting $\hat\bY$:</p>
 $$\bY-\hat\bY_H=(\bY-\hat\bY)+(\hat\bY-\hat\bY_H).$$
@@ -879,6 +1013,10 @@ $$\|\bY-\hat\bY_H\|^2=\|\bY-\hat\bY\|^2+\|\hat\bY-\hat\bY_H\|^2.$$
 <p class="c">Suppose $\Var(\beps)=\sigma^2\bV$ with $\bV\succ0$. Show that $\bbeta^*=(\bX^\top\bV^{-1}\bX)^{-1}\bX^\top\bV^{-1}\bY$ is unbiased with $\Var(\bbeta^*)=\sigma^2(\bX^\top\bV^{-1}\bX)^{-1}$, and that $\Var(\bc^\top\bhat)\ge\Var(\bc^\top\bbeta^*)$ for the ordinary least squares $\bhat$.</p>
 </div>
 <details><summary><h3><span class="sn">34.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Suppose <span class="cue">$\Var(\beps)=\sigma^2\bV$</span><sup class="ct">T14</sup> with $\bV\succ0$. Show that $\bbeta^*$ is unbiased with $\Var(\bbeta^*)=\sigma^2(\bX^\top\bV^{-1}\bX)^{-1}$, and that <span class="cue">$\Var(\bc^\top\bhat)\ge\Var(\bc^\top\bbeta^*)$</span><sup class="ct">T14</sup>.</p>
+<ul class="why"><li><span class="ctag">T14</span> A non-identity error variance: transform by $\bK^{-1}$ to get the standard model.</li><li><span class="ctag">T14</span> A "linear unbiased has larger variance" comparison is Gauss–Markov in the transformed model.</li></ul></div>
+
 <p class="tk">Tricks: transform to the standard model, then T14 (Gauss–Markov)</p>
 <p>Unbiasedness and variance follow from linearity. With $\mathbf W:=(\bX^\top\bV^{-1}\bX)^{-1}\bX^\top\bV^{-1}$,</p>
 $$\E[\bbeta^*]=\mathbf W\bX\bbeta=\bbeta,\qquad \Var(\bbeta^*)=\mathbf W(\sigma^2\bV)\mathbf W^\top=\sigma^2(\bX^\top\bV^{-1}\bX)^{-1}.$$
@@ -895,6 +1033,10 @@ $$\bZ=\bK^{-1}\bY,\quad \bB=\bK^{-1}\bX\ \Longrightarrow\ \bZ=\bB\bbeta+\boldsym
 <p class="c">Under $\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$, compare the mean-squared errors of $\hat\sigma^2_{\rm MLE}=\mathrm{RSS}/n$ and $S^2=\mathrm{RSS}/(n-p)$.</p>
 </div>
 <details><summary><h3><span class="sn">35.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Under <span class="cue">$\bY\sim N_n(\bX\bbeta,\sigma^2\bI_n)$</span><sup class="ct">T16</sup>, <span class="cue">compare the mean-squared errors</span><sup class="ct">T16</sup> of $\hat\sigma^2_{\rm MLE}=\mathrm{RSS}/n$ and $S^2=\mathrm{RSS}/(n-p)$.</p>
+<ul class="why"><li><span class="ctag">T16</span> Normality gives $\mathrm{RSS}/\sigma^2\sim\chi^2_{n-p}$, so both MSEs are explicit.</li><li><span class="ctag">T16</span> MSE comparison: variance plus bias squared for each, then compare.</li></ul></div>
+
 <p class="tk">Trick: T16 (MSE = variance + bias²)</p>
 <p>Let $\nu:=n-p$, so $\mathrm{RSS}/\sigma^2\sim\chi^2_\nu$. Then $\mathrm{MSE}(S^2)=\Var(S^2)=2\sigma^4/\nu$. For $\hat\sigma^2=\frac\nu nS^2$:</p>
 $$\text{bias}=\frac\nu n\sigma^2-\sigma^2=-\frac pn\sigma^2,\qquad \Var(\hat\sigma^2)=\frac{\nu^2}{n^2}\cdot\frac{2\sigma^4}\nu=\frac{2\nu\sigma^4}{n^2}.$$
@@ -914,6 +1056,10 @@ $$\mathrm{MSE}(\hat\sigma^2)=\frac{\sigma^4}{n^2}\big(2\nu+p^2\big).$$
 $$F=\frac{\bY^\top\bP\bY/r}{\bY^\top(\bI_n-\bP)\bY/(n-r)}\sim F_{r,\,n-r}.$$
 </div>
 <details><summary><h3><span class="sn">36.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let <span class="cue">$\bY\sim N_n(\bzero,\sigma^2\bI_n)$</span><sup class="ct">T7</sup> and let $\bP$ be <span class="cue">symmetric idempotent of rank $r$</span><sup class="ct">T8</sup>. Show that <span class="cue">$F=\frac{\bY^\top\bP\bY/r}{\bY^\top(\bI_n-\bP)\bY/(n-r)}\sim F_{r,n-r}$</span><sup class="ct">T9</sup>.</p>
+<ul class="why"><li><span class="ctag">T7</span> Divide by $\sigma$ to get $N(\bzero,\bI)$; $\sigma^2$ cancels in the ratio.</li><li><span class="ctag">T8</span> Idempotent of rank $r$: numerator is $\chi^2_r$; $\bI-\bP$ gives $\chi^2_{n-r}$.</li><li><span class="ctag">T9</span> An $F$ needs independent χ²s: squared lengths of $\bP\bZ$ and $(\bI-\bP)\bZ$, which are uncorrelated.</li></ul></div>
+
 <p class="tk">Tricks: T7 (standardize), T8 (idempotent ⇒ χ²), T6 + T9 (squared norms of uncorrelated normals)</p>
 <p>Let $\bZ:=\bY/\sigma\sim N_n(\bzero,\bI_n)$. The $\sigma^2$ cancels in the ratio, so</p>
 $$F=\frac{\bZ^\top\bP\bZ/r}{\bZ^\top(\bI_n-\bP)\bZ/(n-r)}.$$
@@ -937,6 +1083,10 @@ $$\bZ^\top\bP\bZ=\|\bP\bZ\|^2,\qquad \bZ^\top(\bI_n-\bP)\bZ=\|(\bI_n-\bP)\bZ\|^2
 </ul>
 </div>
 <details><summary><h3><span class="sn">37.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Consider $Y_i=\beta_0+\beta_1$<span class="cue">$(x_i-\bar x)$</span><sup class="ct">T17</sup>$+\varepsilon_i$ with <span class="cue">$\beps\sim N_n(\bzero,\sigma^2\bI_n)$</span><sup class="ct">T9</sup>.</p><ul><li>(a) Show $\hat\beta_0=\bar Y$, $\hat\beta_1=\sum(x_i-\bar x)Y_i/S_{xx}$, and that they are <span class="cue">independent</span><sup class="ct">T9</sup>.</li><li>(b) Show $\mathrm{RSS}=\sum(Y_i-\bar Y)^2-\hat\beta_1^2S_{xx}$ and <span class="cue">$\E[\mathrm{RSS}]$</span><sup class="ct">T4</sup>$=(n-2)\sigma^2$.</li><li>(c) Show that <span class="cue">$T=\frac{\hat\beta_1-\beta_1}{S/\sqrt{S_{xx}}}\sim t_{n-2}$</span><sup class="ct">T8</sup>.</li></ul>
+<ul class="why"><li><span class="ctag">T17</span> A centered covariate is orthogonal to $\bone$, so $\bX^\top\bX$ is diagonal.</li><li><span class="ctag">T9</span> Normal errors and "independent": $\Var(\bhat)$ is diagonal.</li><li><span class="ctag">T4</span> Expectation of a sum of squares: trace plus the mean term, and $\E[\hat\beta_1^2]=\Var+\text{mean}^2$.</li><li><span class="ctag">T8</span> A $t$ statistic: build $N(0,1)$ over $\sqrt{\chi^2/\nu}$, using (a) for the numerator and independence of $\bhat$ and residuals.</li></ul></div>
+
 <p class="tk">Tricks: (a) T17 + T9; (b) T1 + T4; (c) T7, T8, T9 assembled</p>
 <p>Define $\mathbf u:=(x_1-\bar x,\dots,x_n-\bar x)^\top$, so $\bX=[\bone_n\mid\mathbf u]$, $\bone_n^\top\mathbf u=0$ and $\mathbf u^\top\mathbf u=S_{xx}$.</p>
 <h4><span class="sn">37.1.1</span>Part (a)</h4>
@@ -971,6 +1121,10 @@ $$T=\frac{\hat\beta_1-\beta_1}{S/\sqrt{S_{xx}}}=\frac{Z}{\sqrt{V/(n-2)}}.$$
 </ul>
 </div>
 <details><summary><h3><span class="sn">38.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Consider $Y_i=\beta x_i+\varepsilon_i$ with $x_i>0$, uncorrelated errors and <span class="cue">$\Var(\varepsilon_i)=\sigma^2x_i$</span><sup class="ct">T14</sup>.</p><ul><li>(a) Find the <span class="cue">weighted least squares</span><sup class="ct">T14</sup> estimate $\beta^*$ and its variance.</li><li>(b) Show that <span class="cue">$\Var(\hat\beta)\ge\Var(\beta^*)$</span><sup class="ct">T15</sup> for ordinary least squares $\hat\beta$.</li></ul>
+<ul class="why"><li><span class="ctag">T14</span> Unequal variances: weights $1/x_i$, i.e. minimize $\sum(Y_i-\beta x_i)^2/x_i$.</li><li><span class="ctag">T15</span> The inequality reduces to $(\sum x_i^2)^2\le\sum x_i\sum x_i^3$: Cauchy–Schwarz with $x_i^{1/2}\cdot x_i^{3/2}$.</li></ul></div>
+
 <p class="tk">Tricks: (a) transform to the standard model (weights $1/x_i$), (b) T15 via Cauchy–Schwarz</p>
 <h4><span class="sn">38.1.1</span>Part (a)</h4>
 <p>Here $\bV=\mathrm{diag}(x_1,\dots,x_n)$, so $\beta^*$ minimizes $\sum_i(Y_i-\beta x_i)^2/x_i$. Setting the derivative to zero,</p>
@@ -993,6 +1147,10 @@ $$\Big(\sum_ix_i^{1/2}x_i^{3/2}\Big)^2\le\sum_ix_i\cdot\sum_ix_i^3.$$
 <p class="c">Let $\bX$ be a random vector with $\Var(\bX)=\Sig$. Show that $\Sig$ is singular if and only if there exist $\ba\ne\bzero$ and a constant $b$ with $\ba^\top\bX=b$ with probability one.</p>
 </div>
 <details><summary><h3><span class="sn">39.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $\bX$ have $\Var(\bX)=\Sig$. Show that <span class="cue">$\Sig$ is singular</span><sup class="ct">T5</sup> if and only if there exist $\ba\ne\bzero$ and a constant $b$ with <span class="cue">$\ba^\top\bX=b$</span><sup class="ct">T5</sup> with probability one.</p>
+<ul class="why"><li><span class="ctag">T5</span> Singular means some $\ba\ne\bzero$ has $\Sig\ba=\bzero$.</li><li><span class="ctag">T5</span> A constant linear combination has zero variance, and $\Var(\ba^\top\bX)=\ba^\top\Sig\ba$ links the two.</li></ul></div>
+
 <p class="tk">Trick: T5 (a linear combination has variance $\ba^\top\Sig\ba$)</p>
 <p>For any constant vector $\ba$, by the variance of a linear transformation,</p>
 $$\Var(\ba^\top\bX)=\ba^\top\Sig\ba.$$
@@ -1013,6 +1171,10 @@ $$\Var(\ba^\top\bX)=\ba^\top\Sig\ba.$$
 </ul>
 </div>
 <details><summary><h3><span class="sn">40.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Let $\bY=\bX\bbeta+\beps$, $\mathit{rank}(\bX)=p$, and $\be=(\bI_n-\bP)\bY$.</p><ul><li>(a) Assuming <span class="cue">only $\E[\beps]=\bzero$ and $\Var(\beps)=\sigma^2\bI_n$</span><sup class="ct">T5</sup>, show $\E[\be]=\bzero$, $\Var(\be)=\sigma^2(\bI_n-\bP)$, and <span class="cue">$\sum_i\Var(e_i)$</span><sup class="ct">T4</sup>$=(n-p)\sigma^2$.</li><li>(b) Now <span class="cue">assume $\beps\sim N_n(\bzero,\sigma^2\bI_n)$</span><sup class="ct">T9</sup>. Show that $\be$ and $\bhat$ are <span class="cue">independent</span><sup class="ct">T9</sup>.</li><li>(c) <span class="cue">Under normality</span><sup class="ct">T8</sup>, show $\E[S^2]=\sigma^2$ and <span class="cue">$\Var(S^2)=2\sigma^4/(n-p)$</span><sup class="ct">T8</sup>.</li></ul>
+<ul class="why"><li><span class="ctag">T5</span> No distribution, only moments: use $\Var(\mathbf M\beps)=\mathbf M\Var(\beps)\mathbf M^\top$ with $\be=(\bI-\bP)\beps$.</li><li><span class="ctag">T4</span> A sum of diagonal variances is a trace.</li><li><span class="ctag">T9</span> Normality switched on plus "independent": compute $\Cov(\bhat,\be)$.</li><li><span class="ctag">T8</span> A variance of $S^2$ under normality: use $\be^\top\be/\sigma^2\sim\chi^2_{n-p}$.</li></ul></div>
+
 <p class="tk">Tricks: (a) T5 + T4; (b) T9; (c) T7 + T8 (χ² moments)</p>
 <h4><span class="sn">40.1.1</span>Part (a)</h4>
 <p>Note that $\bP\bX=\bX$, so $(\bI_n-\bP)\bX\bbeta=\bzero$ and $\be=(\bI_n-\bP)\beps$. Then,</p>
@@ -1042,6 +1204,10 @@ $$\frac{\be^\top\be}{\sigma^2}=\Big(\frac{\beps}\sigma\Big)^\top(\bI_n-\bP)\Big(
 </ul>
 </div>
 <details><summary><h3><span class="sn">41.1</span>Solution</h3></summary><div class="sol">
+<div class="qread"><span class="qlabel">Reading the question</span>
+<p>Fit $\E[Y_i]=\beta_0+\beta_1x_i+\beta_2$<span class="cue">$(x_i^2-2)$</span><sup class="ct">T17</sup> at <span class="cue">$x=(-2,-1,0,1,2)$</span><sup class="ct">T17</sup>, with $\bY\sim N_5(\bX\bbeta,\sigma^2\bI_5)$.</p><ul><li>(a) Show that the columns of $\bX$ are <span class="cue">mutually orthogonal</span><sup class="ct">T17</sup>, and find $\bhat$ and $\Var(\bhat)$.</li><li>(b) Show that <span class="cue">dropping the quadratic term increases the RSS</span><sup class="ct">T6</sup> by $14\hat\beta_2^2$, and that under $\beta_2=0$, <span class="cue">$F\sim F_{1,2}$</span><sup class="ct">T9</sup>.</li></ul>
+<ul class="why"><li><span class="ctag">T17</span> Symmetric points and a centered quadratic $x^2-2$: check the three dot products.</li><li><span class="ctag">T6</span> The RSS increase is $\bY^\top\mathbf P_q\bY=\|\mathbf P_q\bY\|^2$, a rank-1 projection (χ²₁).</li><li><span class="ctag">T9</span> $F$ needs independent χ²s: $\mathbf P_q(\bI-\bP)=\bzero$.</li></ul></div>
+
 <p class="tk">Tricks: (a) T17 (orthogonal columns decouple); (b) T6, T8, T9 assembled</p>
 <p>Define the columns $\bone_5$, $\bx=(-2,-1,0,1,2)^\top$ and $\mathbf q=(2,-1,-2,-1,2)^\top$ (the values of $x^2-2$).</p>
 <h4><span class="sn">41.1.1</span>Part (a)</h4>
